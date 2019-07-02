@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <title>跨域</title>
+</head>
+<body>
+
+<div>
+    用户名：<input type="text" value="xz" id="account">
+</div>
+<div>
+    密码：<input type="text" value="123456" id="password">
+</div>
+
+<button onclick="getLoginData()">登陆</button>
+
+
+<script>
+
+    function getLoginData(){
+        $.ajax({
+            method:"get",
+            url:`${baseUrl}/login`,
+            data:{
+                account:$("#account").val(),
+                password:$("#password").val()
+            },
+            success:function(result){
+                if(!result){return false;}
+                result=JSON.parse(result);
+                if(result.code===200){
+                    alert("验证成功");
+                }else{
+                    alert(result.msg)
+                }
+            },
+            error:function(xhr){
+                console.log("错误码:"+xhr.status+";错误提示："+xhr.statusText);
+                // console.log(xhr);
+            }
+        })
+    }
+
+    function getHomeData(){
+        $.ajax({
+            method:"get",
+            url:`${baseUrl}/index`,
+            data:{
+                account:"xz",
+                password:"555"
+            },
+            success:function(result){
+                if(!result){return false;}
+                result=JSON.parse(result);
+                let {account,password}=result;
+                $("#account").val(account);
+                $("#password").val(password);
+            },
+            error:function(xhr){
+                console.log("错误码:"+xhr.status+";错误提示："+xhr.statusText);
+                // console.log(xhr);
+            }
+        })
+    }
+
+    const baseUrl="http://127.0.0.1:8080";
+    $(()=>{
+
+    })
+</script>
+
+</body>
+</html>
