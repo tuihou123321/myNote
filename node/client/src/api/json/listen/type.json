@@ -1,0 +1,31 @@
+{
+  "code": "200",
+  "data":[
+    {
+      "id":0,
+      "catName":"全部"
+    },{
+      "id":1,
+      "catName":"精选"
+    },{
+      "id":2,
+      "catName":"情感"
+    },{
+      "id":3,
+      "catName":"健康"
+    },{
+      "id":4,
+      "catName":"性格"
+    },{
+      "id":5,
+      "catName":"趣味"
+    },{
+      "id":6,
+      "catName":"职业"
+    },{
+      "id":7,
+      "catName":"其他"
+    }
+  ],
+  "msg": "成功"
+}

@@ -1,0 +1,9 @@
+.coupon-select .am-list-item.am-list-item-middle{
+  border: 1px solid #eee;
+}
+.forss .am-picker .am-picker-col:first-child{
+  display: block;
+}
+.coupon-select .am-list-item .am-list-line .am-list-arrow{
+  padding-right: 0;
+}         

@@ -1,0 +1,25 @@
+{
+  "code": "200",
+  "msg": "success",
+  "data": {
+    "uid": "13081782",
+    "appId": "ydleeeb452887b32fc4",
+    "sessionKey": "b9577b89f92aa8f32ea910431262e91e",
+    "companyName": "吉利",
+    "pinyin": "geely",
+    "logo": "https://img.yidianling.com/file/2018/06/21/722c979f1e5a629d1a0b1b67585ef004.jpg?500x500",
+    "cover": "https://img.yidianling.com/file/2018/06/14/4caa5cdf49a4ccb6b43885478739a38c.jpg?470x430",
+    "address": "",
+    "contactName": "小白",
+    "contactMobile": "13400001234",
+    "contactEmail": "123@qq.com",
+    "contactWechat": "",
+    "status": 1,
+    "adminUserId": "1",
+    "authKey": null,
+    "createTime": "2018-06-06 03:06:39",
+    "updateTime": "2018-06-21 11:42:44",
+    "adminUserName": "admin",
+    "adminUserWechat": ""
+  }
+}

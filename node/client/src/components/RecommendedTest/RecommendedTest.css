@@ -1,0 +1,7 @@
+.lists>div{
+    border-bottom: 1px solid #ddd;
+}
+
+.lists>div:last-child{
+    border-bottom: 0;
+}

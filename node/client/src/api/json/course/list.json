@@ -1,0 +1,23 @@
+{
+  "code": "200",
+  "data": {
+    "total":"20",
+    "list": [
+      {
+        "id":10,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"1如何快速读懂男人心听懂看穿他的一言一行1如何快速读懂男人心听懂看穿他的一言一行",
+        "readNums":"600",
+        "price":"39.00"
+      },
+      {
+        "id":11,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"言一行1如何快速读懂男人心听懂看穿他的一言一行",
+        "readNums":"600",
+        "price":"0"
+      }
+    ]
+  },
+  "msg": "成功"
+}

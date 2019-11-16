@@ -1,0 +1,107 @@
+.am-list-content{
+
+}
+.am-navbar{
+  height: 0.45rem;
+}
+
+.am-navbar-left {
+  padding-left: 0.15rem;
+  font-size: 0.16rem;
+}
+
+.am-navbar-title {
+  font-size: 0.18rem;
+}
+
+.am-navbar-right {
+  font-size: 0.16rem;
+}
+
+.am-icon-md {
+  width: 0.22rem;
+  height: 0.22rem;
+}
+.am-icon-lg {
+  width: 0.36rem;
+  height: 0.36rem;
+}
+.am-tabs-default-bar-bottom .am-tabs-default-bar-tab, .am-tabs-default-bar-top .am-tabs-default-bar-tab{
+  padding:0.08rem 0;
+}
+.am-tabs-default-bar-tab {
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: 0.15rem;
+  height: 0.435rem;
+  line-height: 0.435rem;
+}
+.am-button{
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  border-radius: 0.5rem;
+}
+.am-textarea-control textarea {
+  font-size: .14rem;
+}
+html:not([data-scale]) .am-button:before{
+  -webkit-border-radius: 0.5rem;
+  -moz-border-radius: 0.5rem;
+  border-radius: 0.5rem;
+}
+.rightZeroWrap .am-list-item .am-list-line{
+  padding-right: 0;
+}
+.bdrs0_button{
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+.am-list-item .am-list-line .am-list-content {
+  width: 0.9rem;
+}
+/*.am-list-item .am-list-line .am-list-content {*/
+  /*-ms-flex: 1 initial !important;*/
+  /*flex: initial !important;*/
+/*}*/
+.am-list-item .am-list-line .am-list-arrow {
+  background-position-x: 3.2rem;
+  flex: 1 1;
+  text-align: right;
+  position: absolute;
+  background-position: 0 0;
+  right: 0;
+  top: 0.2rem;
+}
+.am-list-item-middle{
+  position: relative;
+}
+.am-image-picker-list{
+  padding-left:0;
+}
+.am-list-item .am-list-line .am-list-arrow{
+  padding-right: 0.1rem;
+}
+.am-tab-bar-bar .am-tab-bar-tab-image{
+  width:auto !important;
+}
+.trainRf .am-list-item .am-list-line .am-list-content{
+  flex:initial;
+}
+am-navbar-light:nth-child(1) .am-navbar-left{
+  padding-left: 0.05rem;
+}
+.am-carousel-wrap-dot-active > span{
+  background: white;
+}
+/*.am-carousel-wrap{*/
+  /*display: none;*/
+/*}*/
+.am-list-item.am-input-item{
+  line-height: 0.44rem;
+}
+.am-flexbox .am-flexbox-item{
+  margin-left: 0.04rem;
+}

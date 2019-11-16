@@ -1,0 +1,181 @@
+
+html,body{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.hide{
+  display: none;
+}
+.zj-coupon-lists{
+  width: 100%;
+  padding: 0 15px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+.zj-coupon-lists .list-box{
+  margin-bottom: 15px;
+}
+.zj-coupon-lists .list-box .tips{
+  color: rgba(102, 102, 102, 1);
+  font-size: 11px;
+  text-align: left;
+  font-family: PingFangSC-Light;
+  left: 15px;
+  width: 100%;
+  height: 94px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  border: 0.5px solid rgba(240, 240, 240, 1);
+  border-top: transparent;
+  padding: 12px 0 18px 15px;
+  box-sizing: border-box;
+}
+.zj-coupon-lists .list-box .tips p{
+  margin: 0;
+  padding: 0;
+  line-height: 17px;
+}
+.zj-coupon-lists .zj-list{
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background: url('//static.ydlcdn.com/v4/zj/images/acti@2x.png');
+  background-size: cover;
+}
+.zj-coupon-lists .zj-list.list-hongbao{
+  background: url('//static.ydlcdn.com/v4/user_/app/img/Group 6@3x.png');
+  background-size: contain;
+}
+.invalid-zj-coupon-lists.list-box .zj-list{
+  background: url('//static.ydlcdn.com/v4/zj/images/dis@2x.png');
+  background-size: cover;
+}
+.zj-coupon-lists .zj-list .left img{
+  position: absolute;
+  width: 0.45rem;
+  top: 5px;
+  left: 5px;
+}
+.zj-coupon-lists .zj-list .left{
+  width: 1.14rem;
+  height: 100px;
+  line-height: 100px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 36px;
+  text-align: center;
+  font-family: PingFangSC-Semibold;
+}
+.zj-coupon-lists .zj-list .right{
+  position: relative;
+  flex: 1;
+  margin-left: 0.12rem;
+}
+.zj-coupon-lists .zj-list .right .title{
+  margin-top: 0.13rem;
+  color: rgba(36, 36, 36, 1);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: PingFangSC-Medium;
+}
+.zj-coupon-lists .zj-list .right .expire{
+  margin-top: 0.03rem;
+  color: rgba(36, 36, 36, 1);
+  font-size: 0.11rem;
+  font-family: PingFangSC-Light;
+}
+.zj-coupon-lists .zj-list .right .rules{
+  margin-top: 0.2rem;
+  color: rgba(102, 102, 102, 1);
+  font-size: 0.11rem;
+  font-family: PingFangSC-Light;
+}
+.zj-coupon-lists .zj-list .right .button{
+  position: absolute;
+  top: 0.2rem;
+  right: 0.1rem;
+  color: #fff;
+  font-size: 0.13rem;
+  width: 0.72rem;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  border-radius: 100px;
+  background: linear-gradient(to right, #FFC000, #FF8C00);
+}
+.invalid-zj-coupon-lists.list-box .zj-list .right .icon{
+  width: .69rem;
+  height: .62rem;
+  position: absolute;
+  top: 0.2rem;
+  right: 0.1rem;
+  background: url('//static.ydlcdn.com/v4/zj/images/ico_ygq@2x.png');
+  background-size: cover;
+}
+.invalid-zj-coupon-lists.list-box .zj-list .right .icon2{
+  width: .69rem;
+  height: .62rem;
+  position: absolute;
+  top: 0.2rem;
+  right: 0.1rem;
+  background: url('//static.ydlcdn.com/mobile/images/ico_ysy@2x.png');
+  background-size: cover;
+}
+.zj-coupon-lists .zj-list .right .rules img{
+  width: 10px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.myCoupon_card {
+  box-sizing: border-box;
+  border: 1px solid #ebebeb;
+  position: relative;
+  margin: 10px 0;
+  float: left;
+  width: 100%;
+  background: #fff;
+}
+.card_price {
+  background: url(https://static.ydlcdn.com/v2/images/myCoupon_bg.png) repeat-y right;
+  background-size: 100%;
+}
+.card_price_expire {
+  background: url(https://static.ydlcdn.com/v2/images/myCoupon_expire_bg.png) repeat-y right;
+  background-size: 100%;
+}
+.card_price span, .card_price_expire span {
+  font-size: 40px;
+  font-weight: bold;
+}
+.card_price, .card_price_expire {
+  color: #fff;
+  text-align: center;
+  padding: 25px 0px;
+  width: 100px;
+  float: left;
+}
+.myCoupon_card .info {
+  margin-left: 15px;
+  float: left;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #888;
+}
+.disabled {
+  color: #fff !important;
+  background: #D8D8D8!important;
+}
+@media (max-width: 700px){
+  .card_price, .card_price_expire {
+    width: 80px;
+    padding: 40px 0px;
+  }
+  .myCoupon_card .info {
+    margin-left: 8px;
+    float: left;
+    font-size: 13px;
+    margin-top: 10px;
+    color: #888;
+  }
+}

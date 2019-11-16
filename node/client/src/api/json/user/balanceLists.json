@@ -1,0 +1,73 @@
+{
+  "code": "200",
+  "data": {
+    "total":"15",
+    "balance":"200.00",
+    "list": [
+      {
+        "id":10,
+        "refundType":"企业发放",
+        "dealMoney":"100.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":11,
+        "refundType":"课程报名费",
+        "dealMoney":"-200.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":12,
+        "refundType":"倾诉",
+        "dealMoney":"-300.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":10,
+        "refundType":"企业发放企业发放企业发放企业发放企业发放企业发放企业发放企业发放",
+        "dealMoney":"100.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":11,
+        "refundType":"企业发放",
+        "dealMoney":"-200.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":12,
+        "refundType":"企业发放企业发放",
+        "dealMoney":"-300.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":10,
+        "refundType":"企业发放企业发放企业发放企业发放企业发放企业发放企业发放企业发放企业发放",
+        "dealMoney":"100.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":11,
+        "refundType":"企业发放",
+        "dealMoney":"-200.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      },
+      {
+        "id":12,
+        "refundType":"企业发放2",
+        "dealMoney":"-300.00",
+        "available":"309.00",
+        "createTime":"2018-01-25 14:30"
+      }
+    ]
+  },
+  "msg": "成功"
+}

@@ -1,0 +1,37 @@
+{
+  "code": "200",
+  "data": {
+    "total":"25",
+    "list": [
+      {
+        "listenerId":10,
+        "head":"http://img.hb.aicdn.com/b63f31a7d2eb38edbe4cad2b2af661aeec14a855b94d-clcCk1_fw658",
+        "callLong":"10分25秒",
+        "callStartTime":"2018-06-01 09:43",
+        "name":"张小明"
+      },
+      {
+        "listenerId":11,
+        "head":"http://img.hb.aicdn.com/b63f31a7d2eb38edbe4cad2b2af661aeec14a855b94d-clcCk1_fw658",
+        "callLong":"10分25秒",
+        "callStartTime":"2018-06-01 09:43",
+        "name":"张小明"
+      },
+      {
+        "listenerId":11,
+        "head":"http://img.hb.aicdn.com/b63f31a7d2eb38edbe4cad2b2af661aeec14a855b94d-clcCk1_fw658",
+        "callLong":"10分25秒",
+        "callStartTime":"2018-06-01 09:43",
+        "name":"张小明"
+      },
+      {
+        "listenerId":11,
+        "head":"http://img.hb.aicdn.com/b63f31a7d2eb38edbe4cad2b2af661aeec14a855b94d-clcCk1_fw658",
+        "callLong":"10分25秒",
+        "callStartTime":"2018-06-01 09:43",
+        "name":"张小明"
+      }
+    ]
+  },
+  "msg": "成功"
+}

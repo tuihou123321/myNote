@@ -1,0 +1,7 @@
+.am-list-item .am-list-line .am-list-extra {
+    -ms-flex-preferred-size: 5% !important;
+    flex-basis: 5% !important;
+    color: #888;
+    font-size: 16px;
+    text-align: right;
+}

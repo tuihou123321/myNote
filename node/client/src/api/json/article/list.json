@@ -1,0 +1,21 @@
+{
+  "code": "200",
+  "msg": "success",
+  "data": {
+    "total": 2,
+    "list": [
+      {
+        "id": "49",
+        "coverUrl": "https://img.yidianling.com/file/2018/09/13/75eb090451184b7d3dbe55f42b461e38.jpg?1440x900",
+        "title": "这是推送到吉利",
+        "content": "这是推送到吉利\r\n"
+      },
+      {
+        "id": "19",
+        "coverUrl": "https://img.yidianling.com/file/2018/09/11/8e22fac891b7b59f5470dac3514426a5.jpg?1440x900",
+        "title": "这个是给吉利的数据",
+        "content": "这个是给吉利的数据\r\n"
+      }
+    ]
+  }
+}

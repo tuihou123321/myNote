@@ -1,0 +1,19 @@
+{
+  "name": "koademo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.js",
+  "scripts": {
+    "dev": "nodemon 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "koa-route": "^3.2.0"
+  },
+  "devDependencies": {
+    "lru-cache": "^5.1.1"
+  }
+}

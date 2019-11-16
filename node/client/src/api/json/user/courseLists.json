@@ -1,0 +1,52 @@
+{
+  "code": "200",
+  "data": {
+    "total":"20",
+    "list": [
+      {
+        "id":10,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"1如何快速读懂男人心听懂看穿他的一言一行1如何快速读懂男人心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      }, {
+        "id":11,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"2如何快速读懂男人心听懂看穿他的一言一行心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      },   {
+        "id":12,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"3如何快速读懂男",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      },   {
+        "id":13,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"5如何快速读懂男人心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      },   {
+        "id":14,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"6如何快速读懂男人心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      }, {
+        "id":13,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"5如何快速读懂男人心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      },{
+        "id":14,
+        "img":"http://img.hb.aicdn.com/fb3ad0809f992f0f74e4c9cf28a67504f7e6a649cb29-5Kn5YV_fw658",
+        "title":"6如何快速读懂男人心听懂看穿他的一言一行",
+        "paytime":"2018-06-01",
+        "price":"39.00"
+      }
+    ]
+  },
+  "msg": "成功"
+}

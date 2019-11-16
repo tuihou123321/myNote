@@ -1,0 +1,97 @@
+{
+  "code": "200",
+  "data": {
+    "id":"100",
+    "name":"测测你们之间是不是有爱情",
+    "cover":"http://img.hb.aicdn.com/bbb2f7133529ed8f3c8da12787ea28e442681cfa72936-nDc07P_fw658",
+    "desc":"也许你正在感情的漩涡中挣扎，不知道何时应该往前一步;也许你们两个惺惺相惜，却都不知道未来会给你们带来什么，赶快进入测试，看看你们之间，到底有没有相爱的缘分呢。",
+    "testNum":"100",
+    "questions":[
+      {
+        "content":"你更喜欢下面哪张图片？",
+        "questionNo":"0",
+        "detailTxt":"请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答",
+        "detailImage":"",
+        "detailVoice":"",
+        "id":100,
+        "testAnswerDtos":[
+          {
+            "id":10,
+            "content":"这是选项一这是选项一这是选项一这是选项一这是选项一这是选项一",
+            "image":"",
+            "jumpAnsId": "1"
+          },
+          {
+            "id":11,
+            "content":"这是选项二",
+            "image":"",
+            "jumpAnsId": "2"
+          },
+          {
+            "id":12,
+            "content":"这是选项三",
+            "image":"",
+            "jumpAnsId": "2"
+          }
+        ]
+      },
+      {
+        "content":"22你更喜欢下面哪张图片？",
+        "questionNo":"1",
+        "detailTxt":"请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答",
+        "detailImage":"",
+        "detailVoice":"",
+        "id":100,
+        "testAnswerDtos":[
+          {
+            "id":10,
+            "content":"这是选项一这是选项一这是选项一这是选项一这是选项一这是选项一",
+            "image":"",
+            "jumpAnsId": "2"
+          },
+          {
+            "id":11,
+            "content":"这是选项二",
+            "image":"",
+            "jumpAnsId": "2"
+          },
+          {
+            "id":12,
+            "content":"这是选项三",
+            "image":"",
+            "jumpAnsId": "2"
+          }
+        ]
+      },
+      {
+        "content":"333喜欢下面哪张图片？",
+        "questionNo":"2",
+        "detailTxt":"请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答请在10秒内快速回答",
+        "detailImage":"",
+        "detailVoice":"",
+        "id":100,
+        "testAnswerDtos":[
+          {
+            "id":10,
+            "content":"这是选项一这是选项一这是选项一这是选项一这是选项一这是选项一",
+            "image":"",
+            "jumpAnsId": ""
+          },
+          {
+            "id":11,
+            "content":"这是选项二",
+            "image":"",
+            "jumpAnsId": ""
+          },
+          {
+            "id":12,
+            "content":"这是选项三",
+            "image":"",
+            "jumpAnsId": ""
+          }
+        ]
+      }
+    ]
+  },
+  "msg": "成功"
+}

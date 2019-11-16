@@ -1,0 +1,110 @@
+.p7{
+    padding: 0.07rem;
+}
+.tabsItem{
+    width:30%;
+    height: 0.32rem;
+    background: #f0f0f0;
+    color:#999;
+    text-align: center;
+    -webkit-border-radius: 0.05rem;
+    -moz-border-radius: 0.05rem;
+    border-radius: 0.05rem;
+    margin-bottom: 0.1rem;
+}
+
+.tag-active{
+    background-color: rgba(16, 142, 233, 0.06);
+    border: 0.5px solid #108ee9;
+    color:#108ee9;
+}
+
+.grey-red{
+    color:#f49992;
+}
+.btn-red .am-button{
+    font-size: 0.15rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    border-radius: 0.25rem;
+}
+.greyBox .am-button-warning{
+    color:#f49992;
+}
+.grey-red{
+    color:#f49992 !important;
+}
+.white{
+    color:white !important
+}
+.btn2{
+   border-radius:0.2rem;
+    font-size: 0.12rem;
+}
+.btn-wrap .btn{
+    padding: 0.03rem 0.08rem;
+}
+.bg-blue{
+    background: #96d3f8;
+}
+.blue{
+    color:#2aa6f3;
+}
+.bg-grey-light{
+    background: #fafafa;
+    /*background: red;*/
+}
+.red{
+    color:#e43327;
+}
+.yellow{
+    color: #f7b952;
+}
+.bg-green{
+    background: #34cd65;
+}
+.bg-orange{
+    background: #faa05a;
+}
+.am-list-body .am-list-item:last-child{
+    border:none !important;
+}
+.am-list-item .am-input-label {
+    font-size: 0.14rem;
+}
+.am-list-item .am-input-control input{
+    font-size: 0.14rem;
+}
+.am-list-item .am-list-line .am-list-content{
+    font-size: 0.14rem;
+}
+.am-list-item .am-list-line .am-list-extra{
+    font-size: 0.14rem !important;
+}
+.ti35{
+    text-indent: 0.35rem;
+}
+.fil{
+    height: 1rem;
+    line-height: 0.7rem;
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0.0),rgba(255,255,255,0.6),rgba(255,255,255,0.9), rgba(255,255,255,1)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom, rgba(255,255,255,0.0),rgba(255,255,255,0.6),rgba(255,255,255,0.9), rgba(255,255,255,1)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom, rgba(255,255,255,0.0),rgba(255,255,255,0.6),rgba(255,255,255,0.9), rgba(255,255,255,1)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.0),rgba(255,255,255,0.6),rgba(255,255,255,0.9), rgba(255,255,255,1)); /* 标准的语法（必须放在最后） */
+    z-index: 100;
+}
+
+.am-picker .am-picker-col:first-child{
+    display:none;
+}
+.am-picker .am-picker-col:nth-child(2){
+    display:none;
+}
+.maxWidth img{
+    max-width: 100%;
+    margin: 0.1rem 0;
+}
+.maxWidth video{
+    max-width: 100%;
+    margin: 0.1rem 0;
+}

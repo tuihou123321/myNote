@@ -1,0 +1,87 @@
+{
+  "code": "200",
+  "data": {
+    "id": 56,
+    "title": "测试课程。~~",
+    "pic": "https://img.ydlcdn.com/file/2015/10/nvtv207vfi8ely24.jpg",
+    "desc": "春天，它不像夏天那样干枯炎热，不像秋天那样冷清，也不像冬天那样寒冷。而春天",
+    "contentImageUrl": "",
+    "hostUid": 5,
+    "courseStartTime": 1496246400000,
+    "applyFee": 0,
+    "originalApplyFee": 0,
+    "readNums": 84,
+    "courseType": 1,
+    "demoOption": 1,
+    "content": "<h1>这里是html文本描述</h1>",
+    "isPushToBg": 2,
+    "isBuy": false,
+    "hostInfo": {
+      "doctorId": 3,
+      "uid": 5,
+      "name": "陈莉",
+      "head": "https://img.ydlcdn.com/file/2015/09/dlo8pci12sfrrg0h.jpg!s120x120",
+      "cousultAmount": 35,
+      "goodAt": "恋爱婚姻家庭咨询，人际沟通，学习障碍",
+      "tags": "标签一,标签二,标签三",
+      "thksAmount": 28,
+      "fansAmount": 48,
+      "status": 1
+    },
+    "subCourseList": [
+      {
+        "id":1,
+        "pic":"http://img.hb.aicdn.com/af3a0bcb9b57f6d37c44d19c5a59163c5916b0152e7e6-LigTFx_fw658",
+        "title":"第一讲：这是课程标题内容这是课程标题内容这是课程标题内容这是课程标题内容",
+        "readNums":"100"
+      },
+      {
+        "id":2,
+        "pic":"http://img.hb.aicdn.com/af3a0bcb9b57f6d37c44d19c5a59163c5916b0152e7e6-LigTFx_fw658",
+        "title":"第二讲：这是课程标题内",
+        "readNums":"0"
+      },
+      {
+        "id":3,
+        "pic":"http://img.hb.aicdn.com/af3a0bcb9b57f6d37c44d19c5a59163c5916b0152e7e6-LigTFx_fw658",
+        "title":"第三讲：这是课程标题内容这是课程标题内容这是课程标题内容这是课程标题内容",
+        "readNums":"100"
+      },
+      {
+        "id":4,
+        "pic":"http://img.hb.aicdn.com/af3a0bcb9b57f6d37c44d19c5a59163c5916b0152e7e6-LigTFx_fw658",
+        "title":"第四讲：这是课程标题内容这是课程标题内容这是课程标题内容这是课程标题内容",
+        "readNums":"100"
+      },
+      {
+        "id":5,
+        "pic":"http://img.hb.aicdn.com/af3a0bcb9b57f6d37c44d19c5a59163c5916b0152e7e6-LigTFx_fw658",
+        "title":"第五讲：这是课程标题内容这是课程标题内容这是课程标题内容这是课程标题内容",
+        "readNums":"100"
+      }
+    ],
+    "demoAttachmentList": [
+      {
+        "courseId": 56,
+        "title": "测试课程。~~(1)",
+        "attachment": "http://on674msdo.bkt.clouddn.com/%E9%99%88%E6%85%A7%E7%90%B3%20-%20%E4%B8%B4%E8%B5%B0%E5%89%8D%E5%90%BB%E6%88%91.mp3"
+      },
+      {
+        "courseId": 56,
+        "title": "测试课程。~~(2)",
+        "attachment": "http://on674msdo.bkt.clouddn.com/%E9%99%88%E6%85%A7%E7%90%B3%20-%20%E4%B8%B4%E8%B5%B0%E5%89%8D%E5%90%BB%E6%88%91.mp3"
+      },
+      {
+        "courseId": 56,
+        "title": "测试课程。~~(3)",
+        "attachment": "http://on674msdo.bkt.clouddn.com/%E9%99%88%E6%85%A7%E7%90%B3%20-%20%E4%B8%B4%E8%B5%B0%E5%89%8D%E5%90%BB%E6%88%91.mp3"
+      },
+      {
+        "courseId": 56,
+        "title": "测试课程。~~(4)",
+        "attachment": "http://on674msdo.bkt.clouddn.com/%E9%99%88%E6%85%A7%E7%90%B3%20-%20%E4%B8%B4%E8%B5%B0%E5%89%8D%E5%90%BB%E6%88%91.mp3"
+      }
+    ]
+  },
+  "msg": "成功"
+}
