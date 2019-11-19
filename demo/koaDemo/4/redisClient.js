@@ -62,10 +62,5 @@ client.on('ready', function() {
     console.log(">>>>> 链接redis服务器"+redisConfig.host+":"+redisConfig.port+"成功");
 });
 
-// 1 键值对
-client.set('color', 'red', redis.print);
-client.get('color', function(err, value) {
-    if (err) throw err;
-    console.log('Got: ' + value)
-    client.quit();
-})
+module.exports = client;
+
