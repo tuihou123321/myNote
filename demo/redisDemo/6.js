@@ -31,18 +31,7 @@ if(redisConfig.password){
 }
 
 
-client.set("string key", "string val", redis.print);
-client.hset("hash key", "hashtest 1", "some value", redis.print);
-client.hset(["hash key", "hashtest 2", "some other value"], redis.print);
-
-//清空的有
-// client.flush;
-// client.flushall();
-
 client.hkeys("m", function (err, replies) {
-    console.log(`总长度为:${replies.length}`);
-    // replies.forEach(function (reply, i) {
-    //     console.log("    " + i + ": " + reply);
-    // });
+    console.log(replies);
     client.quit();
 });

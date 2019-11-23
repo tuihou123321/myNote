@@ -1,4 +1,5 @@
 const Config =require('./config')
+const env =require('./env')
 const { configure,getLogger }=require('log4js')
 const Log=getLogger();
 
@@ -20,13 +21,16 @@ configure({
 const redis = require("redis");
 
 // 服务配置项
-redisConfig = Config['0'];
+redisConfig = Config[env.deploy];
 
 // 创建redis服务
 const client = redis.createClient(redisConfig.port, redisConfig.host, {});
 
 // 设置密码
-client.auth(redisConfig.password);
+if(redisConfig.password){
+	client.auth(redisConfig.password);
+}
+
 
 /**
  * 启动错误
@@ -112,9 +116,9 @@ module.exports = {
 	 */
 	hmset: function(key, data, flag, time){
 
-    for(let a in data) {
-      data[a] = JSON.stringify(data[a])
-    }
+		for(let a in data) {
+			data[a] = JSON.stringify(data[a])
+		}
 
 		client.HMSET(key, data);
 		/**
@@ -124,7 +128,23 @@ module.exports = {
 			var time = time || 60 * 60 * 24;
 			client.expire(key, time);
 		}
-  },
+	},
+
+	/**
+	 * 设置哈希表
+	 * 如果存在则覆盖
+	 */
+	set: function(key, data, flag, time){
+
+		client.SET(key, data);
+		/**
+		 * 从创建房间开始，默认过期时间为24小时
+		 */
+		if(flag) {
+			var time = time || 60 * 60 * 24;
+			client.expire(key, time);
+		}
+	},
 
 	/**
 	 * 获取所有哈希表
@@ -145,9 +165,9 @@ module.exports = {
 				}
 			});
 		});
-  },
+	},
 
-  /**
+	/**
 	 * 获取当前值
 	 */
 	hmget: function(key, value) {
@@ -162,10 +182,76 @@ module.exports = {
 					reject(false);
 
 				} else {
-          // let data = JSON.parse(res);
-					resolve(res);
+					let data = JSON.parse(res);
+					resolve(data);
 				}
 			});
+		});
+	},
+
+	/**
+	 * 获取当前值
+	 */
+	get: function(key) {
+
+		return new Promise(function(resolve, reject) {
+
+			client.GET(key, function(err, value){
+				if (err) {
+					console.log(">>>>> redis");
+					console.log("获取列表指定范围内的元素时出错。 错误码："+ err);
+					reject(false);
+
+				} else {
+					resolve(value);
+				}
+			});
+		});
+	},
+
+
+
+	/**
+	 * 获取哈希表长度
+	 */
+	length: function() {
+
+		return new Promise(function(resolve, reject) {
+
+			client.keys('*', function(err, replies) {
+
+				if( err ) {
+					Log.info(">>>>> redis");
+					Log.info("获取长度时出错。 错误码："+ err);
+					reject(err);
+				}
+				else {
+					resolve(replies.length);
+					// client.quit();
+				}
+			})
+		});
+	},
+
+	/**
+	 * 获取哈希表长度
+	 */
+	keys: function() {
+
+		return new Promise(function(resolve, reject) {
+
+			client.keys('*', function(err, replies) {
+
+				if( err ) {
+					Log.info(">>>>> redis");
+					Log.info("获取长度时出错。 错误码："+ err);
+					reject(err);
+				}
+				else {
+					resolve(replies);
+					// client.quit();
+				}
+			})
 		});
 	},
 
@@ -212,7 +298,7 @@ module.exports = {
 	 */
 	scard: function(key, fn){
 		client.SCARD(key, function(err, len) {
-		    typeof fn === "function" && fn(len);
+			typeof fn === "function" && fn(len);
 		});
 	},
 
