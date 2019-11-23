@@ -6,6 +6,8 @@ client.set('/ask/1', 'html 文本1');
 client.set('/ask/2', 'html 文本2');
 client.set('/ask/99', 'html 文本99');
 
+client.del('/ask/1');
+
 async function getData(){
     // const value =await  client.get('/ask/1')
     // console.log(value);
