@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "log4js": "^6.1.0",
     "redis": "^2.8.0"
   }
 }
