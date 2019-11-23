@@ -9,3 +9,5 @@ client.hmset(["key", "test keys 1", "test val 1", "test keys 2", "test val 2"], 
         console.log(res);
     }
 });
+
+

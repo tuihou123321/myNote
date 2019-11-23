@@ -221,5 +221,6 @@ module.exports = {
 	 */
 	del: function(key){
 		client.DEL(key);
-	}
+	},
+	client:client
 }

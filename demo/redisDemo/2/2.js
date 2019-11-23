@@ -8,3 +8,5 @@ client.get('color', function(err, value) {
     console.log('Got: ' + value)
     client.quit();
 })
+
+
