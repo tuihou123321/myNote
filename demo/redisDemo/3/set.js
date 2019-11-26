@@ -3,10 +3,12 @@ const client=require('./redis')
 
 // 1 键值对
 client.set('/ask/1', 'html 文本1');
-client.set('/ask/2', 'html 文本2');
-client.set('/ask/99', 'html 文本99');
+// client.set('/ask/2', 'html 文本2');
+// client.set('/ask/99', 'html 文本99');
+//
+// client.del('/ask/1');
 
-client.del('/ask/1');
+// client.set('/ask/10','html10',true,5); //5s后过期
 
 async function getData(){
     // const value =await  client.get('/ask/1')
@@ -32,7 +34,6 @@ async function getData(){
 
 getData();
 
-client.set('/ask/99', 'html 文本100');
 
 
 
