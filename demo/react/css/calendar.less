@@ -1,0 +1,75 @@
+
+.container{
+  width: 100%;
+}
+.title{
+  display: flex;
+  text-align: center;
+  height: 40px;
+}
+
+.titleBox{
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+.titleItem{
+  flex: 1;
+}
+
+.day{
+  width: 100%;
+  color: rgba(36, 36, 36, 100);
+  font-size: 14px;
+}
+
+.white{
+  color:white;
+}
+.monthTitle{
+  text-align: center;
+  padding: 10px 0;
+}
+.monthBox{
+  clear:both;
+  margin-bottom: 30px;
+}
+.dayItem{
+  width: 14.285%;
+  float: left;
+  text-align: center;
+  height: 49px;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.activeBox .dayItemContent{
+  height: 49px;
+  width: 49px;
+  border-radius: 8px;
+  background-color: rgba(29, 161, 242, 1);
+  color: white;
+  display: inline-table;
+}
+
+.activeBox .day{
+  color:white;
+}
+.activeBox .type{
+  color:white;
+}
+
+.item-disable{
+  color:#bfbfbf;
+}
+.type{
+  color: rgba(102, 102, 102, 100);
+  font-size: 12px;
+}
+.clear{
+  clear: both;
+}

@@ -1,0 +1,212 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react 过滤器</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+    <style>
+        .title{
+            color:red;
+        }
+        .modal{
+            border:1px solid #dddddd;
+            padding: 20px;
+        }
+        a{
+            padding: 0 4px;
+            display: inline-block;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+    class Modal extends React.Component{
+        constructor(props){
+            super(props);
+            this.affirm=this.affirm.bind(this);
+            this.changeInput=this.changeInput.bind(this);
+            this.cancel=this.cancel.bind(this);
+            this.state={
+                value:'',
+                visibility:false
+            }
+        }
+        componentWillReceiveProps (nextProps){
+            this.setState({
+                value: nextProps.value,
+                visibility: nextProps.visibility,
+            });
+        }
+        affirm(){
+            setTimeout(()=>{
+                this.setState({
+                    visibility:false
+                })
+            },0)
+            this.props.changeItem(this.state.value)
+        }
+        cancel(){
+            this.setState({
+                visibility:false
+            })
+        }
+        changeInput(event){
+            this.setState({value: event.target.value});
+        }
+        showModal(){
+            this.setState({
+                visibility:true
+            })
+        }
+        hideModal(){
+            this.setState({
+                visibility:false
+            })
+        }
+        render(){
+            if (!this.state.visibility){
+                return <div/>
+            }
+            return (
+
+                <div className="modal">
+                    <h3>编辑框</h3>
+                    <input value={this.state.value} onChange={this.changeInput}/>
+                    <button onClick={this.affirm}>确认</button>
+                    <button onClick={this.cancel}>取消</button>
+                </div>
+            )
+        }
+    }
+
+    class MyComponent extends React.Component {
+        constructor(props) {
+            super(props);
+            this.myTextInput = React.createRef();
+            this.search = this.search.bind(this);
+            this.onChangeInput = this.onChangeInput.bind(this);
+            this.changeItem = this.changeItem.bind(this);
+            this.edit = this.edit.bind(this);
+            this.remove = this.remove.bind(this);
+            this.add = this.add.bind(this);
+            this.state={
+                title:'过滤器',
+                skills:['react','vue','js','node'], //完整数据
+                skillsShow:[], //完整数据
+                keyword:'',
+                openIndex:0,
+                selectValue:'',
+                visibilityModal:false
+            }
+        }
+        search() {
+            if (this.state.keyword){
+                // this.myTextInput.current.focus();
+                let newSkills=this.state.skills.filter(item=>{
+                    return item.indexOf(this.state.keyword)>-1
+                })
+                this.setState({
+                    skillsShow:newSkills
+                })
+            }else{
+                this.setState({
+                    skillsShow:this.state.skills
+                })
+            }
+        }
+        onChangeInput(event){
+            this.setState({keyword: event.target.value});
+        }
+
+        edit(index,value){
+            this.setState({
+                openIndex:index,
+                selectValue:value,
+                visibilityModal:true
+            })
+        }
+        add(index,value){
+            let {skills}=this.state;
+            skills.unshift(this.state.keyword);
+            this.setState({
+                skills:skills,
+                keyword:''
+            },()=>{
+                this.search()
+            })
+        }
+        remove(index,value){
+            let {skills}=this.state;
+            skills.splice(index,1);
+            this.setState({
+                skills:skills
+            },()=>{
+                this.search()
+            })
+        }
+        changeItem(value){
+            let {skills}=this.state;
+            skills[this.state.openIndex]=value;
+            this.setState({
+                skills:skills
+            },()=>{
+                this.search()
+            })
+
+        }
+        componentWillMount() {
+            this.setState({
+                skillsShow:this.state.skills
+            })
+        }
+
+        render() {
+            const {edit,remove,add}=this;
+            return (
+                <div>
+                    <div>{this.state.title}</div>
+                    <input type="text" ref={this.myTextInput} value={this.state.keyword} onChange={this.onChangeInput} placeholder="请输入"/>
+                    <input type="button" value="search" onClick={this.search} />
+
+
+                    <input type="button" value="add" onClick={add} />
+                    <ul>
+                        {
+                            this.state.skillsShow.map((item,index)=>{
+                                return <li key={index}>{item}
+                                <a href="javascript:;" onClick={()=>{edit(index,item)}}>编辑</a>
+                                <a href="javascript:;" onClick={()=>{remove(index,item)}}>删除</a>
+                                </li>
+                            })
+                        }
+                    </ul>
+                    <Modal value={this.state.selectValue} changeItem={(value)=>{this.changeItem(value)}} visibility={this.state.visibilityModal}/>
+                </div>
+            );
+        }
+    }
+
+    class App extends React.Component {
+        render(){
+           return (
+            <div>
+             <MyComponent/>
+            </div>
+           )
+        }
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+</body>

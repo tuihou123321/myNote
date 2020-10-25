@@ -1,0 +1,264 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classnames/2.2.6/index.min.js" integrity="sha512-PMVw2HzV4gXtPe+BpvOQRQe9HtKcU4jA4N9ilRq+paTcz/ERKCt4d9hqXlslfsKOydknA4Y4JsiQexm/1W8zIA==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dateformat@3.0.3/lib/dateformat.js"></script>
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.18.1/locale/zh-cn.js"></script>-->
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/tuihou123321/commonCss/master/Index.css">
+
+    <!--引入test.less文件 -->
+    <link rel="stylesheet/less" type="text/css" href="css/calendar.less" />
+    <!--引入less.min.js文件 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/3.8.1/less.min.js" ></script>
+
+
+
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+
+
+    function format(times=[]){
+        let arrNew=[[]]
+        let i=0;
+        times.forEach((item,index)=>{
+            let strArr=item.date.split('/');
+            if(arrNew[i].length===0){
+                arrNew[i].push(item)
+                return;
+            }
+
+            let arrNewLastOne=times[index-1].date.split('/');
+            if(strArr[0]+'/'+strArr[1]===arrNewLastOne[0]+'/'+arrNewLastOne[1]){
+                arrNew[i].push(item)
+            }else{
+                ++i;
+                arrNew.push([]);
+                arrNew[i].push(item)
+            }
+        })
+
+        return arrNew;
+    }
+
+    const types=[
+        {
+            type:'1',
+            value:'可约'
+        },{
+            type:'2',
+            value:'约满'
+        },{
+            type:'3',
+            value:'未开放'
+        },
+    ]
+
+    class Calendar extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state={
+                times:this.props.times,
+                currentMonth:'',
+                timesDistance:0
+            }
+        }
+
+        componentWillReceiveProps(nextProps) {
+            // this.setState({
+            //     times:nextProps.times
+            //  })
+        }
+
+        getDay(day){
+            //获取今天的日期
+            let today=dateFormat(new Date(), 'yyyy/mm/dd');
+            if(today===day){
+                return '今天'
+            }else{
+                return day.split('/')[2];
+            }
+
+        }
+        getState(type){
+            let typeName='';
+            types.forEach((item,index)=>{
+                if(type===item.type){
+                    typeName=item.value;
+                }
+            })
+            return typeName;
+        }
+        componentDidMount() {
+            let timesDistance=new Date(this.state.times[0].date).getDay();
+
+            let timesArr=this.state.times[0].date.split('/');
+
+            this.setState({
+                timesDistance,
+                currentMonth:`${timesArr[0]}年${timesArr[1]}月`
+             })
+        }
+        render() {
+
+            let timesDistanceArr=[];
+            for (let i=0; i<this.state.timesDistance; i++){
+                timesDistanceArr.push(0);
+            }
+
+            return (
+                <div className="monthBox">
+                    <div className="monthTitle">{this.state.currentMonth}</div>
+                    <div className="day">
+                        {
+                            timesDistanceArr.map((item,index)=>{
+                                return <div className="dayItem white" key={index}>0</div>
+                            })
+                        }
+
+                        {
+                            this.state.times.length>0 && this.state.times.map((item,index)=>{
+                                return <div className={
+                                            classNames('dayItem',{
+                                                    'activeBox': item.isActive,
+                                                    'item-disable':item.type==='2' || item.type==='3'
+                                                })
+                                            }
+                                    key={index} onClick={()=>{this.props.selectTime(item)}}>
+
+                                    <div className="dayItemContent">
+                                        <div className="day">{this.getDay(item.date)}</div>
+                                        <div className="type">{this.getState(item.type)}</div>
+                                    </div>
+
+                                </div>
+                            })
+                        }
+
+                        <div className="clear"/>
+                    </div>
+                </div>
+            );
+        }
+    }
+
+
+    class App extends React.Component{
+        constructor(props) {
+            super(props);
+            this.state = {
+                weekday:['日','一','二','三','四','五','六'],
+                times:[
+                    {
+                        date:'2020/10/25',
+                        type:'1'
+                    },
+                    {
+                        date:'2020/10/26',
+                        type:'1'
+                    },
+                    {
+                        date:'2020/10/27',
+                        type:'1'
+                    },
+                    {
+                        date:'2020/10/28',
+                        type:'1'
+                    },
+                    {
+                        date:'2020/10/29',
+                        type:'1'
+                    },
+                    {
+                        date:'2020/10/30',
+                        type:'2'
+                    },
+                    {
+                        date:'2020/10/31',
+                        type:'3'
+                    },
+                    {
+                        date:'2020/11/1',
+                        type:'2'
+                    },
+                    {
+                        date:'2020/11/2',
+                        type:'3'
+                    }
+                ],
+                timesArr:[]
+            }
+        }
+
+        selectTime(itemData){
+            let { times }=this.state;
+            let { date }=itemData;
+
+            times.forEach((item,index)=>{
+                if(item.date===date){
+                    item.isActive=true;
+                }else{
+                    item.isActive=false;
+                }
+            })
+
+            this.setState({
+                times
+             })
+        }
+
+        componentDidMount() {
+            // console.log(format(this.state.times),'xz44444485');
+            //格式化数据
+            let {times}=this.state;
+
+            times[0].isActive=true;
+            this.setState({
+                timesArr:format(times)
+             })
+        }
+
+
+        render(){
+            return (
+                <div className="container">
+                    <div className="titleBox">
+                        <div className="title">
+                            {
+                                this.state.weekday.map((item,index)=>{
+                                    return <div className="titleItem" key={index}>{item}</div>
+                                })
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        {
+                            this.state.timesArr.length>0 &&　this.state.timesArr.map((item,index)=>{
+                              return  <Calendar times={item} selectTime={(item)=>{this.selectTime(item)}} key={index}/>
+                            })
+                        }
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
