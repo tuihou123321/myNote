@@ -1,0 +1,72 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react 图片懒加载</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lazysizes/0.4.0/lazysizes.min.js"  async=""></script>
+    <style>
+        img{
+            margin: 20px;
+            max-height: 600px;
+            border: 1px solid red;
+            padding: 10px;
+        }
+        li{
+            list-style: none;
+        }
+
+        .teaser.lazyload {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .teaser.lazyloaded {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 700ms;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="app">
+</div>
+
+
+<script type="text/babel">
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state={
+                imgLists:['https://hbimg.huabanimg.com/4fb85cbdc5c652d5f3498c5c0e0ab1149708515a4ae90-ZmWr4L_fw658/format/webp','https://hbimg.huabanimg.com/5a329dae25d831f8ffa5787d3ce3f51057be4407ba384-gtNF51_fw658/format/webp',
+                'https://hbimg.huabanimg.com/412eb79b412071c9133d9f7a6c06f741c789bc556250d-Lc5ZEX_fw658/format/webp','https://hbimg.huabanimg.com/887cbbf8002c9148eb985be30714003c649940951ad3d2-nwhyI9_fw658/format/webp'
+                ],
+                imgBg:'https://huaban.com/img/img_bg_2.png',  //1x1 背景图片
+                imgBgBase64:'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',  //1x1 背景图片
+            }
+        }
+        render() {
+            return (
+                <div>
+                    <ul>
+                        {
+                            this.state.imgLists.map((item,index)=>{
+                                return <li key={index}> <img src={this.state.imgBgBase64} alt="" data-src={item} className="lazyload"/></li>
+                            })
+                        }
+                    </ul>
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
