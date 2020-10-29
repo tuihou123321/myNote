@@ -7,6 +7,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/lazysizes/0.4.0/lazysizes.min.js"  async=""></script>
     <style>
+        .content{
+            height: 700px;
+            border: 2px solid red;
+        }
         img{
             margin: 20px;
             max-height: 600px;
@@ -41,9 +45,7 @@
         constructor(props) {
             super(props);
             this.state={
-                imgLists:['https://hbimg.huabanimg.com/4fb85cbdc5c652d5f3498c5c0e0ab1149708515a4ae90-ZmWr4L_fw658/format/webp','https://hbimg.huabanimg.com/5a329dae25d831f8ffa5787d3ce3f51057be4407ba384-gtNF51_fw658/format/webp',
-                'https://hbimg.huabanimg.com/412eb79b412071c9133d9f7a6c06f741c789bc556250d-Lc5ZEX_fw658/format/webp','https://hbimg.huabanimg.com/887cbbf8002c9148eb985be30714003c649940951ad3d2-nwhyI9_fw658/format/webp'
-                ],
+                imgLists:['https://img.zcool.cn/community/01629f5f6744e911013f3110273836.jpg@1280w_1l_2o_100sh.jpg','https://img.zcool.cn/community/01d3815f6744ba11013e45842dbc3a.jpg@1280w_1l_2o_100sh.jpg','https://img.zcool.cn/community/01ce2b5f6744d011013f31106a42ca.jpg@1280w_1l_2o_100sh.jpg'],
                 imgBg:'https://huaban.com/img/img_bg_2.png',  //1x1 背景图片
                 imgBgBase64:'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',  //1x1 背景图片
             }
@@ -51,6 +53,9 @@
         render() {
             return (
                 <div>
+                    <div className="content">
+                        我是主要内容
+                    </div>
                     <ul>
                         {
                             this.state.imgLists.map((item,index)=>{
