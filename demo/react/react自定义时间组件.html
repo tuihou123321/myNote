@@ -8,6 +8,7 @@
     <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/classnames/2.2.6/index.min.js" integrity="sha512-PMVw2HzV4gXtPe+BpvOQRQe9HtKcU4jA4N9ilRq+paTcz/ERKCt4d9hqXlslfsKOydknA4Y4JsiQexm/1W8zIA==" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/dateformat@3.0.3/lib/dateformat.js"></script>
+    <script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
 <!--    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.18.1/locale/zh-cn.js"></script>-->
     <link rel="stylesheet" href="https://raw.githubusercontent.com/tuihou123321/commonCss/master/Index.css">
 
@@ -26,8 +27,6 @@
 
 
 <script type="text/babel">
-
-
 
     function format(times=[]){
         let arrNew=[[]]
@@ -52,6 +51,45 @@
         return arrNew;
     }
 
+    const timesData=[
+        {
+            date:'2020/10/25',
+            type:'1'
+        },
+        {
+            date:'2020/10/26',
+            type:'1'
+        },
+        {
+            date:'2020/10/27',
+            type:'1'
+        },
+        {
+            date:'2020/10/28',
+            type:'1'
+        },
+        {
+            date:'2020/10/29',
+            type:'1'
+        },
+        {
+            date:'2020/10/30',
+            type:'2'
+        },
+        {
+            date:'2020/10/31',
+            type:'3'
+        },
+        {
+            date:'2020/11/1',
+            type:'2'
+        },
+        {
+            date:'2020/11/2',
+            type:'3'
+        }
+    ]
+
     const types=[
         {
             type:'1',
@@ -65,7 +103,7 @@
         },
     ]
 
-    class Calendar extends React.Component {
+    class CalendarMonth extends React.Component {
         constructor(props) {
             super(props);
             this.state={
@@ -153,82 +191,41 @@
         }
     }
 
+    class Calendar extends React.Component{
 
-    class App extends React.Component{
         constructor(props) {
             super(props);
             this.state = {
                 weekday:['日','一','二','三','四','五','六'],
-                times:[
-                    {
-                        date:'2020/10/25',
-                        type:'1'
-                    },
-                    {
-                        date:'2020/10/26',
-                        type:'1'
-                    },
-                    {
-                        date:'2020/10/27',
-                        type:'1'
-                    },
-                    {
-                        date:'2020/10/28',
-                        type:'1'
-                    },
-                    {
-                        date:'2020/10/29',
-                        type:'1'
-                    },
-                    {
-                        date:'2020/10/30',
-                        type:'2'
-                    },
-                    {
-                        date:'2020/10/31',
-                        type:'3'
-                    },
-                    {
-                        date:'2020/11/1',
-                        type:'2'
-                    },
-                    {
-                        date:'2020/11/2',
-                        type:'3'
-                    }
-                ],
+                times:this.props.times,
                 timesArr:[]
             }
         }
 
         selectTime(itemData){
-            let { times }=this.state;
-            let { date }=itemData;
-
-            times.forEach((item,index)=>{
-                if(item.date===date){
-                    item.isActive=true;
-                }else{
-                    item.isActive=false;
-                }
-            })
+            let { times }=this.props;
+            const { date }=itemData;
+            times.forEach(item=> item.isActive= item.date===date);
 
             this.setState({
                 times
              })
+
+            this.props.onChange(itemData)
+
         }
 
-        componentDidMount() {
-            // console.log(format(this.state.times),'xz44444485');
+        componentWillReceiveProps(nextProps) {
             //格式化数据
-            let {times}=this.state;
+            let {times}=nextProps;
 
-            times[0].isActive=true;
-            this.setState({
-                timesArr:format(times)
-             })
+            if(times.length>0){
+                times[0].isActive=true;
+                this.setState({
+                    timesArr:format(times)
+                })
+            }
         }
-
 
         render(){
             return (
@@ -245,7 +242,7 @@
                     <div>
                         {
                             this.state.timesArr.length>0 &&　this.state.timesArr.map((item,index)=>{
-                              return  <Calendar times={item} selectTime={(item)=>{this.selectTime(item)}} key={index}/>
+                              return  <CalendarMonth times={item} selectTime={(item)=>{this.selectTime(item)}} key={index}/>
                             })
                         }
                     </div>
@@ -254,10 +251,36 @@
         }
     }
 
+    class App extends React.Component{
+        constructor(props) {
+            super(props);
+            this.state = {
+                times:[],
+            }
+        }
+
+        componentDidMount() {
+            setTimeout(()=>{
+                this.setState({
+                    times:timesData
+                })
+            },10)
+        }
+
+        onChange(selectTime){
+            console.log(selectTime,'选中的时间');
+        }
+
+        render(){
+            return <Calendar times={this.state.times} onChange={(selectTime)=>this.onChange(selectTime)}/>
+        }
+    }
+
     ReactDOM.render(
         <App />,
         document.getElementById('app')
     );
+
 </script>
 
 
