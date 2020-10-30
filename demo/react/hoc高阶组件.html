@@ -1,0 +1,100 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+
+    //高阶组件
+    const HOC = (WrappedComponent) =>
+        class WrapperComponent extends React.Component {
+            constructor(props) {
+                super(props);
+                this.changeRandomNumber=this.changeRandomNumber.bind(this);
+                this.showModal=this.showModal.bind(this);
+                this.state = {
+                    randomNumber:''
+                }
+            }
+
+            componentWillMount() {
+                this.changeRandomNumber();
+            }
+
+            changeRandomNumber () {
+                this.setState({
+                    randomNumber: Math.random()
+                })
+            }
+            showModal(){
+                console.log('展示彈層并對數據進行處理');
+                alert(this.props.id);
+            }
+
+            render() {
+                return <WrappedComponent
+                    randomNumber={this.state.randomNumber}
+                    changeRandomNumber={this.changeRandomNumber}
+                    showModal={this.showModal}
+                />;
+            }
+        }
+
+
+
+    //子组件
+    class Page extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state={
+                id:10
+            }
+        }
+        render() {
+            return (
+                <div>
+                    <h3>列表組件</h3>
+                    <button onClick={this.props.showModal}>查看日誌</button>
+                    <div>随机数：{this.props.randomNumber}</div>
+                    <button onClick={this.props.changeRandomNumber}>改变随机数</button>
+                </div>
+            );
+        }
+    }
+
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state={
+            }
+        }
+        render() {
+            const HOCCompoent=HOC(Page);
+            return (
+                <div>
+                    <HOCCompoent/>
+                </div>
+            );
+        }
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
