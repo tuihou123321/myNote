@@ -1,0 +1,61 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    //useState方法要写在function 里面
+    function App(){
+        const [lists,changeLists]=React.useState(['a','b']);
+        const [value,changeValue]=React.useState([]);
+
+        function removeValueFn(index){
+            lists.splice(index,1);
+            //changeLists(lists);  //这种写法不生效，why?
+            changeLists([...lists]);
+        }
+
+        //增加列表
+        function onchangeInput(event){
+            changeValue(event.target.value)
+        }
+
+        function submit(event){
+            if(event.keyCode===13){
+                changeLists([...lists,value]);
+                changeValue('')
+            }
+        }
+
+
+        return <div>
+            <p>列表标题</p>
+            <ul>
+                {
+                    lists.map((item,index)=>{
+                        return  <li key={index}>{item}-{index}  <button onClick={()=>{removeValueFn(index)}}>删除</button></li>
+                    })
+                }
+            </ul>
+            <input type="text" onChange={onchangeInput} onKeyDown={submit} placeholder='添加后，按回车'  value={value}/>
+        </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
