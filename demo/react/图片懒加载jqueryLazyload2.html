@@ -1,0 +1,57 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react 图片懒加载</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="//static.ydlcdn.com/global/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="//static.ydlcdn.com/global/js/jquery.lazyload.min.js"></script>
+    <style>
+        .content{
+            height: 700px;
+            border: 2px solid red;
+        }
+        img{
+            margin: 120px 20px;
+            height: 800px;
+            width: 800px;
+            border: 1px solid red;
+            padding: 10px;
+        }
+        li{
+            list-style: none;
+        }
+
+        .teaser.lazyload {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .teaser.lazyloaded {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 700ms;
+        }
+    </style>
+</head>
+<body>
+
+
+<div>
+    <div class="content">
+        我是主要内容
+    </div>
+    <ul>
+        <li> <img  alt="" data-original='https://img.zcool.cn/community/01629f5f6744e911013f3110273836.jpg@1280w_1l_2o_100sh.jpg' class="lazy" /></li>
+        <li> <img  alt="" data-original='https://img.zcool.cn/community/01d3815f6744ba11013e45842dbc3a.jpg@1280w_1l_2o_100sh.jpg' class="lazy" /></li>
+        <li> <img  alt="" data-original='https://img.zcool.cn/community/01ce2b5f6744d011013f31106a42ca.jpg@1280w_1l_2o_100sh.jpg' class="lazy" /></li>
+    </ul>
+</div>
+
+<script>
+    $('img.lazy').lazyload();
+</script>
+
+
+</body>

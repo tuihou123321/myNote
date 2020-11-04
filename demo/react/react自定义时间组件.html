@@ -81,11 +81,11 @@
             type:'3'
         },
         {
-            date:'2020/11/1',
+            date:'2020/11/01',
             type:'2'
         },
         {
-            date:'2020/11/2',
+            date:'2020/11/02',
             type:'3'
         }
     ]
@@ -198,7 +198,8 @@
             this.state = {
                 weekday:['日','一','二','三','四','五','六'],
                 times:this.props.times,
-                timesArr:[]
+                timesArr:[],
+                selectDate:''
             }
         }
 
@@ -220,7 +221,7 @@
             let {times}=nextProps;
 
             if(times.length>0){
-                times[0].isActive=true;
+                // times[0].isActive=true;
                 this.setState({
                     timesArr:format(times)
                 })
@@ -268,11 +269,17 @@
         }
 
         onChange(selectTime){
-            console.log(selectTime,'选中的时间');
+            this.setState({
+                selectDate:selectTime.date
+             })
         }
 
         render(){
-            return <Calendar times={this.state.times} onChange={(selectTime)=>this.onChange(selectTime)}/>
+            return <div>
+                <Calendar times={this.state.times} onChange={(selectTime)=>this.onChange(selectTime)}/>
+                <h3>{this.state.selectDate}</h3>
+            </div>
+
         }
     }
 
