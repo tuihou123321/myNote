@@ -127,3 +127,4 @@ pm2/pm2log/
 .tags_sorted_by_file
 
 package-lock.json
+!/demo/koaDemo/1.js

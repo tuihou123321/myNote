@@ -1,0 +1,102 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/redux/4.0.5/redux.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-redux/7.2.2/react-redux.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <style>
+        button{
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { createStore }=Redux;
+    const { Provider, connect }=ReactRedux;
+
+
+    //创建reducer
+    function counter(state={count:10},action){
+        const { count } = state;
+        const { type }=action;
+        //增加
+        if(type==='add'){
+           state = {
+               count:count+1
+           };
+        }else if(type==='reduce'){
+            state = {
+                count:count-1
+            }
+        }
+        return state;
+    }
+
+
+    //创建一个store,传入reducer（处理由dispach发起的action的方法）
+    const store=createStore(counter);
+
+
+    //创建 state 给到 component props
+    function mapStateToProps(state){
+        return {
+            value: state.count
+        }
+    }
+
+    //印射 dispatch到 component props
+    function  mapDispatchToProps(dispatch){
+        return {
+            add:()=> dispatch({type:'add'}),
+            reduce:()=> dispatch({type:'reduce'}),
+        }
+    }
+
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.handleClickAdd=this.handleClickAdd.bind(this)
+            this.state={
+            }
+        }
+        handleClickAdd(){
+            this.props.add();
+        }
+        render() {
+            return (
+                <div>
+                    <p>{this.props.value}</p>
+                    <button onClick={this.handleClickAdd}>add</button>
+                    <button onClick={this.props.reduce}>reduce</button>
+                </div>
+            );
+        }
+    }
+
+    //通过 react-redux 中的 connnect 方法，把 state, dispatch传到组件；
+    //connect就是一个高阶组件，接收一个组件，并返回一个组件，这个组件可以接收高阶组件传递的props(state,function)
+    const AppStore= connect(mapStateToProps,mapDispatchToProps)(App);
+
+    //能过provider
+    ReactDOM.render(
+        <Provider store={store}>
+            <AppStore />
+        </Provider>,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
