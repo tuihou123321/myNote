@@ -1,0 +1,96 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/redux/4.0.5/redux.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-redux/7.2.2/react-redux.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/redux-logger/4.0.0/redux-logger.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+    const { useState,Component }=React;
+    const { createStore, applyMiddleware }=Redux;
+    const { Provider, connect }=ReactRedux;
+    const { createLogger }=reduxLogger;
+
+    const logger =createLogger();
+
+    //reducer不能直接修改state的值，要创建新的对象返回
+    function todosReducer(state={isFollowed:false},action){
+
+        const { type,id }=action;
+        const { isFollowed }=state;
+
+        if(type==='follow'){
+            state={
+                isFollowed:!isFollowed
+            }
+        }
+        return state;
+    }
+
+    const store=createStore(todosReducer,applyMiddleware(logger));
+
+    class App extends Component {
+        componentDidMount() {
+
+        }
+
+        render(){
+            const { isFollowed, follow }=this.props;
+            return <div>
+                { isFollowed ? <button onClick={follow}>取消关注</button> :  <button onClick={follow}>关注</button> }
+            </div>
+        }
+    }
+
+
+
+    //从store中获取state并映射给connect中的组件，子组件通过props获取
+    function mapStateToProps(state){
+       return {
+           isFollowed:state.isFollowed
+       }
+    }
+
+
+    //action.js
+    const FOLLOW=(id)=>({
+        type:'follow',
+        id
+    })
+
+
+    //从store中获取dispatch 方法，并映射给connect的方法，子组件通过props获取
+   function mapDispatchToProps(dispatch){
+       return {
+           follow:()=>dispatch(FOLLOW(10))
+       }
+    }
+
+
+    const Container=connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App);
+
+
+    ReactDOM.render(
+        <Provider store={store}>
+            <Container />
+        </Provider>,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
