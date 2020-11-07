@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let a=[];
+    let b={};
+
+    //有兼容性问题
+    console.log(Array.isArray(a),Array.isArray(b));
+
+    //instanceof, constructor 方法都不能跨iframe使用
+    console.log(a instanceof Array, b instanceof Array); //不能夸iframe判断，否则不准确
+    console.log(a.constructor===Array, b.constructor===Array); //constructor可改写
+
+
+    //推荐使用这种方法
+    function isArray(arg){
+        return Object.prototype.toString.call(arg) === '[object Array]'
+    }
+    console.log(isArray(a),isArray(b));
+
+
+</script>
+
+</body>
+</html>

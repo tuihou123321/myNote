@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+
+
+<script>
+    var iframe = document.createElement('iframe');
+    document.body.appendChild(iframe);
+
+    var arr = [1,2,3];
+    let xArray = window.frames[0].Array;  //iframe中的构造函数
+    var arrx = new xArray(4,5,6);
+
+    console.log(arrx instanceof Array);  //false
+    console.log(arrx.constructor == Array);// false
+
+    console.log(Array.prototype == xArray.prototype); //false
+    console.log(arr instanceof xArray); //false
+
+    console.log(arrx.constructor === Array);// false
+    console.log(arr.constructor === Array);// true
+    console.log(arrx.constructor === xArray);// true
+    console.log(Array.isArray(arrx));  //true
+
+
+
+</script>
+</body>
+</html>

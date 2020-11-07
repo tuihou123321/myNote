@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    //基本类型，引用类型
+
+    let a=1;
+    function test(x){
+        x=10;
+        return x;
+    }
+    //基本类型 按值传递
+    //函数内的修改不影响外部
+    console.log(test(a),a);
+
+
+
+    //改变一个值，另外一个也修改了
+    let b={a:1,b:2};
+    function test2(x){
+        x.a=10;
+        return x;
+    }
+
+    //复杂类型，按引用传递
+    console.log(test2(b),b);
+
+
+</script>
+
+</body>
+</html>

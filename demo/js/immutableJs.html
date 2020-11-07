@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/immutable/4.0.0-rc.9/immutable.js"></script>
+</head>
+<body>
+
+<script>
+
+    //
+
+
+    let { Map }=Immutable;
+
+    let obj={
+        a:1,
+        b:2
+    }
+
+    //克隆出一个
+    let map=Map(obj);
+
+    //调用immutable中的map对象下的set方法来修改指定key的value
+    let map1=map.set('a',10);
+    let map2=map1.set('a',20);
+
+    //两个对象修改互不影响
+    console.log(map1.get('a'),map2.get('a'));  //10,20
+
+
+</script>
+
+</body>
+</html>
