@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    //定义一个闭包
+    let secretFn=(function (){
+        //变量secrent只有secretFn内的getSecret, setSecret 才可以访问，外部无法访问
+        let secrent='100';
+        let getSecret=function (){
+            return secrent;
+        }
+        let setSecret=function (newSecrent) {
+            secrent=newSecrent;
+        }
+        return {
+            getSecret,
+            setSecret
+        }
+    })()
+
+
+    console.log(secretFn.getSecret());
+    secretFn.setSecret(200);
+    console.log(secretFn.getSecret());
+    console.log(secretFn.secrent);   //Type error 无法访问
+
+</script>
+
+</body>
+</html>
