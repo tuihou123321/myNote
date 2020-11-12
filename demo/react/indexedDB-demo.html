@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //打开idnexDB数据库
+    var openRequest = window.indexedDB.open('test', 3);
+
+    var db;
+
+    //初始化回调
+    openRequest.onupgradeneeded = function (e) {
+        console.log('Upgrading...');
+    }
+
+    openRequest.onsuccess = function (e) {
+        console.log('Success!');
+        db = openRequest.result;
+        console.log(db);
+    }
+
+    openRequest.onerror = function (e) {
+        console.log('Error');
+        console.log(e);
+    }
+
+
+    //写入数据库
+
+
+
+
+</script>
+
+</body>
+</html>

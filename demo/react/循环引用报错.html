@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/circular-json@0.5.9/build/circular-json.js"></script>
+</head>
+<body>
+
+<script>
+    let a={};
+    a.b=a;
+    // console.log(a);
+
+    //循环引用的对象，直接使用 JSON.stringify会报错：Ｃｉｒｃｕｌａｒ　ｓｔｒｕｃｔｕｒｅ　ｔｏ　ＪＳＯＮ　
+    JSON.stringify(a)
+
+    //解决循环上用的问题
+    let b=CircularJSON.stringify(a);
+    let c=CircularJSON.parse(b)
+    console.log(b);
+    //完美还原
+    console.log(c);
+
+
+
+
+</script>
+
+</body>
+</html>
