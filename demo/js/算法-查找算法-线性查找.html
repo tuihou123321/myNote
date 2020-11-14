@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+
+    let arr=['a','b','c'];
+
+    //查找算法：线性查找
+    function linearSearch(arr, target){
+        let i=-1;
+        arr.forEach((item,index)=>{
+           if(item===target){
+               i=index
+           }
+        })
+        return i;
+    }
+
+    console.log(linearSearch(arr,'b'));
+    console.log(linearSearch(arr,'z'));
+
+
+
+
+</script>
+
+</body>
+</html>

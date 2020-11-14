@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+    1
+</div>
+<script>
+
+    let arr=['10','11','12'];
+
+    //汉字不能比较排序，所以使用不了二分查找法
+    // let arr=['你','好','呀']
+
+    //二分查找法，只能比较字母，数据排序（两个对象可以比较大小的情况，不能比较字符串）
+    function binarySearch(arr, target) {
+        let max = arr.length - 1
+        let min = 0
+        while (min <= max) {
+            let mid = Math.floor((max + min) / 2)
+            //运算符可以比较number,string(字母)类型
+            //如果目标值比中间值要小，最大聚值索引就-1
+            if (target < arr[mid]) {
+                max = mid - 1
+            } else if (target > arr[mid]) {
+                min = mid + 1
+            } else {
+                return mid
+            }
+        }
+        return -1
+    }
+
+    console.log(binarySearch(arr,'12'));
+
+    // console.log('我'<'你');
+
+</script>
+
+</body>
+</html>
