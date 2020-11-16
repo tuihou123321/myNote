@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        button{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="father" onclick="clickFather()">
+
+    父级
+
+    <button onclick="clickChild(event)">我是子元素</button>
+</div>
+
+
+<script>
+
+
+    //事件冒泡的封装
+    function stopBubble(e){
+        //如果提供了事件对象,则这是一个非IE浏览器
+        if(e && e.stopPropagation){
+            e.stopPropagation();
+        }
+        else{
+            //否则,我们需要使用IE的方式来取消事件冒泡
+            window.event.returnValue=false;
+            return false
+        }
+    }
+
+
+function clickChild(event){
+    console.log(event);
+    //阻止事件冒泡,兼容性处理
+    stopBubble(event);
+    console.log('点击子元素');
+}
+
+function clickFather(){
+    console.log('点击父元素');
+}
+
+</script>
+
+</body>
+</html>
