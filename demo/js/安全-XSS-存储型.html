@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+文章内容区
+<div id="content">
+
+</div>
+
+<script>
+
+    //跨站脚本攻击，动态插入script恶意代码到网页中
+
+    //代码一:
+    let script = document.createElement('script');
+    script.type= 'text/javascript';
+    script.onload = script.onreadystatechange = function() {
+        if (!this.readyState || this.readyState === "loaded"
+            || this.readyState === "complete" ) {
+            callback();
+            // Handle memory leak in IE
+            script.onload = script.onreadystatechange = null;
+        }
+    };
+    let scriptSrc='./dist/alert.js';
+    script.src= scriptSrc;
+
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+
+    //代码二：
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.text = "alert('hi')";
+    document.body.appendChild(script);
+
+
+</script>
+
+
+
+</body>
+</html>
