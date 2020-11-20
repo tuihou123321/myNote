@@ -1,0 +1,43 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, useEffect }=React;
+
+      //判断用户是否在线
+    function App(props){
+        const [isOnline,setIsOnline]=useState(null)
+
+
+
+        useEffect(()=>{
+
+        })
+
+
+        if(isOnline===null){
+            return '加载中...'
+        }
+        return  isOnline ? '在线' : '离线'
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
