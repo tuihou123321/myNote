@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /*
+    * 一个高阶函数，接收一个函数做为参数
+    * */
+
+   //demo1
+  // function add(x,y,f){
+  //     return f(x)+f(y)
+  // }
+  //
+  // let num=add(2,-2,Math.abs)
+  // console.log(num);
+
+
+    //demo2
+    let arr=[1,2,3];
+    //array中的 map,filter,sort都是高阶函数
+    let newArr=arr.map(function (item) {
+        return item*2
+    })
+    console.log(newArr);
+
+</script>
+
+</body>
+</html>

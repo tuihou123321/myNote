@@ -17,44 +17,11 @@
 
     //高阶组件
     const HOC = (WrappedComponent) =>
-        //HOC里面的WrapperComponent 如果需要有后续交互，只能是带有生命周期的函数，否则不会触发render重渲染
-        class WrapperComponent extends React.Component {
-            constructor(props) {
-                super(props);
-                this.changeRandomNumber=this.changeRandomNumber.bind(this);
-                this.showModal=this.showModal.bind(this);
-                this.state = {
-                    randomNumber:''
-                }
-            }
-
-            componentWillMount() {
-                this.changeRandomNumber();
-            }
-
-            componentDidMount() {
-
-                console.log(this.props,1111);
-            }
-
-
-            changeRandomNumber () {
-                this.setState({
-                    randomNumber: Math.random()
-                })
-            }
-            showModal(){
-                console.log('要反向继承，才能获取对WrappedComponent的属性');
-                alert(this.props.id);
-            }
-
+        //Enhancer 继承了 WrappedComponent, 而不是WrappedComponent 继承了 Enhancer 所以是反向继承
+        class Enhancer extends WrappedComponent {
             render() {
                 //1. 属性代理（Props Proxy）:HOC对传给WrappedComponent的props进行操作
-                return <WrappedComponent
-                    randomNumber={this.state.randomNumber}
-                    changeRandomNumber={this.changeRandomNumber}
-                    showModal={this.showModal}
-                />;
+                 return super.render()
             }
         }
 
@@ -85,6 +52,7 @@
         constructor(props) {
             super(props);
             this.state={
+                id:10
             }
         }
         render() {

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    let Person=function (){
+    }
+
+    /*
+    * 静态方法：只针对当前实例，可直接调用
+    * */
+    Person.say=function (){
+        console.log('我是一个人');
+    }
+
+
+    /*
+    * 实例方法：先实例化才能调用，实例方法写在原型链里面
+    * */
+    Person.prototype.getName=function (name){
+        console.log(`我的名字是${name}`);
+    }
+
+
+    Person.say();  //正常打印，不能使用   Person.getName('Jay')
+
+    let china=new Person();
+    china.getName('JAY');  //正常打印 ，不能使用china.say();
+
+
+
+</script>
+
+</body>
+</html>

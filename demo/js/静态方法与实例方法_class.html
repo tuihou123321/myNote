@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+
+    class Person{
+        //加上static 就是静态方法，不需要实例化调用
+        static getName(name){
+            console.log(`我的名字是${name}`);
+        }
+        //say属于实例方法，要先new实例化后才能调用
+        say(){
+            console.log('开始说话')
+        }
+    }
+
+    let china =  new Person();
+    china.say();
+    Person.getName('JAY')
+
+
+
+</script>
+
+</body>
+</html>
