@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //报错
+    let a=2;
+    let b=a.toString()
+    console.log(typeof b);  //正常
+
+    console.log(typeof 1..toString());    //正常
+    console.log(typeof (1).toString());  //正常
+    // 1.toString();  //报错,因为js解析器把1.看成1
+
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+    const { useEffect }=React;
+
+    /*
+    * useEffect react 生命周期
+    * */
+     function useDocumentTitle(title){
+         useEffect(
+             ()=>{
+                 document.title=title;
+                 return ()=>(document.title='前端精读')
+             },[title]
+         )
+     }
+
+    function App(){
+        useDocumentTitle('首页')
+        return <div><button onClick={()=>{ document.title = Math.random()}}>改变标题名</button></div>
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+</body>
+</html>

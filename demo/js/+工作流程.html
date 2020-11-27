@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 1. 如果操作数是对象，先转换成原始值
+    * 2. 如果有一个是字符串，其他操作数都转换为字符串并执行连接
+    * 3. 否则：所有操作数都转换为数字并执行
+    * */
+
+    let obj={
+        a:1
+    }
+    let arr=[1,2]
+
+    let a=obj+1;
+
+    let b=arr+1;
+
+    console.log(a);  //[object,object]1
+    console.log(b); //1,21
+    console.log(null+1); //1
+    console.log(undefined+1); //NaN
+
+</script>
+</body>
+</html>

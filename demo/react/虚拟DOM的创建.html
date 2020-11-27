@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul id="list">
+    <li class="item">item1</li>
+    <li class="item">item2</li>
+</ul>
+
+<script>
+
+    /*
+    * 虚拟DOM 本质是一个JS对象，这个对象是更加轻量级的对DOM的描述
+    * */
+    //tagName,props,children
+    const element={
+        tagName:'ul',
+        props:{
+            id:'list'
+        },
+        children: [{
+            tagName:'li',
+            props:{
+                class:'item'
+            },
+            children:['item1']  //item1 只是没有包裹的子节点
+        }]
+    }
+
+</script>
+
+</body>
+</html>
