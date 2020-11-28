@@ -1,0 +1,60 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, useEffect }=React;
+
+
+    function App(){
+        const [showLists,changeListsState]=useState(true)
+
+        function setCountFn(){
+            changeListsState(!showLists)
+        }
+
+        useEffect(()=>{
+            console.log('初始化');
+            //下面的cb fn 不会执行
+            return ()=>{
+                console.log('卸载了');
+            }
+        },[])
+
+        useEffect(()=>{
+            console.log('更新');
+            //effect适用于每个渲染，而不仅仅是一次。这就是为什么react在下次运行effect之前会清理之前渲染的effect;
+            // 每下一次退出前都会清理之前的状态
+            return ()=>{
+                console.log('卸载');
+            }
+        })
+
+        return <div>
+                <button onClick={setCountFn}>点击切换</button>
+                <button onClick={()=>{
+                    changeListsState(true)
+                }}>显示</button>
+                {showLists && <div>列表</div>}
+            </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

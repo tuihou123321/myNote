@@ -1,0 +1,59 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, useEffect,useMemo }=React;
+
+
+
+    //  shouldComponentUpdate, 只有 Parent 组件中的 count state 更新了，Child 才会重新渲染，否则不会。
+    function Parent() {
+        const [count,setCount] = useState(0);
+
+        useEffect(()=>{
+            console.log('初始化');
+        }, [])
+
+        // componentDidUpdate
+        useEffect(()=>{
+            document.title = `You clicked ${count} times`;
+            console.log('更新');
+            return()=>{
+// 以及 componentWillUnmount 执行的内容
+                console.log('卸载');
+            }
+        }, [count])
+
+        const child = useMemo(()=> <Child count={count} />, [count]);
+        return <div>
+            <button onClick={()=>{setCount(count+1)}}>增加</button>
+            <button onClick={()=>{
+                setCount(3)
+            }}>变成3</button>
+            {count}</div>
+    }
+
+    function Child(props) {
+        return <div>Count:{props.count}</div>
+    }
+
+    ReactDOM.render(
+        <Parent />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

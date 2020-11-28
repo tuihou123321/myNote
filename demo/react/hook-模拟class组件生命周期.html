@@ -1,0 +1,82 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, useEffect }=React;
+
+    //判断用户是否在线
+    function OnlineState(props){
+        const [isOnline,setIsOnline]=useState(true)
+
+        //componentDidMount:只执行一次
+        useEffect(()=>{
+          console.log('初始化');
+        },[])
+
+        //componentDidUpdate(有所不同的时，下次更新也会渲染)
+        //下次调用useEffect时，会开始调用return回来的函数，当做清理工作，取消事件监听
+        //当props的值没改变时，不会执行
+        useEffect(()=>{
+            console.log('更新',isOnline);
+
+            //componentUnmount:下一次调用时才会执行清理之前的操作（比较事件监听函数）
+            return ()=>{
+                console.log('卸载');
+            }
+        })
+
+
+        function changeOnlineState(){
+            setIsOnline(!isOnline)
+        }
+
+        return  <div>
+            晚上好：{props.userName}
+            <button onClick={changeOnlineState}>
+                {
+                    isOnline ? '上线' : '离线'
+                }
+            </button>
+        </div>
+    }
+
+    function App(){
+        const [isShowUserInfo,changeUserInfo]=useState(true)
+
+        function changeUserInfoFn(){
+            changeUserInfo(!isShowUserInfo)
+        }
+
+        return <div>
+            <button onClick={changeUserInfoFn}>显示/隐藏用户消息</button>
+            <button onClick={()=>{
+                changeUserInfo(true)
+            }}>强制显示</button>
+
+            {
+                isShowUserInfo && <OnlineState userName="xz"/>
+            }
+        </div>
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+    const WithTimingHOC=function(WrappedComponent){
+        return class Enhance extends WrappedComponent{
+            constructor(props){
+                super(props);
+                this.start=0;
+                this.end=0;
+            }
+
+            componentWillMount() {
+                //调用继承类的方法
+                super.componentWillMount && super.componentWillMount();
+                this.start=Date.now();
+            }
+
+
+            componentDidMount() {
+                super.componentDidMount && super.componentDidMount();
+                this.end=Date.now();
+                console.log(`${WrappedComponent.name}组件渲染时间为${this.end-this.start}ms`);
+            }
+
+
+            render(){
+                //返回继承实现的功能
+                //super调用继承类的方法
+                return super.render();
+            }
+        }
+    }
+
+
+    class App extends React.Component{
+        render(){
+            return <div>111</div>
+        }
+    }
+
+    const AppRro=WithTimingHOC(App);
+
+
+    ReactDOM.render(<AppRro/>,document.getElementById('app'))
+
+</script>
+
+</body>
+</html>
