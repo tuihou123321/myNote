@@ -1,0 +1,59 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+
+
+    const { useState, useReducer } = React;
+
+    function App(){
+
+        function reducer(state,action){
+            if(action.type==='add'){
+                return {
+                    ...state,
+                    count:state.count+1
+                }
+            }else{
+                return state;
+            }
+        }
+
+
+        //累加函数
+        function addCount(){
+            dispatch({
+                type:'add'
+            })
+        }
+
+
+        const [state,dispatch] = useReducer(reducer,{count:0})
+        return (
+           <div>
+               <p>{state.count}</p>
+               <button onClick={addCount}>add</button>
+           </div>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

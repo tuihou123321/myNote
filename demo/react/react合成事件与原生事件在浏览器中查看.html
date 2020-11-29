@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+     class App extends React.Component{
+         //react合成事件
+         reactEvent(){
+            console.log('react event');
+         }
+
+         componentDidMount() {
+             //原生dom 事件
+             document.getElementById('native-btn').addEventListener('click',(e)=>{
+                 console.log('dom event');
+             })
+
+         }
+
+
+         render(){
+             return <div>
+                 <button onClick={this.reactEvent}>react 事件</button>
+                 <button id="native-btn">合成事件</button>
+             </div>
+         }
+     }
+
+    ReactDOM.render(<App/>,document.getElementById('app'))
+
+</script>
+
+
+</body>
+</html>

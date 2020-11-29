@@ -1,0 +1,59 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    /*
+    * createContext/useContext 使用方法和react-redux差不多
+     1. 创建store：通过 createContext Api
+     2. 包裹整个组件：通过store中的Provider方法
+     3. 注入全局变量，provider组件中
+     4. 引入全局变量： 通过 useContext,传入store的名字，返回一个store对象内容
+    * */
+
+    const { useState, createContext, useContext } = React;
+
+    function App(){
+        //创建store
+        const AppContext=createContext({});
+
+        function A(){
+            //从store中取值
+            const {name}=useContext(AppContext);
+            return <div>A组件Name:{name}</div>
+        }
+
+        function B(){
+            //从store中取值
+            const {name}=useContext(AppContext);
+            return <div>B组件Name:{name}</div>
+        }
+
+        //在顶层包裹所有元素，注入到每个子组件中
+        return (
+            <AppContext.Provider value={{name:'xz'}}>
+                <A/>
+                <B/>
+            </AppContext.Provider>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

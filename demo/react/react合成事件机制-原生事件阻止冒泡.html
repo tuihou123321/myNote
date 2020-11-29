@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+    /*
+    * 如果在原生/合成事件使用了阻止冒泡，后面的事件都不会执行
+    * */
+
+     class App extends React.Component{
+
+         //react合成事件
+         childClick(e){
+            console.log('react child');
+            // e.stopPropagation();
+         }
+
+         parentClick(){
+             console.log('react parent');
+         }
+
+
+         componentDidMount() {
+             document.addEventListener('click',(e)=>{
+                 console.log('dom document');
+             })
+
+             document.getElementById('child').addEventListener('click',(e)=>{
+                 //阻止冒泡，后面所有事件都不会执行
+                 // e.stopPropagation();
+                 console.log('dom  child');
+             })
+
+             document.getElementById('parent').addEventListener('click',(e)=>{
+                 console.log('dom  parent');
+             })
+         }
+
+
+         render(){
+             return <div onClick={this.parentClick} id="parent">
+                 <button onClick={this.childClick} id="child">button</button>
+             </div>
+         }
+     }
+
+
+    ReactDOM.render(<App/>,document.getElementById('app'))
+
+
+
+
+</script>
+
+
+</body>
+</html>

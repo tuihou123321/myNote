@@ -1,0 +1,84 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+
+    /*
+    * 自定义一个hook,接收一个string,返回一个object
+    *1. 定义一个 hook函数，并返回一个数组（内部可以调用react其他hooks）
+    *2. 从自定义的hook函数中取出对象的数据，做业务逻辑处理即可
+    *
+    * */
+
+
+    const { useState,useEffect } = React;
+
+    function usePerson(name){
+        const [loading,setLoading]=useState(true)
+        const [person, setPerson]=useState({})
+
+        useEffect(()=>{
+            setLoading(true);
+
+            //模拟请求，延迟改变数据
+            setTimeout(()=>{
+                setLoading(false);
+                setPerson({
+                    name
+                })
+            },1000)
+
+        },[name])
+
+        return [loading,person]
+    }
+
+    //异步获取数据的页面
+    function AsyncPage({name}){
+        const [loading,person]=usePerson(name);
+        return <div>
+            {
+                loading ? <p>loading</p> : <p>{person.name}</p>
+            }
+        </div>
+    }
+
+
+    function App(){
+
+        const [name,setName]=useState('匿名');
+        function changeName(){
+            setName(Math.random())
+        }
+
+        //在顶层包裹所有元素，注入到每个子组件中
+        return (
+           <div>
+               <AsyncPage name={name}/>
+               <div>
+                   <button onClick={changeName}>改变名字</button>
+               </div>
+           </div>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
