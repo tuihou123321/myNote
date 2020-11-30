@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    let Person=(function (){
+        let PersonInner=function (){
+            this.jump=function (){
+                console.log('跳转起来');
+            }
+        }
+
+        PersonInner.staticMethod=function (){
+            console.log('静态方法');
+        }
+
+        return PersonInner;
+    })()
+
+
+    //静态方法: 直接能过构造函数调用
+    Person.staticMethod();
+
+
+    //实例方法的调用：要先new
+    let china=new Person();
+    china.jump();
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+
+    //构造函数的写法
+    function PointFn(x,y){
+        this.x=x;
+        this.y=y;
+    }
+
+    PointFn.prototype.calculate=function (){
+        return this.x+this.y;
+    }
+
+    let pointFnExample=new PointFn(2,4);
+    console.log(pointFnExample.calculate());
+
+
+
+
+
+    //等价于，class类的写法
+    /*
+    * */
+    class Point{
+        constructor(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        calculate(){
+            return this.x+this.y;
+        }
+    }
+
+    let MathExample=new Point(2,3);
+
+    console.log(MathExample.calculate());
+
+
+    /*
+    * 类的数据类型就是函数
+    * 类本身就是指向构造函数
+    * 使用时，也是直接对类使用new命令，和构造函数一样
+    * */
+    console.log(typeof Point);  //function
+    console.log(Point.prototype.constructor===Point);  //等于它自己
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

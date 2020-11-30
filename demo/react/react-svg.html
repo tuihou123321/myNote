@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+    function App(){
+        return  <div>
+         <p>远程svg</p>
+         <img src="https://cdn.svgporn.com/logos/react.svg"/>
+
+         <p>本地svg</p>
+         <img src="./static/svg/react.svg"/>
+        </div>
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>
