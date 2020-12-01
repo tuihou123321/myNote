@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    * map转数组的方法有两种
+    * 1. Array.from(myMap)
+    * 2. [...myMap]
+    *
+    * */
+
+    let myMap=new Map();
+    myMap.set('key1','value1')
+    myMap.set('key2','value2')
+
+    // let newArr=Array.from(myMap);
+    // console.log(newArr);
+
+    console.log([...myMap]);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+    /*
+    * map的合并
+    * 1. 把Map 实例化对象，当做数组处理（使用array展开符，会自动去重）
+    * 2. 把再数组转成Map对象
+    * */
+
+
+  let myMap1=new Map([['key1','value1'],['key2','value2']]);
+  let myMap2=new Map([['key3','value3'],['key1','value1']]);
+
+  let newMap=new Map([...myMap1,...myMap2]);
+
+  console.log(newMap);
+
+
+
+
+</script>
+</body>
+</html>
