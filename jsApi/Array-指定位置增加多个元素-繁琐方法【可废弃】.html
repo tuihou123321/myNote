@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    let arr=['a','b','c'];
+
+    //在指定索引位置上增加多个元素的方法
+    function addStrToArr(arr,index,...other){
+            let cutArr=arr.slice(0,1);
+            let surplusArr=arr.slice(index,arr.length);
+            return [...cutArr,...other,...surplusArr]
+    }
+
+    //在index=1 的位置增加一个（多个元素）
+    console.log(addStrToArr(arr,1,'100','101'));
+
+
+
+</script>
+
+</body>
+</html>

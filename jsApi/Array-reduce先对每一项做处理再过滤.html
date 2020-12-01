@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    *实现功能：
+    * 把arr中的每个项*2，再过滤出超过21的
+    * */
+
+    let arr=['10','11','12'];
+
+    //实现方法一：能过定义变量，再加循环实现
+    // let newArr=[];
+    // arr.forEach(item => {
+    //     const newItem=item*2;
+    //     if(newItem>21){
+    //         newArr.push(newItem);
+    //     }
+    // })
+    // console.log(newArr);
+
+
+    /*
+    * 使用reduce实现， 把变量封装在 reduce的参数中，不污染全局变量
+    * */
+    let newArr=arr.reduce((finalList,item)=>{
+            const newItem=item*2;
+            if(newItem>21){
+                finalList.push(newItem);
+            }
+            return finalList;
+    },[])
+
+    console.log(newArr);
+
+
+</script>
+</body>
+</html>

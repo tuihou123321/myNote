@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let obj=[
+        {
+            a:{
+                a1:1
+            }
+        },{
+            b:2
+        },{
+            c:2
+        }
+    ]
+
+    let cutObj=obj.slice(0,1);
+
+    cutObj[0].a.a1=100;
+
+
+
+    console.log(cutObj,obj);
+
+
+</script>
+</body>
+</html>

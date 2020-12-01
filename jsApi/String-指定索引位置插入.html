@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str='abc';
+
+    /*
+    * 思路：
+    * 1. 通过索引把字符串拆分成两部分(slice方法，切换成两部分)
+    * 2. 再拼装字符串
+    * */
+
+    /*
+    * slice : 返回切割后的string字符串， str.slice(0,index);
+    * split:  str.split(value);  使用指定标示符分隔数组
+    * */
+
+    function addStringFromIndex(str,index,addStr){
+        let cutStr=str.slice(0,index);
+        let remainderStr=str.slice(index,str.length);
+        return cutStr+addStr+remainderStr;
+    }
+
+
+    //在第1个数的后面，添加一位
+    console.log(addStringFromIndex('acd',1,'b'));
+
+</script>
+</body>
+</html>

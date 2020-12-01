@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    *实现功能：
+    * 把arr中的每个项*2，再过滤出超过21的
+    * */
+
+    let arr=[10,11,12];
+
+    /*
+    * 实现方法一：
+    * 1. 先计算出总数
+    * 2. 再把总数处于个数，算出平均
+    * */
+
+    // let total=0;
+    // arr.forEach((item,index)=>{
+    //     total=total+item;
+    // })
+    //
+    // let average=total/arr.length;
+    // console.log(average);
+
+
+    let length=arr.length;
+    let average = arr.reduce((total,item,index)=>{
+        console.log(a);
+        total=total+item;
+        if(length===index+1){
+            return total/length;
+        }
+        return total;
+    },0)
+
+    console.log(average);
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let str='acac';
+
+
+    function addString(str,targetStr,addStr){
+        /*
+        * 正则可以使用
+        * 变量替换：/targetStr/g   //不能替换变量
+        * 使用正则动态替换：new RegExp(targetStr,'g')   //动态替换
+        * */
+        str=str.replace(new RegExp(targetStr,'g'),targetStr+addStr);
+        return str;
+    }
+
+
+    let a=addString(str,'a','b');
+    console.log(a);
+
+
+
+
+</script>
+</body>
+</html>

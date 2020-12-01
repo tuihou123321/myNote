@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    /*
+    * 实现思路：
+    * 1. 【找到目标元素的索引为index】在后面插入要添加的数据，使用splice方法
+    * 2. 【遍历】【从index+1 开始搜索下一开目标元素出现的index】:在后面插入要添加的数据数据，使用splice方法
+    * */
+
+    //在指定索引位置上增加多个元素的方法
+    function addStrToArr(arr,targetStr,...addValues){
+        let targetIndex=0;
+        while (arr.indexOf(targetStr,targetIndex)>-1){
+            targetIndex=arr.indexOf(targetStr,targetIndex)+1;
+            arr.splice(targetIndex,0,...addValues);
+        }
+        return arr;
+    }
+
+    let arr=['a','b','a','b'];
+    //在数组a后面增加一个元素aa
+    console.log(addStrToArr(arr,'a','a1','a2'));
+
+
+</script>
+
+</body>
+</html>

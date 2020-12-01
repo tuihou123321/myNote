@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    * 初始始SET
+    * */
+    let mySet=new Set([1,2,3,{a:1}]);
+    /*
+    * delete会删除与值相等的元素
+    * */
+    let obj={
+        b:2
+    }
+
+    console.log(mySet.size);
+
+    mySet.add(obj);
+
+
+    console.log(mySet.delete(2));   //true
+    console.log(mySet.delete({a:1}));  //false, 引用对象的地址不对
+    console.log(mySet.delete(obj));  //true,对象的引用地址一致，才能删除
+    console.log(mySet);
+
+    console.log(mySet.has(3));  //true
+    console.log(mySet.has(5));  //false
+
+    mySet.clear();
+    console.log(mySet);
+
+
+</script>
+</body>
+</html>
