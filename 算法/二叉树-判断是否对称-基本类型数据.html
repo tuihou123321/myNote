@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 判断二叉树是否对称
+    * */
+
+    let tree={
+        value:1,
+        left:{
+            value:2,
+            left:{
+                value:3
+            },
+            right:{
+                value:4
+            }
+        },
+        right:{
+            value:2,
+            left:{
+                value:4
+            },
+            right:{
+                value:3
+            }
+        }
+    }
+
+        /**
+         * 思路：
+         * 1. 把二叉树进行镜向翻转
+         * 1）把left, right使用中间变量存储起来
+         * 2) treeItem.left=right;treeItem.right=left;
+         * 2. 比较翻转后的对和原对象是不是相等， JSON.string 可以判断
+         */
+
+
+        function turn(tree){
+            //终止条件
+            if(!tree){return;}
+
+            //临时变量存储
+            let left=tree.left;
+            let right=tree.right;
+
+            //二叉树翻转
+            left && (tree.right=left);
+            right && (tree.left=right);
+
+            //递归获取
+            turn(tree.right);
+            turn(tree.left);
+            return tree;
+        }
+
+
+        //只考虑节点中的value都为：节点不能是函数
+        let originStr = JSON.stringify(tree);
+        let turnStr = JSON.stringify(turn(tree));
+
+        //判断是不是对称二叉树
+        console.log(originStr===turnStr);
+
+
+</script>
+</body>
+</html>

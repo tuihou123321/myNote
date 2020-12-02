@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /*
+    * 实现思路：
+    * 1.【定义全局变量】定义全局变量value，初始值为1
+    * 2.【累乘】实现函数,接收一个参数n, value=value*n;
+    * 3.【递归】函数内递归调用本身 fn(n-1);
+    * */
+
+  let value=1;
+  function calculate(num){
+    if(num<2){return;}
+    calculate(num-1);
+    value=value*num;
+    return value;
+  }
+
+
+  console.log(calculate(5));
+
+</script>
+
+</body>
+</html>

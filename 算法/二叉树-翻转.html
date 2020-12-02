@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    let tree={
+        value:0,
+        left:{
+            value:1,
+            left:{
+                value:2
+            },
+            right:{
+                value:3
+            }
+        },
+        right:{
+            value:10,
+            left:{
+                value:11
+            },
+            right:{
+                value:12
+            }
+        }
+    }
+
+        /**
+         * 思路：
+         * 1. 把二叉树进行镜向翻转
+         * 1）把left, right使用中间变量存储起来
+         * 2) treeItem.left=right;treeItem.right=left;
+         * 2. 比较翻转后的对和原对象是不是相等， JSON.string 可以判断
+         */
+
+
+        function turn(tree){
+            //终止条件
+            if(!tree){
+                return;
+            }
+
+            //单个逻辑
+            let left=tree.left;
+            let right=tree.right;
+            //注意二叉树，子节点为空的情况
+            left && (tree.right=left);
+            right && (tree.left=right);
+
+            //递归
+            tree.left && turn(tree.left);
+            tree.right && turn(tree.right);
+
+            //返回最后的值
+            return tree;
+        }
+
+        console.log(turn(tree));
+
+</script>
+</body>
+</html>

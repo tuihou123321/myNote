@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.20/lodash.min.js"></script>
+</head>
+<body>
+<script>
+    /*
+    * 判断二叉树是否对称
+    * */
+
+    let tree={
+        value:1,
+        left:{
+            value:2,
+            left:{
+                value:[1,2]
+            },
+            right:{
+                value:/str111/g,
+            }
+        },
+        right:{
+            value:2,
+            left:{
+                value:/str/g,
+            },
+            right:{
+                value:[1,2]
+            }
+        }
+    }
+
+        /**
+         * 思路：
+         * 1. 把二叉树进行镜向翻转
+         * 1）把left, right使用中间变量存储起来
+         * 2) treeItem.left=right;treeItem.right=left;
+         * 2. 比较翻转后的对和原对象是不是相等， JSON.string 可以判断
+         */
+
+
+        function turn(tree){
+            //终止条件
+            if(!tree){return;}
+
+            //临时变量存储
+            let left=tree.left;
+            let right=tree.right;
+
+            //二叉树翻转
+            left && (tree.right=left);
+            right && (tree.left=right);
+
+            //递归获取
+            turn(tree.right);
+            turn(tree.left);
+            return tree;
+        }
+
+        console.log(turn(tree));
+
+
+        //判断是不是对称二叉树
+        console.log(JSON.stringify(tree)===JSON.stringify(turn(tree)));  //true
+
+        //使用loadsh判断 ??  上面两个正则表达式不一样，却显示相等，有问题
+
+        console.log(_.isEqual(tree,turn(tree)));   //true
+
+
+</script>
+</body>
+</html>
