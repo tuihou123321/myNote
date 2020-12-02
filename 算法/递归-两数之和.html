@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * 找出数组中，和为目标值的数组下标，可能有多种情况
+    * (边际情况：数组数字可能重复，可能有多种答案)
+    *
+    * 实现思路：
+    * 1.定义一个全局变量，let indexArr=[]; 里面是一个数组，可能有多个情况
+    * 2.fn(arr,i),取出数组中第一个元素，依次和后面的进行相加，如果等于目标值，就把当前两个的索引存起来， indexArr.push([index1,index2])
+    * 3. 【递归】取出数据的第二个值，依次和后面的进行相加，如果等于目标值，就把当前的两个索引存起来   fn(arr,i)
+    * 4. 终止判断：  (i+1)===arr.length
+    * */
+
+    let arr=[3,2,4];  //6
+
+    let indexArr=[];
+    function twoSum(arr,target,index=0){
+        //定义终止条件
+        if(index===arr.length){return false;}
+        arr.forEach((item,i)=>{
+            if(i > index){
+                if(arr[index]+item===target){
+                    indexArr.push([index,i])
+                }
+            }
+        })
+
+       //执行递归
+       twoSum(arr,target,index+1)
+        //只返回一个结果
+       return indexArr[0] || [];
+        //返回多个结果，二维数组
+       // return indexArr;
+    }
+
+    console.log(twoSum(arr,6));
+
+</script>
+</body>
+</html>
