@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+<script>
+    let fn1=  axios.get('https://api.ydl.com/api/test-category/all',{params:{}});
+    let fn2=  axios.get('https://api.ydl.com/api/test-category/all',{params:{}});
+
+
+    //两个同时返回
+    Promise.all([fn1,fn2]).then(res=>{
+        console.log(res);
+    })
+
+</script>
+
+</body>
+</html>

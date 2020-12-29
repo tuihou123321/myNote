@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    /*
+    * generator函数 执行过程
+    * 1. 执行，Generator函数，获取遍历器对象
+    * 2. 然后调用next() 方法，执行异步任务的第一队伍
+    * 3. 由于fetch模块是一个promise对象， 因此要用then方法调用下一个next方法
+    *     * */
+    function* getData(){
+        yield fetch('https://api.ydl.com/api/test-category/all');
+    }
+
+
+    let gen = getData()
+    gen.next().value.then(res=>{
+      return res.json();
+    }).then(res=>{
+        console.log(res);
+    })
+
+
+
+
+    /*
+    * 写法二：直接返回一个promise对象
+    * */
+   // function getData(){
+   //      return fetch('https://api.ydl.com/api/test-category/all');
+   //  }
+   //
+   //  getData().then(res=>{
+   //      return res.json();
+   //  }).then(res=>{
+   //      console.log(res);
+   //  })
+
+
+
+</script>
+</body>
+</html>
