@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    // 此方法不考虑大数情况，只处理浮点型数据
+    const Mathpro={
+        getCimalLength(value=0){
+            //把value转成number
+            if(value){
+                return value.toString().split('.')[1] ? value.toString().split('.')[1].length : 0;
+            }
+            return 0;
+        },
+         add(...other){
+            /*
+            * 1. 判断a,b小数位最大长度
+            * 2. 把a,b都乘以小数位最大长度的n
+            * 3. 把a,b再计算
+            * 4. 把计算的结果再除以倍数n
+            * */
+
+            if(other.length<2){
+                return other[0];
+            }
+
+            const otherA = other.map(item=>{
+                return this.getCimalLength(item)
+            })
+            const multiple=Math.pow(10, Math.max(...otherA)  || 1);
+            const total=other.reduce((temp,item,index)=>{
+                 return index===1 ? temp*multiple+item*multiple : temp+item*multiple;
+            })
+            return total/multiple
+        }
+    }
+
+
+    // 单元测试
+    console.log(Mathpro.add(0.1),0.1);
+    console.log(Mathpro.add(0.12),0.12);
+
+    console.log(Mathpro.add(0.1,0),0.1+0);
+    console.log(Mathpro.add(0.1,0.2),0.1+0.2);  //success
+    console.log(Mathpro.add(0.11,0.2),0.11+0.2);
+
+
+
+    console.log(Mathpro.add(0.1,0.2,0.3),0.1+0.2+0.3);  //success
+
+    console.log(Mathpro.add(0.111,0.2,0.3),0.111+0.2+0.3);
+
+
+    console.log(Mathpro.add(0.1,null),0.1+null);
+
+</script>
+</body>
+</html>
