@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /*
+    * generator函数的使用
+    * 1. function关键字后面添加*;
+    * 2.返回的generator对象使用next()方法继续执行
+    * 3. yield 是返回的value
+    * */
+    function* gen(){
+       yield 1;
+    }
+
+    let g=gen();
+    // console.log(g); // 返回一个迭代器
+    console.log(g.next()); // { value:1, done:false }   ，第一次执行，返回yield的值
+    console.log(g.next()); // { value:undefined, done:true }  ， 第二次执行函数已经走完了
+
+
+
+
+</script>
+</body>
+</html>

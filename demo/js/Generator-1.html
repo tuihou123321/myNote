@@ -11,17 +11,25 @@
     * 1. function关键字后面添加*;
     * 2.返回的generator对象使用next()方法继续执行
     * */
+
+
+    // 无限迭代器
     function* idMaker(){
-        let index=0;
+        let index='100';
         while (true)
         yield index++;
     }
 
+
     let gen = idMaker();  //默认返回一个 Generator对象 {}
-    console.log(gen.next());  //{value:0,done:false}
-    console.log(gen.next().value);
-    // console.log(gen.next().value);
-    // console.log(gen.next().value);
+    // console.log(gen);  // 返回一个迭代器函数
+    // console.log(gen.next());  //{value:100,done:false}
+    console.log(gen.next().value);  // 100
+    console.log(gen.next().value);  // 101
+    console.log(gen.next().value);  // 102
+    // ...
+
+
 
 </script>
 </body>

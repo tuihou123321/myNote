@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dva@2.4.1/dist/dva.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const { connect  } = dva;
+
+  const app = dva();
+
+  app.model({
+      namespace: 'count',
+      state: 0,
+      reducers: {
+          add  (count) { return count + 1 },
+          minus(count) { return count - 1 },
+      },
+  });
+
+
+
+  // 3. View
+  const App = connect(({ count }) => ({
+      count
+  }))(function(props) {
+      return (
+          <div>
+              <h2>{ props.count }</h2>
+              <button key="add" onClick={() => { props.dispatch({type: 'count/add'})}}>+</button>
+              <button key="minus" onClick={() => { props.dispatch({type: 'count/minus'})}}>-</button>
+          </div>
+      );
+  });
+
+
+
+  // 4. Router
+  app.router(() => <App />);
+
+  // 5. Start
+  app.start('#app');
+
+</script>
+</body>
+</html>
