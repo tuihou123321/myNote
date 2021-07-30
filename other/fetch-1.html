@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+9
+
+<script>
+  // 直接访问，报跨域
+  fetch('http://8.136.218.143:8082/getData/transportData',{
+    method:'POST',
+    headers:{
+      u_co_id:'10048538',
+      u_id:'21726',
+    },
+    body:JSON.stringify({
+        "apiCode":"merchant_warehouse_list_erp",
+        "apiParams":{
+          "coId":10000147
+        },
+        "bizDomain":"logisticsTrack"
+      }
+    )
+  }).then(res=>{
+    return res.json();
+  }).then(res=>{
+    console.log(res);
+  })
+</script>
+</body>
+</html>

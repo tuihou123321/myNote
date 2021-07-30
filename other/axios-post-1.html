@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 接口返回authMap权限表
+    let authMap = [
+        {
+            nameKey:'home',
+            authTypeAdd:true,  // 增删改查
+            authTypeView:true, // 查看
+            children:[
+                {
+                    nameKey:'page1', //
+                    authTypeAdd:true,
+                    authTypeView:true
+                }
+            ]
+        }
+    ]
+
+    let router=[
+        {
+            nameKey:'name',
+            name: '首页',
+            path: '/home',
+            layout: false, // 默认布局
+            routes: [
+                {
+                    nameKey:'name',
+                    name: '子页面',
+                    path: '/home/page1',
+                    component: './User/Login',
+                },
+            ]
+        }
+    ]
+
+    function haveAuth(){
+        // 通过这两个 authMap,router
+        return true;
+    }
+
+    function ButtonPro(value){
+        //
+        if(haveAuth()){
+            return <div/>
+        }
+
+        return <Button>{value}</Button>
+    }
+
+    function ButtonPro2(){
+
+    }
+
+
+    function Demo(){
+        return <div>
+            <Search/>
+            <div>
+                <ButtonPro type={'primary'}>添加</ButtonPro>
+                <ButtonPro>修改</ButtonPro>
+                <ButtonPro2>下载</ButtonPro2>
+                <Button>弹层</Button>
+            </div>
+        </div>
+    }
+
+</script>
+</body>
+</html>

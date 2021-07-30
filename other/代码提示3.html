@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.js" integrity="sha512-2iwCHjuj+PmdCyvb88rMOch0UcKQxVHi/gsAml1fN3eg82IDaO/cdzzeXX4iF2VzIIes7pODE1/G0ts3QBwslA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+<!--    <script src="./js/lib/lodash.js"></script>-->
+</head>
+<body>
+
+<script>
+
+    function md5(value){
+        return escape(value);   //加密字符串
+    }
+
+    // 第二个扩号是全局参数，第一个参数是局部变量，可修改全局变量传入的值
+    var sdk=(function (md5, w){
+        return {
+            userId:'',
+            // 获取联系人
+            getConcact:function (name){
+                return md5(name)
+            },
+            getWindow:function (){
+                return w;
+            }
+        }
+    })(md5,window)
+</script>
+
+<script>
+
+
+
+
+
+
+
+
+
+    sdk.get
+
+    console.log(sdk.getConcact('123A?'));
+    console.log(sdk.getWindow());
+</script>
+</body>
+</html>

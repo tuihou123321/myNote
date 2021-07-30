@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二叉树遍历</title>
+</head>
+<body>
+
+<script>
+    const data=[
+        {
+            resourceName: "数据开发",
+            resourceCode: "dataDevelop",
+            isHave: true,
+            childList: [
+                {
+                    resourceName: "数据开发2",
+                    resourceCode: "dataDevelop2",
+                    isHave: true,
+                }
+            ]
+        }
+    ]
+
+    // function transformObjectKeyName(list=[]){
+    //     if(list instanceof Array && list.length>0){
+    //         list=JSON.stringify(list);
+    //         list=list.replace(/resourceName/g, 'title')
+    //         list=list.replace(/resourceCode/g, 'key')
+    //         return JSON.parse(list)
+    //     }
+    //     return list;
+    // }
+
+    function transformObjectKeyName(list=[],objMap){
+        if(list instanceof Array && list.length>0){
+            list=JSON.stringify(list);
+
+            for(let i in objMap){
+                // list=list.replace(/resourceName/g, 'title')
+                list=list.replace(new RegExp(i,'g'),objMap[i]);
+            }
+
+            return JSON.parse(list)
+        }
+        return list;
+    }
+
+    console.log(transformObjectKeyName(data,{
+        resourceName:'title',
+        resourceCode:'key',
+    }));
+
+</script>
+
+</body>
+</html>

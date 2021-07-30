@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dva@2.4.1/dist/dva.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const { useEffect } = React;
+  const { connect  } = dva;
+
+  const app = dva();
+
+  let menusmData=['/home','/dataCenter/1', '/dataCenter/2']
+
+  app.model({
+      namespace: 'menus',
+      state: {
+          menums:[],  //菜单权限
+          hasDataAuth:null
+      },
+      effects:{
+          *init ({ payload }, { put }){
+              yield put({
+                  type:'menus/update',
+                  payload:{
+                      menums:menusmData
+                  }
+              })
+          },
+          *init2 ({ payload }, { put }){
+              yield put({
+                  type:'menus/update',
+                  payload:{
+                      hasDataAuth:true
+                  }
+              })
+          }
+      },
+      // 同步执行
+      reducers: {
+          update (state, { payload }) {
+              return {
+                  ...state,
+                  ...payload
+              }
+          }
+      }
+  });
+
+
+
+  // 3. View
+  const App = connect(({ menus }) => ({ menus }))(function({ dispatch, menus }) {
+
+      useEffect(()=>{
+          console.log(menus, 'xz445');
+          // 传入用户名，密码
+           dispatch({
+              type:'menu/init2',
+              // payload: {}
+          })
+
+          console.log(menus, 'xz55');
+      }, [])
+
+
+      let changeValue=()=>{
+          dispatch({
+              type:'menu/init2',
+              payload: {
+                  hasDataAuth:55
+              }
+          })
+      }
+
+      return (
+          <div>
+              <h3>菜单权限目录</h3>
+              <div>
+                  <button onClick={changeValue}>改变</button>
+              </div>
+              <ul>
+                  {
+                      menus.menums.length>0 && menus.map(item=>{
+                          return <li>{item}</li>
+                      })
+                  }
+              </ul>
+
+              <div>{JSON.stringify(menus.hasDataAuth)}</div>
+          </div>
+      );
+  });
+
+
+  // 4. Router
+  app.router(() => <App />);
+
+  // 5. Start
+  app.start('#app');
+
+</script>
+</body>
+</html>

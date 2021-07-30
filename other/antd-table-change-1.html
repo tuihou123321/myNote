@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const { Table } = antd;
+
+  const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+      render: (text, record) => {
+          return <div>
+              <a>{text}</a>
+          </div>
+      },
+    },
+    // {
+    //   title: 'Age',
+    //   dataIndex: 'age',
+    // }
+  ];
+
+
+  const data = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42
+    }
+  ];
+
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    }
+  };
+
+
+   const App=()=>{
+
+
+
+       return (
+         <div className="container">
+           <Table
+             rowSelection={{
+               ...rowSelection,
+             }}
+             columns={columns}
+             dataSource={data}
+           />
+         </div>
+       )
+   }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

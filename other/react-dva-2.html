@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dva@2.4.1/dist/dva.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+
+  const { useEffect } = React;
+  const { connect  } = dva;
+
+
+  const globalDvaData = {
+      namespace: 'count',
+      state: 0,
+      reducers: {
+          add (value) {
+              if(value>=5){
+                  return 5;
+              }
+              return value+1;
+          },
+          reduce (value) {
+              if(value<=0){
+                  return 0;
+              }
+              return value-1;
+          },
+      },
+  };
+
+  let app=dva();
+  app.model(globalDvaData);
+
+
+  const Index=({ dispatch, count })=>{
+
+       const getData = ()=> {
+           dispatch('count/add')
+       }
+
+       return (
+         <div>
+             <div>
+                 计数器：{count}
+             </div>
+             <div>
+                 <button onClick={()=>{
+                     dispatch({type:'count/add'})
+                 }}>加</button>
+
+                 <button onClick={()=>{
+                     dispatch({type:'count/reduce'})
+                 }}>减</button>
+             </div>
+
+         </div>
+       )
+   }
+
+   // 把组件和dva的数据结合在一起
+  const App  = connect(({ count }) => ({count}))(Index);
+
+
+  // 4. Router
+  app.router(() => <App />);
+
+  // 5. Start
+  app.start('#app');
+
+
+</script>
+</body>
+</html>

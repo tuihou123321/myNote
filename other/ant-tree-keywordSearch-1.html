@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    const treeData = [
+        {
+            title: '数据服务',
+            key: '0-0',
+            children:[
+                {
+                    title:'子项',
+                    key:'0-0-1'
+                },
+                {
+                    title:'子项2',
+                    key:'0-0-2'
+                }
+            ]
+        },
+        {
+            title: '数据管理',
+            key: '1-0',
+            children:[
+                {
+                    title:'查询表模型',
+                    key:'1-0-0'
+                },
+                {
+                    title:'查询表模型子项',
+                    key:'1-0-1'
+                }
+            ]
+        },
+    ];
+
+    const findKeyWordKeysArr =  {
+        // 使用递归完成
+        findKeysArr:[],
+        find(treeData,keyword){
+            if(treeData instanceof Array && treeData.length){
+                treeData.forEach((item,index)=>{
+                    // 如果选中，并且当前无子集，就把当前 key 添加进去
+
+                    console.log(item,'xz445');
+
+                    if(item.title.indexOf(keyword)>-1){
+                        this.findKeysArr.push(item.key);
+                    }
+
+                    if(item.children && item.children.length>0){
+                        this.find(item.children,keyword);
+                    }
+                })
+            }
+            return this.findKeysArr
+        }
+    }
+
+    console.log(findKeyWordKeysArr.find(treeData,'子项'),'xz4545454');
+
+
+
+</script>
+</body>
+</html>

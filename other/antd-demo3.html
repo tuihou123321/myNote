@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+    let {Row, Col, Space}=antd;
+
+  class App extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state={
+      }
+    }
+    render() {
+
+      const style={
+        color:"red",
+        border:"1px solid red"
+      }
+
+      return (
+        <div>
+          <Row>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+          <br/>
+
+
+
+          <Row>
+            <Col className="gutter-row" span={12}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+          <br/>
+
+          <Row justify="center">
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+          <br/>
+
+          <Row justify="space-between">
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+
+          <br/>
+
+          <Row justify="space-around">
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={6}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+          <br/>
+
+          <Row>
+            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                <div style={style}>col-6</div>
+            </Col>
+            <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+                <div style={style}>col-6</div>
+            </Col>
+            <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+                <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+
+          <br/>
+
+          <Row>
+            <Col xs={0} sm={4} md={12} lg={12} >
+              <div style={style}>左侧导航</div>
+            </Col>
+            <Col xs={24} sm={20} md={12} lg={12}>
+              <div style={style}>主内容区域</div>
+            </Col>
+          </Row>
+
+      <br/>
+
+          <Row justify="space-between" gutter={[30,8]}>
+            <Col className="gutter-row" span={12}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div style={style}>col-6</div>
+            </Col>
+            <Col className="gutter-row" span={12}>
+              <div style={style}>col-6</div>
+            </Col>
+          </Row>
+
+          <br/>
+
+
+            <Row gutter={[8,20]}>
+              <Col xs={24} sm={12} md={6} lg={6} >
+                <div style={style}>page</div>
+              </Col>
+             <Col xs={24} sm={12} md={6} lg={6} >
+                <div style={style}>page</div>
+              </Col>
+
+             <Col xs={24} sm={12} md={6} lg={6} >
+                <div style={style}>page</div>
+              </Col>
+             <Col xs={24} sm={12} md={6} lg={6} >
+                <div style={style}>page</div>
+              </Col>
+            </Row>
+
+          <Row>
+            <Col offset={1} span={6}>
+              <div style={style}>page</div>
+            </Col>
+          </Row>
+        </div>
+      );
+    }
+  }
+  ReactDOM.render(
+    <App />,
+    document.getElementById('app')
+  );
+</script>
+</body>
+</html>

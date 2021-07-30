@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css"
+      rel="stylesheet"
+    />
+    <style>
+      .warpBox {
+        width: 50%;
+        padding: 30px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      // 模拟删除接口方法
+      const createRole = function (params) {
+        console.log(params, "创建用户的id");
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            const data = {
+              code: 200,
+              success: true,
+            };
+            resolve(data);
+          }, 500);
+        });
+      };
+
+      const formLabels = [
+        {
+          label: "角色名称",
+          name: "roleName",
+          rules: [
+            {
+              required: true,
+              message: "请输入角色名称",
+            },
+          ],
+        },
+        {
+          label: "角色编码",
+          name: "roleCode",
+          rules: [
+            {
+              required: true,
+              message: "请输入角色编码",
+            },
+          ],
+        },
+        {
+          label: "描述",
+          name: "roleDesc",
+          rules: [
+            {
+              required: true,
+              message: "请输入角色描述",
+            },
+          ],
+        },
+      ];
+    </script>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      const { Form, Input, Button, Checkbox, Modal } = antd;
+
+      const layout = {
+        labelCol: {
+          span: 4,
+        },
+        wrapperCol: {
+          span: 16,
+        },
+      };
+
+
+      const Demo = ({ onOk, visible }) => {
+        const [loading, setLoading] = useState(false);
+        const [form] = Form.useForm();
+
+        const onOkFn = () => {
+          form.submit();
+        };
+
+        const resetForm = () => {
+          // 重置表单
+          form.resetFields();
+          // 完成
+          onOk();
+        };
+
+        const onFinish = async (params) => {
+          const { roleCode, roleDesc, roleName } = params;
+          setLoading(true);
+          await createRole({
+            roleCode,
+            roleDesc,
+            roleName,
+          });
+          setLoading(false);
+
+          resetForm();
+        };
+
+        const onFinishFailed = (errorInfo) => {
+          console.log("Failed:", errorInfo);
+        };
+
+        return (
+          <Modal
+            title={"添加角色"}
+            visible={visible}
+            onOk={onOkFn}
+            onCancel={resetForm}
+            footer={[
+              <Button key="back" onClick={resetForm}>
+                取消
+              </Button>,
+              <Button
+                key="submit"
+                type="primary"
+                loading={loading}
+                onClick={onOkFn}
+              >
+                确认
+              </Button>,
+            ]}
+          >
+            <Form
+              {...layout}
+              name="createRoleForm"
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              form={form}
+            >
+              {formLabels.length > 0 &&
+                formLabels.map((item) => {
+                  return (
+                    <Form.Item
+                      label={item.label}
+                      name={item.name}
+                      rules={item.rules}
+                      key={item.name}
+                    >
+                      <Input />
+                    </Form.Item>
+                  );
+                })}
+            </Form>
+          </Modal>
+        );
+      };
+
+      const App = () => {
+        const [visibleCreateRoleModal, setVisibleCreateRoleModal] = useState(
+          false
+        );
+        const showVisibleCreateRoleModal = () => {
+          setVisibleCreateRoleModal(true);
+        };
+        const hideVisibleCreateRoleModal = () => {
+          setVisibleCreateRoleModal(false);
+        };
+
+        return (
+          <div className="warpBox">
+            <button onClick={showVisibleCreateRoleModal}>显示</button>
+
+            <Demo
+              onOk={hideVisibleCreateRoleModal}
+              visible={visibleCreateRoleModal}
+            />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

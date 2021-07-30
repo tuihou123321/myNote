@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/@ant-design/pro-table@2.8.1/dist/table.min.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/@ant-design/pro-table@2.8.1/dist/table.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ant-design/pro-table@2.8.1/dist/table.min.css">
+
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+    const { useRef } = React;
+    const { Input, Select, Button, Table } = antd;
+
+   const columns = [
+     {
+       title: '名字',
+       dataIndex: 'name',
+       search: false,
+     },
+     {
+       title: '分类',
+       dataIndex: 'label',
+       search:false
+     }
+   ];
+
+
+   const dataSource = [
+     {
+       key: 'key1',
+       name: 'name1',
+       label: '分类1',
+     },
+   {
+       key: 'key2',
+       name: 'name2',
+       label: '分类2',
+   },
+       {
+           key: 'key2',
+           name: 'name2',
+           label: '分类2',
+       }
+   ];
+
+
+
+
+   const ChildTable =()=>{
+       return <Table
+           columns={columns}
+           Column={
+               align:'center'
+           }
+           dataSource={dataSource}
+       />
+   }
+
+
+    const App=()=>{
+        return (
+            <div>
+                <ProTable
+                  search={false}
+                  columns={columns}
+                  request={(params, sorter, filter) => {
+                    return Promise.resolve({
+                      data: dataSource,
+                      success: true,
+                    });
+                  }}
+                  expandable={{
+                      expandedRowRender: record => (
+                          <ChildTable/>
+                      )
+                  }}
+                />
+            </div>
+        )
+    }
+
+     ReactDOM.render(
+         <App />,
+         document.getElementById('app')
+     );
+</script>
+</body>
+</html>

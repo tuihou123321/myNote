@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .app{
+            border:20px solid red;
+            }
+        .btn{
+            position: fixed;
+            top:50px;
+            left:50px;
+        }
+        .box{
+            height: 3000px;
+            border:20px solid blue;
+        }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <button class="btn" onclick="jumpToDetail()">跳转到子页</button>
+   <div class="box" id="box">我是主体内容</div>
+</div>
+
+<script>
+    // 获取当前鼠标相对于document的高度
+    const getScrollTop=(event)=> {
+        const e = event || window.event;
+        const scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+        return (e.pageY || e.clientY + scrollY);
+    }
+
+  const backScrollToTarget = (pathName)=>{
+    try{
+      // 判断上一个路由来源是否是子页面
+      const referrerUrl = document.referrer;
+      if(referrerUrl.indexOf(pathName)>-1){
+        // 页面滚动到相应位置
+        let scrollTop = sessionStorage.getItem('scrollTop')
+        if (scrollTop) {
+          document.querySelector('#root').scrollTop = scrollTop
+        }
+        sessionStorage.removeItem('scrollTop')
+      }
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+
+
+    setTimeout(()=>{
+        backScrollToTarget('获取内层滚动条的高度-子页')
+    },500);
+
+
+    // 跳转
+  function jumpToDetail(){
+       // 获取点击时光标的位置
+      sessionStorage.setItem('scrollTop',getScrollTop());
+      window.location.href='/获取内层滚动条的高度-子页.html'
+  }
+
+
+</script>
+</body>
+</html>

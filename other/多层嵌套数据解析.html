@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let router =[
+        {
+            name: '首页',
+            icon: 'crown',
+            path: '/home',
+            component: './Home',
+        },
+        {
+            name: '数据中心',
+            icon: 'crown',
+            path: '/dataCenter',
+            routes:[
+                {
+                    name:'数据字典',
+                    path: '/dataCenter/dictionary',
+                    component: './DataCenter/Dictionary',
+                    routes:[
+                        {
+                            name:'数据',
+                            path: '/dataCenter/dictionary',
+                            component: './DataCenter/Dictionary',
+                        },
+                        {
+                            name:'数据2',
+                            path: '/dataCenter/dictionary2',
+                            component: './DataCenter/Dictionary2',
+                        }
+                    ]
+                },
+                {
+                    name:'数据字典2',
+                    path: '/dataCenter/dictionary2',
+                    component: './DataCenter/Dictionary2',
+                }
+            ]
+        }
+    ]
+
+
+
+    let authLists=['数据中心','数据字典','数据'];
+
+       const addAuthToRoutes = function(router, authLists){
+            if(router && router.length>0){
+                router.forEach((item,index)=>{
+                    if(!authLists.includes(item.name)){
+                        item.hideInMenu=false;
+                    }
+                    if(item.routes && item.routes.length>0){
+                        addAuthToRoutes(item.routes, authLists);
+                    }
+                })
+            }
+            return router;
+        }
+
+
+    console.log(addAuthToRoutes(router, authLists));
+
+</script>
+</body>
+</html>

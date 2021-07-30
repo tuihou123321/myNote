@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二叉树遍历</title>
+</head>
+<body>
+
+
+<script>
+    const treeData=[
+        {
+            resourceName: "权限管理",
+            resourceCode: "dataDevelop",
+            isHave: true,
+            childList: [
+                {
+                    resourceName: "权限管理1",
+                    resourceCode: "dataDevelop1",
+                    isHave: true,
+                },
+                {
+                    resourceName: "权限管理2",
+                    resourceCode: "dataDevelop2",
+                    isHave: true,
+                }
+            ]
+        },
+        {
+            resourceName: "用户管理-",
+            resourceCode: "userManager",
+            isHave: true,
+            childList: [
+                {
+                    resourceName: "用户管理1",
+                    resourceCode: "userManager1",
+                    isHave: false,
+                },
+                {
+                    resourceName: "用户管理2",
+                    resourceCode: "userManager2",
+                    isHave: true,
+                }
+            ]
+        }
+    ]
+
+
+
+    const findTreeAllHaveed={
+        // 使用递归完成
+        selectIds:[],
+        find(treeData){
+            // 最多支持四层
+            treeData.forEach((item,index)=>{
+                // 如果选中，并且当前无子集，就把当前id添加进去
+                if(item.isHave){
+                    if(!item.childList){
+                        this.selectIds.push(item.resourceCode);
+                    }else{
+                        this.find(item.childList);
+                    }
+                }
+            })
+            return this.selectIds
+        }
+    }
+
+
+    console.log(findTreeAllHaveed.find(treeData));
+
+
+
+
+</script>
+</body>
+</html>

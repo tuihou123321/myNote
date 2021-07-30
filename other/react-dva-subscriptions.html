@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dva@2.4.1/dist/dva.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+  const { useEffect } = React;
+  const { connect  } = dva;
+
+  const globalDvaData = {
+      namespace: 'userInfo',  // 命令空间
+      state: {     // state存放的状态值
+          name:''
+      },
+      // 异步调用方法
+      effects:{
+          *getUserInfo({ payload }, { call, put }) {
+              // 这里可以使用异步数据请求
+              yield put({
+                   type:'userInfo/update',
+                   payload: {
+                       name:'888888',
+                   }
+              })
+          },
+      },
+      // 同步的改变方法
+      reducers: {
+          update (state, { payload  }) {
+              return {
+                 ...state,
+                  ...payload
+              }
+          }
+      },
+      subscriptions:{
+          setup({ dispatch, history }){
+              console.log('xz10');
+              // 页面点击
+              return history.listen(({pathname, query})=>{
+                   console.log(pathname, 'xz11');
+              })
+          },
+          // 值的改变
+          subValueChange({ dispatch, history }){
+              // 页面点击
+              return history.listen(({pathname, query})=>{
+                  console.log(pathname, 'xz11');
+              })
+          }
+      }
+  };
+
+  let app=dva();
+  app.model(globalDvaData);
+
+
+  const Index=({ dispatch, userInfo })=>{
+
+      const changeUserInfo = (params)=>{
+          dispatch({
+              type:'userInfo/update',
+              payload: params
+          })
+      }
+
+      useEffect(()=>{
+          // 传入用户名，密码
+          dispatch({
+              type:'userInfo/getUserInfo',
+              payload: {
+                  username:'123',
+                  password:'abc',
+              }
+          })
+      },[])
+
+
+       return (
+         <div>
+             <p>用户名是：  {userInfo.name}</p>
+             <button onClick={()=>{
+                 changeUserInfo({
+                     name:Math.random()
+                 })
+             }}>随机生成用户名</button>
+         </div>
+       )
+   }
+
+   // 把组件和dva的数据结合在一起
+  const App  = connect(({ userInfo }) => ({userInfo}))(Index);
+
+
+  // 4. Router
+  app.router(() => <App />);
+
+  // 5. Start
+  app.start('#app');
+
+
+</script>
+</body>
+</html>

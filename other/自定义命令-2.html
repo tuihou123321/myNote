@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+    <input type="text"/>
+    <h1 class="lnXdpd">我是内容</h1>
+    <button id="button2">判断当前input是否被选中</button>
+</div>
+
+<script>
+  function hideContent(){
+    const tipSearchBar= document.getElementsByClassName("lnXdpd")[0];
+    tipSearchBar.style.cssText="visibility:hidden";
+  }
+
+  function showContent(){
+    const tipSearchBar= document.getElementsByClassName("lnXdpd")[0];
+    tipSearchBar.style.cssText="visibility:show";
+  }
+
+  // 只支持字母和数字，不区分大小写
+  let eventObj={
+    'hc':hideContent,
+    'sc':showContent,
+  }
+
+
+  // 判断当前 input/textarea 框是否选中，如何选中，keydown事件不监听；
+
+  let keydownStr='';
+  document.addEventListener('keydown', function(event) {
+    const code = event.code.replace('Digit','').replace('Key','');
+    // 去掉特殊字符；
+    if(code.length>1){
+        return;
+    }
+    if(keydownStr.length<2){
+      keydownStr=keydownStr+code;
+    }
+    else if(keydownStr.length>=2) {
+      // 删除第一位再添加
+      keydownStr=(keydownStr.substring(1,keydownStr.length)+code);
+    }
+    keydownStr=keydownStr.toLocaleLowerCase();
+    console.log(keydownStr, 'xz');
+    eventObj[keydownStr] && eventObj[keydownStr]()
+  })
+
+
+
+  var inputs = document.getElementsByTagName('input');
+  var button2 = document.getElementById('button2');
+  button2.onclick = function () {
+    for (let i=0; i<inputs.length; i++){
+      if (inputs[i].checked == true){
+        console.log('第' + i + 'input被选中了');
+      }else{
+        console.log('第' + i + 'input没被选中');
+      };
+    };
+  };
+
+
+</script>
+</body>
+</html>

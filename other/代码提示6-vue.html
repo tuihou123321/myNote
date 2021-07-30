@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <p>{{value}}</p>
+    <p>{{value2}}</p>
+    <button @click="add">增加</button>
+</div>
+
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            value: 1
+        },
+        mounted(){
+            console.log(11);
+        },
+        methods:{
+            add:function () {
+                this.value=++this.value;
+            }
+        },
+        computed: {
+            value2:function(){
+                return this.value*2;
+            }
+        }
+    })
+</script>
+</body>
+</html>

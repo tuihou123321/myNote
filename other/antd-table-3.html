@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script>
+
+    const result = {
+        code: 0,
+        act: 0,
+        msg: null,
+        data: {
+            records: [
+                {
+                    id:1,
+                    roleId:'100',
+                    roleName:'小明'
+                },
+                {
+                    id:2,
+                    roleId:'101',
+                    roleName:'小张'
+                },
+                {
+                    id:3,
+                    roleId:'102',
+                    roleName:'小鹏'
+                }
+            ],
+            total: 300
+        }
+    }
+
+
+    // 模拟删除接口方法
+    const batchDeleteRoleUser=function (ids){
+        console.log(ids, 'api:开始删除指定项');
+        new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                const data = {
+                    code:200,
+                    success:true
+                }
+                resolve(data);
+            },500)
+        })
+    }
+
+
+    // 获取接口列表
+    const queryRoleUserList = ids => {
+        console.log(ids, '请求列表接口');
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve(result);
+            },500)
+        })
+    }
+
+
+
+</script>
+
+
+<script type="text/babel">
+
+  const { useState, useEffect } = React;
+
+  const { Table, Pagination,Button } = antd;
+
+
+  const TableRole=({ roleId })=>{
+
+      const columns = [
+          {
+              title: '账号',
+              dataIndex: 'roleId'
+          },
+          {
+              title: '用户',
+              dataIndex: 'roleName',
+              search: false,
+          },
+          {
+              title: '操作',
+              valueType: 'option',
+              render: (text, record, index) => [
+                  <a
+                      key="editable"
+                      onClick={async () => {
+                          await deleteSeleteAccount([record.id])
+                      }}
+                  >
+                      删除
+                  </a>
+              ]
+          }
+      ]
+      // 删除单个
+      const deleteSeleteAccount=async (arr)=>{
+          // 修改页面数据
+          await batchDeleteRoleUser(arr)
+          // 刷新页面
+          await fetchData();
+      }
+
+      // 批量删除
+      const deleteBatchAccount=async ()=>{
+          // 修改页面数据
+          await deleteSeleteAccount(selectIds)
+      }
+      const [ selectIds, setSelectIds ] = useState([]);
+      const [ total, setTotal ] = useState(0);
+      const [ isLoading, setIsLoading ] = useState(true);
+      const [ searchParams, setSearchParams ] = useState({
+          page: {
+              currentPage: 1,
+              pageSize: 10,
+          },
+          requestData: {
+              keyword: '',
+              roleId: roleId
+          }
+      });
+      const [ dataSource, setDataSource ] = useState([]);
+      const fetchData =(async ()=>{
+          setIsLoading(true);
+          let { data } = await queryRoleUserList(searchParams)
+          setIsLoading(false);
+
+          if(!data){data={records:[]}}
+
+
+          data.records.length && data.records.forEach((item,index)=>{
+              item.key=index;
+          })
+
+          setDataSource(data.records);
+          setTotal(data.total)
+
+      })
+
+      useEffect(async () => {
+          await fetchData();
+      }, [searchParams]);
+
+       return (
+         <div className="container">
+           <Table
+             rowSelection={{
+                 onChange: (selectedRowKeys, selectedRows) => {
+                    setSelectIds(selectedRows.map(item=> item.id))
+                 }
+             }}
+             columns={columns}
+             dataSource={dataSource}
+             pagination={{
+                 total: total,
+                 showTotal: total => `总条数 ${total} `,
+                 onChange: (currentPage, pageSize) => {
+
+                     // 深拷贝一个对象
+                     let searchParamsCopy=JSON.parse(JSON.stringify(searchParams));
+
+                     searchParamsCopy.page={
+                         currentPage,
+                         pageSize
+                     };
+
+                     // 设置数据状态
+                     setSearchParams(searchParamsCopy)
+
+
+                 }
+             }}
+             loading={isLoading}
+           />
+           <Button onClick={deleteBatchAccount} type={'primary'}>批量删除</Button>
+         </div>
+       )
+   }
+
+   const App = ()=>{
+      return <TableRole roleId={1}/>
+   }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const { useState, useEffect } = React;
+
+  const { Form, Input, Select, Button, Row, Col } = antd;
+
+  const { Option } = Select;
+
+
+  const SearchBar=({ onFinish, selectOptions })=>{
+
+      const prefixSelector = (
+          <Form.Item name="type" noStyle>
+              <Select style={{ width: 70 }}>
+                  {selectOptions.map((item,index)=> <Option value={item.value} key={index}>{item.name}</Option> )}
+              </Select>
+          </Form.Item>
+      );
+
+      const layout = {
+          labelCol: {
+              span: 0,
+          },
+          wrapperCol: {
+              span: 12,
+          },
+      };
+
+
+      return <div>
+          <Form
+              {...layout}
+              name="basic"
+              initialValues={{
+                  type:selectOptions[0].value
+              }}
+              onFinish={onFinish}
+          >
+              <Form.Item
+                  name="keyword"
+              >
+                  <Input addonBefore={prefixSelector} style={{ width: '100%' }} placeholder={'支持模糊搜索'}/>
+              </Form.Item>
+
+
+              <Form.Item style={{visibility:'hidden'}}>
+                  <Button type="primary" htmlType="submit" >
+                      Submit
+                  </Button>
+              </Form.Item>
+          </Form>
+      </div>
+  }
+
+  const App = ()=>{
+      const onFinish = (params)=>{
+          console.log(params);
+      }
+
+
+      const selectOptions=[
+          {
+              id:'',
+              name:'用户',
+              value:'user'
+          },
+          {
+              id:'',
+              name:'账号',
+              value:'account'
+          }
+      ]
+
+      return <SearchBar {...{
+          onFinish,
+          selectOptions
+      }}/>
+  }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+9
+<script>
+  // 访问umi mock中的接口，开启了允许跨域的选项
+  // 还是报错，CORS ERROR跨域错误
+  fetch('http://localhost:8000/api/users/create0',{
+    method:'POST',
+    headers:{
+      u_co_id:'10048538',
+      u_id:'21726',
+    },
+    mode:'cors',
+    body:JSON.stringify({
+        "apiCode":"merchant_warehouse_list_erp",
+        "apiParams":{
+          "coId":10000147
+        },
+        "bizDomain":"logisticsTrack"
+      },
+    )
+  }).then(res=>{
+    return res.json();
+  }).then(res=>{
+    console.log(res);
+  })
+</script>
+</body>
+</html>

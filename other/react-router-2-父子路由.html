@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js">
+    <script src='https://unpkg.com/react-dom@16.3.1/umd/react-dom.production.min.js'></script>
+    <script src='https://unpkg.com/react-router-dom@5.0.0/umd/react-router-dom.min.js'></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+    <style>
+        .header{
+            border:1px solid #333;
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+        .footer{
+            border:1px solid #333;
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+
+        .main{
+            border:1px solid #333;
+            padding: 10px;
+            margin-bottom: 25px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+    const { useState, useEffect } = React;
+    // 设置Router的别名
+    const { Route, Link, HashRouter:Router,Switch } = ReactRouterDOM
+
+    const Home =()=>{
+        return <div>
+            首页
+        </div>
+    }
+
+    const List =()=>{
+        return <div>
+            列表页
+            <ul>
+                <li><Link to={'/list/module1'} exact={"true"}>模块一</Link></li>
+                <li><Link to={'/list/module2'} exact={"true"}>模块二</Link></li>
+            </ul>
+        </div>
+    }
+
+
+    const Module1 =()=>{
+        return <div>
+            模块一的内容
+        </div>
+    }
+
+
+    const Module2 =()=>{
+        return <div>
+            模块二的内容
+        </div>
+    }
+
+
+    const Layout =({ children })=>{
+        return <div>
+
+            <header className="header">
+                <ul>
+                    <li><Link to={'/'} exact={"true"}>首页</Link></li>
+                    <li><Link to={'/list'} exact={"true"}>列表</Link></li>
+                </ul>
+            </header>
+
+            <main className="main">
+                {children}
+            </main>
+
+            <footer className="footer">
+                我是通用底部
+            </footer>
+        </div>
+    }
+
+
+
+
+    const App=()=>{
+        return (
+            <Router>
+                <Layout>
+                    <Switch>
+                        <Route path={'/'} exact={"true"} component={Home}/>
+
+                        // 注意：父级路由不能使用exact
+                        <Route path={'/list'}>
+                            <List/>
+                            <Route path={'/list/module1'} exact={"true"} component={Module1}/>
+                            <Route path={'/list/module2'} exact={"true"} component={Module2}/>
+                        </Route>
+                    </Switch>
+                </Layout>
+            </Router>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

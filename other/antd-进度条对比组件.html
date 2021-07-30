@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+
+    <!--引入test.less文件, 在webstorm 的 scratches下开启无效，可以启动http服务 -->
+    <link rel="stylesheet/less" type="text/css" href="css/process.less" />
+    <!--引入less.min.js文件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/less.js/3.13.0/less.min.js"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/big.js/6.0.3/big.min.js"></script>
+
+</head>
+<body>
+
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+    // 将数字转化为百分比 默认保留 2 位小数
+    const transNumToPercent = (num, fix = 2) => {
+        if (num || num === 0) {
+            const value = Big(Number(num))
+                .times(100)
+                .toFixed(fix)
+
+            if (num === -1) {
+                // 数据看板需求中 例如返回环比数据值为-1时，没有展示的意义。 另外处理百分比也可以用 numeral 来处理。
+                return '-'
+            }
+
+            return value + '%'
+        } else if (isNaN(num) || num === null || num === undefined) {
+            return '-'
+        }
+        return num
+    }
+
+
+    let { Progress , Space,Row, Col } = antd;
+
+    //使用纯函数组件
+    function ProgressJST(props)  {
+            let { percent=0 }=props;
+            //设置默认值
+            !percent && (percent=0)
+
+            //保留二位有效小数
+            percent=percent.toFixed(2);
+
+            return (
+                <div className="progressJst">
+                    <Progress percent={percent*100} showInfo={false} />
+
+                    <div className="numberWrap">
+
+                        <div className="numberBox">
+                            {
+                                percent>0 && <div style={{width:`${percent*100}%`}}>
+                                    {percent*100}%
+                                </div>
+                            }
+
+
+                            {
+                                (1-percent)>0 && <div style={{width:`${(1-percent)*100}%`}}>
+                                    {(100-percent*100)}%
+                                </div>
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            )
+    }
+
+
+    const ItemBar=({name, type, value, rate, isPercent})=>{
+        return <div className="progressBarJst">
+            <Space>
+                <span>{name}</span>
+                {value>0 && <div className="bar" style={{background:type==='self' ? '#5b8ff9' : '#61ddaa', width:`${200*rate}px`}}/>}
+                {isPercent ?  <span>{transNumToPercent(value)}</span> :  <span>{value}</span>}
+            </Space>
+        </div>
+    }
+
+    function ProgressVerticalJST({self, other,isPercent}){
+        return  <div>
+            <ItemBar name={'自营'} value={self} type={'self'} rate={self>=other ? 1 : self/other  } isPercent={isPercent}/>
+            <ItemBar name={'分销'} value={other} type={'other'} rate={other>self ? 1 : other/self } isPercent={isPercent}/>
+        </div>
+    }
+
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state={
+            }
+        }
+        render() {
+
+            const percent=0.2234;
+
+            const self=50;
+            const other=100;
+
+
+            const self2=0.1234;
+            const other2=0.3456;
+
+
+            const self3=null;
+            const other3=null;
+
+
+
+
+            return (
+                <div className="container">
+                    <ProgressJST percent={percent}/>
+
+                    <br/>
+                    <br/>
+
+                    <ProgressVerticalJST self={self} other={other} isPercent={false}/>
+
+                    <ProgressVerticalJST self={self2} other={other2} isPercent={true}/>
+
+                    <br/>
+                    <br/>
+
+                    <ProgressVerticalJST self={self3} other={other3} isPercent={true}/>
+
+                    <br/>
+                    <br/>
+
+
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

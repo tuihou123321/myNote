@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+    <style>
+        .roleName{
+            font-size: 16px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script>
+
+</script>
+
+
+<script type="text/babel">
+
+    const { useState } = React;
+    const { Tree } = antd;
+
+
+    const treeData = [
+        {
+            title: '数据服务',
+            key: '0-0',
+            children:[
+                {
+                    title:'子项',
+                    key:'0-0-1'
+                },
+                {
+                    title:'子项2',
+                    key:'0-0-2'
+                }
+            ]
+        },
+        {
+            title: '数据管理',
+            key: '1-0',
+            children:[
+                {
+                    title:'查询表模型',
+                    key:'1-0-0'
+                },
+                {
+                    title:'查询表模型',
+                    key:'1-0-1'
+                }
+            ]
+        },
+    ];
+
+    const Demo = () => {
+
+        //
+        const onSelect = (selectedKeys, info) => {
+            console.log('selected', selectedKeys, info);
+        };
+
+        // 复选框事件
+        const onCheck = (checkedKeys, info) => {
+            console.log('onCheck', checkedKeys, info);
+        };
+
+
+
+
+        return (
+            <Tree
+                checkable
+                defaultExpandedKeys={['0-0','1-0']}
+                defaultCheckedKeys={['0-0','1-0-0']}    // 默认选择
+                onSelect={onSelect}
+                onCheck={onCheck}
+                treeData={treeData}
+            />
+        );
+    };
+
+
+    const App=()=>{
+        return <Demo/>
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+    const mountNode = document.getElementById('app')
+</script>
+
+
+<script type="text/babel">
+
+    const {Button, Select} = antd;
+
+    const { Option } = Select;
+
+    const App = () => {
+
+        return (
+            <div>
+                <Select
+                    showSearch
+                    onChange={(e)=>{
+                        console.log(e);
+                    }}
+                    style={{width:'200px'}}
+                    defaultValue={'firefox'}
+                >
+                    <Option value={'chrome'}>chrome浏览器</Option>
+                    <Option value={'firefox'}>firefox浏览器</Option>
+                </Select>
+            </div>
+        );
+    };
+
+
+    ReactDOM.render(<App/>, mountNode);
+</script>
+</body>
+</html>

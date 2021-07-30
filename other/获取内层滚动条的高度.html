@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body{
+            overflow-y: auto;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        .app{
+            border:20px solid red;
+            }
+        .btn{
+            position: fixed;
+            top:50px;
+            left:50px;
+        }
+        .box{
+            height: 3000px;
+            border:20px solid blue;
+        }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <button class="btn" onclick="getScrollTop()">获取滚动条高度按钮</button>
+   <div class="box" id="box">
+       我是主体内容
+   </div>
+</div>
+
+<script>
+
+  const backScrollToTarget = ()=>{
+    try{
+      // 判断上一个路由来源是否是子页面
+      const referrerUrl = document.referrer;
+      if(referrerUrl.indexOf('获取内层滚动条的高度-子页')>-1){
+        // 页面滚动到相应位置
+        let scrollTop = sessionStorage.getItem('scrollTop')
+        if (scrollTop) {
+          document.querySelector('#root').scrollTop = scrollTop
+        }
+        sessionStorage.removeItem('scrollTop')
+      }
+    }catch (e) {
+      console.log(e);
+    }
+  }
+
+  // setTimeout(()=>{
+  //   backScrollToTarget()
+  // }, 0)
+
+
+   function getScrollTop() {
+    let scroll_top = 0;
+    if (document.documentElement && document.documentElement.scrollTop) {
+      scroll_top = document.documentElement.scrollTop;
+    }
+    else if (document.body) {
+      scroll_top = document.body.scrollTop;
+    }
+    console.log(scroll_top);
+    return scroll_top;
+  }
+
+
+   // var dom = document.getElementById('app');
+   // dom.addEventListener('scroll',function () {
+   //   console.log('xz', dom.scrollTop);
+   // });
+
+
+</script>
+</body>
+</html>

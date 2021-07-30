@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+  // 直接跨域访问 umi mock中的接口数据访问，默认就允许跨域
+  fetch('http://localhost:8001/api/user/info2').then(res=>{
+    return res.json();
+  }).then(res=>{
+    console.log(res, 'xz1111');
+  })
+
+  fetch('http://localhost:8001/api/user/info').then(res=>{
+    return res.json();
+  }).then(res=>{
+    console.log(res, 'xz2222');
+  })
+</script>
+</body>
+</html>

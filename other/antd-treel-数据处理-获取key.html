@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>二叉树遍历</title>
+</head>
+<body>
+
+
+<script>
+    const treeData = [
+        {
+            title: '数据服务',
+            key: '0-0',
+            isHave: true,
+            children:[
+                {
+                    title:'子项',
+                    key:'0-0-1',
+                    isHave: true
+                },
+                {
+                    title:'子项2',
+                    key:'0-0-2',
+                    isHave: false
+                }
+            ]
+        },
+        {
+            title: '数据管理',
+            key: '1-0',
+            isHave: false,
+            children:[
+                {
+                    title:'查询表模型',
+                    key:'1-0-0',
+                    isHave: true
+                },
+                {
+                    title:'查询表模型',
+                    key:'1-0-1',
+                    isHave: true
+                }
+            ]
+        },
+    ];
+
+
+    function findTreeAllHaveed(treeData){
+        // 找出所有选中子节点的id
+        let selectIds=[];
+
+        // 最多支持四层
+        treeData.forEach((item,index)=>{
+            if(item.isHave){
+
+                //第一层
+                selectIds.push(item.key)
+
+                if(item.children && item.children.length){
+                    // 第二层
+                    item.children.forEach((item2,index2)=>{
+                        if(item2.isHave){
+                            selectIds.push(item2.key)
+
+                            if(item2.children && item2.children.length){
+                                item2.children.forEach((item3,index3)=>{
+                                    if(item3.isHave){
+                                        selectIds.push(item3.key)
+
+                                        // 第三层
+                                        if(item3.children && item3.children.length){
+                                            item3.children.forEach((item4,index4)=>{
+                                                if(item4.isHave){
+                                                    selectIds.push(item4.key)
+
+
+                                                    if(item4.children && item5.children.length){
+                                                        item5.children.forEach((item5,index5)=>{
+                                                            if(item5.isHave){
+                                                                selectIds.push(item5.key)
+                                                            }
+                                                        })
+                                                    }
+
+                                                }
+                                            })
+                                        }
+
+                                    }
+                                })
+                            }
+
+
+                        }
+                    })
+                }
+
+            }
+        })
+        return selectIds
+    }
+
+    console.log(findTreeAllHaveed(treeData));
+
+
+
+
+</script>
+</body>
+</html>
