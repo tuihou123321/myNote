@@ -16,14 +16,14 @@
 
      class App extends React.Component{
          //react合成事件
-         reactEvent(){
-            console.log('react event');
+         reactEvent(e){
+            console.log(e, 'react event');
          }
 
          componentDidMount() {
              //原生dom 事件
              document.getElementById('native-btn').addEventListener('click',(e)=>{
-                 console.log('dom event');
+                 console.log(e, 'dom event');
              })
 
          }

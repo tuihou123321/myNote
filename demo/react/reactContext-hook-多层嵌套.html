@@ -1,0 +1,94 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    /*
+    * context 使用方法
+     1. 创建store：通过 React.createContext 创建 AppContext 实例
+     2. 包裹整个组件：使用AppContext.Provider组件
+     3. 注入全局变量，在AppContext.provider组件上
+     4. 引入全局变量： 通过 AppContext.Consumer组件 ，子组件的回调，获取store中的内容和方法
+    * */
+
+    const { createContext, useState } = React;
+
+    //创建store
+    const { Provider, Consumer }=createContext({
+        country:'china'
+    });
+
+
+    function AAA(){
+        return (
+            <Consumer>
+                {
+                    (context)=>{
+                        return (
+                            <div>
+                                子子组件值：{context.value}
+                                <button onClick={context.changeValue} style={{marginLeft:'20px'}}>改变数量</button>
+                            </div>
+                        )
+                    }
+                }
+            </Consumer>
+        )
+    }
+
+
+    function AA(){
+        //从store中取值
+        return (
+            <Consumer>
+                {
+                    (context)=>{
+                        return (
+                            <div>
+                                <div>
+                                    子组件值：{context.value}
+                                </div>
+                                 <AAA/>
+                            </div>
+                        )
+                    }
+                }
+            </Consumer>
+        )
+    }
+
+
+    const App = ()=>{
+        //在顶层包裹所有元素，注入到每个子组件中
+        const [value, setValue] = useState(1);
+        return (
+            <Provider value={{
+                value,
+                changeValue:function (){
+                    setValue(value+1)
+                }
+            }}>
+                <AA/>
+            </Provider>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

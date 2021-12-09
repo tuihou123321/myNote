@@ -22,49 +22,45 @@
      4. 引入全局变量： 通过 AppContext.Consumer组件 ，子组件的回调，获取store中的内容和方法
     * */
 
-    const { createContext } = React;
+    const { createContext, useState, useContext } = React;
 
     //创建store
-    const AppContext=createContext({});
+    const AppContext = createContext({});
 
     function A(){
         //从store中取值
+     const context = useContext(AppContext);
         return (
-            <AppContext.Consumer>
-                {
-                    (context)=>{
-                        return  <div>
-                            <div>A组件Name:{context.name}</div>
-                            <button onClick={context.changeName}>改变name</button>
-                        </div>
-                    }
-                }
-            </AppContext.Consumer>
-        )
+                <div>
+                    <div>A组件Name:{context.name}</div>
+                    <div>A组件年龄:{context.age}</div>
+                    <button onClick={context.changeName}>改变name</button>
+                    <button onClick={context.changeAge}>改变age</button>
+                </div>
+            )
+
     }
 
 
-    class App extends React.Component{
+    const App = ()=>{
         //在顶层包裹所有元素，注入到每个子组件中
-
-        constructor(){
-            super();
-            this.state={
-                name:'xz'
-            }
-        }
-
-        render(){
-            return (
-                <AppContext.Provider value={{name:this.state.name, changeName:()=>{
-                        this.setState({
-                            name:Math.random()
-                        })
-                    }}}>
-                    <A/>
-                </AppContext.Provider>
-            )
-        }
+        const [name, setName] = useState('defaultName');
+        const [age, setAge] = useState(10);
+        return (
+            <AppContext.Provider value={
+                {
+                    name:name,
+                    age:age,
+                    changeName:()=>{
+                        setName(Math.random())
+                    },
+                    changeAge:()=>{
+                        setAge(Math.random())
+                    }
+            }}>
+                <A/>
+            </AppContext.Provider>
+        )
     }
 
     ReactDOM.render(

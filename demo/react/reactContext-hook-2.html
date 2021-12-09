@@ -1,0 +1,84 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    /*
+    * context 使用方法
+     1. 创建store：通过 React.createContext 创建 实例
+     2. 包裹整个组件：使用AppContext.Provider组件
+     3. 注入全局变量，在AppContext.provider组件上
+     4. 引入全局变量： 通过 AppContext.Consumer组件 ，子组件的回调，获取store中的内容和方法
+    * */
+
+    const { createContext, useState } = React;
+
+    //创建store
+    const { Provider, Consumer } = createContext({});
+
+    function A(){
+        //从store中取值
+        return (
+            <Consumer>
+                {
+                    (context)=>{
+                        return  <div>
+                            <div style={{visibility:context.isVisible ? 'visible' : 'hidden'}}>
+                                我是弹层
+                                <div>标题是：{context.articleInfo.title}</div>
+                                <div>详情是：{context.articleInfo.content}</div>
+                                <button onClick={()=>{
+                                    context.changeModal(false)
+                                }}>关闭弹层</button>
+                            </div>
+
+                            <button onClick={()=>{
+                                context.changeModal(true)
+                            }}>显示弹层</button>
+                        </div>
+                    }
+                }
+            </Consumer>
+        )
+    }
+
+
+    const App = ()=>{
+        //在顶层包裹所有元素，注入到每个子组件中
+        const [isVisible, setIsVisible] = useState(false);
+        return (
+            <Provider value={
+                {
+                    articleInfo:{
+                        title:'react demo',
+                        content:'react demo detail'
+                    },
+                    isVisible:isVisible,
+                    changeModal:(state)=>{
+                        setIsVisible(state)
+                    },
+            }}>
+                <A/>
+            </Provider>
+        )
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
