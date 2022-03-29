@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
+
+      const { useState, useMemo } = React;
+
+      // 申明只依赖于id, 如果id变化，则重新渲染； 其实参数变化不会影响组件的渲染
+      // useMemo相比memo颗粒度更细，可以会对特定的参数进行缓存，提高性能
+      // 注意点：useMemo是在执行点，进行操作的，所有不能执行一些复作用的操作，否则会报错（比如：网络请求）
+      const Header = (props = {}) => {
+        console.log(props, "Header render");
+        return useMemo(() => {
+            return (
+              <div>
+                <div>用户名：{props.name}</div>
+                <div>id：{props.id}</div>
+              </div>
+            );
+          }, [props.id]
+        );
+      };
+
+      function App() {
+        const [id, setId] = useState("1");
+        const [name, setName] = useState("a");
+
+        console.log("App render");
+        return (
+          <div>
+            <Header id={id} name={name} />
+
+            <div>
+              <button
+                onClick={() => {
+                  setId(Math.random());
+                }}
+              >
+                改变id
+              </button>
+
+              <button
+                      onClick={() => {
+                        setName(Math.random());
+                      }}
+              >
+                改变name
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

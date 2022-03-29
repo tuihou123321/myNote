@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
+
+      const { useState, memo } = React;
+
+      // 只当userInfo修改时，才会执行render
+      const Header = memo(({ userInfo }) => {
+        console.log("Header render");
+        return (
+          <div>
+            <div>用户名：{userInfo.name}</div>
+          </div>
+        );
+      });
+
+      // 支持object和array 对象和数组都可以
+      const Content = memo(({ list }) => {
+        console.log(list,  "Content render");
+        return (
+                <ul>
+                    {
+                      list.map((item,index) => {
+                        return <li key={index}>{item.label}</li>
+                      })
+                    }
+                </ul>
+        )
+      });
+
+      function App() {
+        const [userInfo, setUserInfo] = useState({
+          name: "a",
+        });
+        const [list, setList] = useState([{
+          label:'label11'
+        }]);
+
+        console.log("App render");
+        return (
+          <div>
+            <Header userInfo={userInfo} />
+            <Content list={list} />
+
+            <div>
+              <button
+                onClick={() => {
+                  setUserInfo({
+                    name: Math.random(),
+                  });
+                }}
+              >
+                改变用户名称
+              </button>
+
+              <button
+                onClick={() => {
+                  setList(list=>{
+                    return [...list,{
+                      label:Math.random()
+                    }]
+                  });
+                }}
+              >
+                改变增加列表数据
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

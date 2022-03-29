@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+    <script
+            crossorigin
+            src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+            crossorigin
+            src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/mobx/6.3.2/mobx.umd.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/mobx-react-lite/3.2.0/mobxreactlite.umd.development.min.js"></script>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script type="text/babel">
+    const { createContext, useState, useContext, useEffect } = React;
+    const { Provider, Consumer } = createContext();
+    const { observable, action } = mobx;
+    const { useLocalObservable, observer, Observer } = mobxReactLite;
+
+    class Store {
+        @observable // 这种写法在本地调试时报语法错误？？
+        count = 0;
+
+        @action
+        handleCount() {
+            this.count += 1;
+        }
+    }
+
+    const store = new Store();
+
+    const Counter = observer((props) => {
+        const store = useLocalObservable(() => ({
+            count: 1,
+            get getCount() {
+                return store.count;
+            },
+            handleCount() {
+                store.count += 2;
+            }
+        }));
+        return <Provider value={store}>{props.children}</Provider>;
+    });
+
+    const CounterFunction = observer((props) => {
+        const [num, setNum] = useState(10);
+        const context = useContext(Counter);
+
+        console.log(context, "xz100"); // 打印不出来？
+        useEffect(() => {
+            console.log("num change", Counter);
+        }, [num]);
+
+        return (
+            <div>
+                <p>num: {num}</p>
+            </div>
+        );
+    });
+
+    function App() {
+        return (
+            <div className="App">
+                <Counter>
+                    <CounterFunction />
+                </Counter>
+            </div>
+        );
+    }
+
+    ReactDOM.render(<App />, document.getElementById("app"));
+</script>
+</body>
+</html>

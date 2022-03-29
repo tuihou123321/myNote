@@ -1,0 +1,68 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, memo }=React;
+
+
+    // 只当userInfo修改时，才会执行render
+    const Header = ({userInfo})=>{
+        console.log('Header render');
+       return (
+           <div>
+               <div>{userInfo.name}</div>
+           </div>
+       )
+    }
+
+    // 使用memo时，如果memo依赖的值没有变化，则不会执行render，起到性能优化的作用
+    const Content = memo(()=>{
+        console.log('Content render');
+        return <div>
+            主要内容
+        </div>
+    })
+
+    function App(){
+        const [userInfo, setUserInfo]=useState({
+            name:'a'
+        })
+        console.log('App render');
+        return <div>
+               <Header userInfo={userInfo}/>
+               <Content/>
+
+              <div>
+                  <button onClick={()=>{
+                      // 生成一个随机字母
+                   const name=String.fromCharCode(Math.floor(Math.random()*26)+97);
+                    setUserInfo({
+                        name:name
+                    })
+                  }}>改变用户名称</button>
+              </div>
+
+
+            </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
