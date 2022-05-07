@@ -42,7 +42,7 @@
         const [value, setValue] = useState(1);
         const [theme, setTheme] = useState("light"); // 初始化为light, dark
 
-        // 相当于计算属性
+        // 只有当getList函数发生改变时，才会重新触发useEffect, getList是一个函数
         const getList = useCallback((step) => {
           return [value+step, value + step+1, value + step+2];
         }, [value]);
