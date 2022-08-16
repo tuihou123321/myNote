@@ -53,10 +53,15 @@
           label:'label11'
         }]);
 
+
+        // 特殊说明，如果listCopy是list的深拷贝，那么memo优化将失效
+        // 深拷贝,map ,filter, JSON.stringify( JSON.parse), ...
+        const listCopy = [...list];
+
         return (
           <div>
             <Header userInfo={userInfo} />
-            <Content list={list} />
+            <Content list={listCopy} />
 
             <div>
               <button

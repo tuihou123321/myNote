@@ -21,7 +21,7 @@
 
       const { useState, memo } = React;
 
-      // 只当userInfo修改时，才会执行render
+      // 只当userInfo修改时，才会执行render, userInfo虽然是一个对象也会做性能优化
       const Header = memo(({ userInfo }) => {
         console.log("Header render");
         return (

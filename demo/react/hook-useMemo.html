@@ -14,7 +14,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app"></div>N
 
     <script type="text/babel">
       // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
@@ -26,7 +26,6 @@
       // 注意点：useMemo是在执行点，进行操作的，所有不能执行一些复作用的操作，否则会报错（比如：网络请求）
       const Header = (props = {}) => {
         console.log(props, "Header render");
-
         return useMemo(() => {
           // 注意事项：不要在useEffect, useMemo或者其他内置的hooks中调用hooks。只能在react 函数的顶层调用函数
           // const [updateTime, setUpdateTime] = useState('0000');
@@ -36,7 +35,7 @@
                 <div>id：{props.id}</div>
               </div>
             );
-          }, [props.id])
+          }, [props.id]);
       };
 
       function App() {

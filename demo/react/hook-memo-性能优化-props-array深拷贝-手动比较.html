@@ -43,6 +43,11 @@
                     }
                 </ul>
         )
+      },(prevProps, nextProps)=>{
+        console.log(prevProps, nextProps, "比较list数据");
+        // 返回true代表启用性能优化，不重新渲染
+        console.log(JSON.stringify(prevProps.list) === JSON.stringify(nextProps.list),'xz34343')
+        return JSON.stringify(prevProps.list) === JSON.stringify(nextProps.list);
       });
 
       function App() {
@@ -53,10 +58,15 @@
           label:'label11'
         }]);
 
+
+        // 特殊说明，如果listCopy是list的深拷贝，那么memo优化将失效
+        // 深拷贝,map ,filter, JSON.stringify( JSON.parse), ...
+        const listCopy = [...list];
+
         return (
           <div>
             <Header userInfo={userInfo} />
-            <Content list={list} />
+            <Content list={listCopy} />
 
             <div>
               <button
