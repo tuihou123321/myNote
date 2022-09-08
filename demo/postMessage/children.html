@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我是子页面</title>
+</head>
+<body>
+我是子页面
+<button onclick="over()">完成订购了</button>
+<script>
+
+    function over(){
+        console.log('子页面完成订购')
+        // 子页面调用方法
+        window.parent.postMessage( {isSubscribeOver: true}, '*');
+    }
+</script>
+</body>
+</html>
