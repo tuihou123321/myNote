@@ -1,0 +1,17 @@
+Index: demo/postMessage/children.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/demo/postMessage/children.html b/demo/postMessage/children.html
+--- a/demo/postMessage/children.html	(revision a50bff9a032ffc4e008e34a3b70b6babfaff7fce)
++++ b/demo/postMessage/children.html	(revision 552f7f3b359b9364d4e4e68462172177832ab9c9)
+@@ -5,7 +5,7 @@
+     <title>我是子页面</title>
+ </head>
+ <body>
+-我是子页面
++我是子页面,测试撤销2
+ <button onclick="over()">完成订购了</button>
+ <script>
+ 

@@ -1,0 +1,68 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+    const { useState, useEffect }=React;
+
+
+ const Page2= ()=>{
+     const fn = ()=>{
+         console.log('定时器输出')
+     }
+
+
+     let setIntervalFn;
+
+     // 5秒执行一次
+     useEffect(()=>{
+         openSetIntervalFn();
+         return ()=>{
+             closeSetIntervalFn();
+         };
+     }, [])
+
+     // 开启定时器
+     const openSetIntervalFn = ()=>{
+         setIntervalFn = setInterval(()=>{
+             fn()
+         }, 1000)
+     }
+
+     // 关闭定时器
+     const closeSetIntervalFn = ()=>{
+         clearInterval(setIntervalFn);
+     }
+
+     // 定时器
+     return <div>
+         <button onClick={openSetIntervalFn}>开启定时器</button>
+         <button onClick={closeSetIntervalFn}>关闭定时器</button>
+         组件2
+     </div>
+ }
+
+   const App = ()=>{
+       return <div>
+           <Page2/>
+       </div>
+   }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

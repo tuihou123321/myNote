@@ -1,0 +1,96 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+<script type="text/babel">
+    const { useState, useEffect }=React;
+
+
+ const Page2= ()=>{
+     const handler = ()=>{
+         console.log('定时器输出')
+     }
+
+     let setIntervalFn;
+
+     // 5秒执行一次
+     useEffect(()=>{
+         openSetIntervalFn();
+         return ()=>{
+             closeSetIntervalFn();
+         };
+     }, [])
+
+     // 开启定时器
+     const openSetIntervalFn = ()=>{
+         console.log('开启定时器')
+         setIntervalFn = setInterval(()=>{
+             handler()
+         }, 1000)
+     }
+
+     // 关闭定时器
+     const closeSetIntervalFn = ()=>{
+         console.log('关闭定时器');
+         clearInterval(setIntervalFn);
+     }
+
+     const onVisibilityChange =()=>{
+         console.log(document.visibilityState, 'xz----document.visibilityState')
+         if (document.visibilityState === 'hidden') {
+             // 容器隐藏，去掉定时器
+             closeSetIntervalFn();
+         } else if (document.visibilityState === 'visible') {
+             // 容器显示，开启定时器
+             openSetIntervalFn()
+         }
+     }
+
+     useEffect(() => {
+         document.addEventListener('visibilitychange', onVisibilityChange);
+         return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+     }, []);
+
+
+     // 定时器
+     return <div>
+         <button onClick={openSetIntervalFn}>开启定时器</button>
+         <button onClick={closeSetIntervalFn}>关闭定时器</button>
+         组件2
+     </div>
+ }
+
+    const App = ()=>{
+        const [isShow, setIsShow]= useState(true);
+        return <div>
+            <div>
+                <button onClick={()=>{
+                    setIsShow(!isShow)
+                }}>切换显示有定时器的组件</button>
+            </div>
+
+
+            {
+                isShow && <Page2/>
+            }
+
+        </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>

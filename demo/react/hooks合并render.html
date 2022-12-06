@@ -1,0 +1,46 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+
+    //useState方法要写在function 里面
+    function App(){
+        const [value,changeValue]=React.useState('初始值是100');
+        const [value2,changeValue2]=React.useState('初始值是200');
+
+        const  changeValueFn =()=>{
+            changeValue(Math.random());
+            changeValue2(Math.random());
+        }
+
+        // 这里只会render一次，合并render
+        console.log('render')
+
+        return <div>
+            <p>当前标题</p>
+           <h3> {value} </h3>
+           <h3> {value2} </h3>
+            <button onClick={changeValueFn}>改变标题</button>
+        </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
