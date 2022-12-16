@@ -1,0 +1,67 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+
+<script type="text/babel">
+
+    const { useState, useEffect } = React;
+
+    function App(){
+        const [count,setCount]=useState(0);
+        const [count2,setCount2]=useState(1);
+        const [pageAndPageSize,setPageAndPageSize]=useState({
+            pageSize:10,
+            page:1,
+        })
+
+        // 如果count
+        function setCountFn(){
+            // 变量的不会render
+            setCount(0)
+        }
+
+        function setCountFn2(){
+            // 变量的不会render
+            setCount2(1)
+        }
+
+        function setCountFnLast(){
+            // 这里的会render
+            setPageAndPageSize({
+                pageSize:10,
+                page:1,
+            })
+        }
+
+        console.log('render了')
+        return <div>
+            当前的值： {count}
+            <br/>
+            当前的值： {count2}
+            <br/>
+            当前的值：{pageAndPageSize.page}, {pageAndPageSize.pageSize}
+            <br/>
+            <button onClick={setCountFn}>按钮0</button>
+            <button onClick={setCountFn2}>按钮1</button>
+            <button onClick={setCountFnLast}>按钮,object</button>
+        </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
