@@ -59,7 +59,8 @@
         const $form = useRef(null);
 
         const onOk = async () => {
-          let value=await $form.current.validateFields();
+          // 通过外部获取到form 对象内的最新值
+          let value=await $form.current;
           console.log(value, 'xz44454');
         };
 

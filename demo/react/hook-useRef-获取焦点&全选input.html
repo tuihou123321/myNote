@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>react demo</title>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+
+</head>
+<body>
+
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const  { useRef }=  React;
+
+  function App () {
+
+    // 创建ref，写法和createRef一样,但是createRef是类组件的写法,这里是函数组件的写法,所以用useRef,而且useRef可以传入参数,createRef不行
+    const inputDom = useRef();
+
+    //通过ref,获取焦点
+    function focusInput(e){
+      inputDom.current.focus();
+    }
+
+    // 通过ref,全选input
+    function selectInput(e){
+      inputDom.current.select();
+    }
+
+
+    return (
+            <div>
+              <input ref={inputDom}/>
+              <button onClick={focusInput}>获取焦点</button>
+              <button onClick={selectInput}>全选</button>
+            </div>
+    )
+  }
+
+
+  ReactDOM.render(
+          <App />,
+          document.getElementById('app')
+  );
+</script>
+</body>
+</html>

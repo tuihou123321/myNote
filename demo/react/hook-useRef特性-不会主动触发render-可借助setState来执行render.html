@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+      const { useState, useRef } = React;
+      function App() {
+        // 设置一个ref，初始值为0； 要读取值，需要使用current属性;
+        // useRef值的变化不会主动渲染页面
+        const ref = useRef(0);
+
+        // 虽然value的值没有引用，但是只要修改了value的值，页面就会重新渲染
+        const [value, setValue] = useState(null);
+
+
+        // 改变ref的值
+        const changeRefValue = ()=>{
+
+          // ref的改变不会主动渲染页面
+          ref.current+=1;
+
+          // 通过修改value的值，让页面重新渲染
+          setValue(Math.random());
+
+          // 页面打印出来的 ref.current的值已经改变
+          console.log(ref.current)
+        }
+
+
+        return (
+          <div>
+            {ref.current}
+            <button onClick={changeRefValue}>改变ref的值</button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

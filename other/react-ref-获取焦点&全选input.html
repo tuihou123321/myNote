@@ -24,16 +24,20 @@
 
 <script type="text/babel">
 
-
-
+    const  { createRef }=  React;
 
     function App () {
 
-        let inputDom=React.createRef();
+        const inputDom = createRef();
 
         //通过ref,获取焦点
         function focusInput(e){
             inputDom.current.focus();
+        }
+
+        // 通过ref,全选input
+        function selectInput(e){
+            inputDom.current.select();
         }
 
 
@@ -41,6 +45,7 @@
             <div>
               <input ref={inputDom}/>
               <button onClick={focusInput}>获取焦点</button>
+              <button onClick={selectInput}>全选</button>
             </div>
         )
     }
