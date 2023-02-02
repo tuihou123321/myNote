@@ -24,12 +24,14 @@
 
 <script type="text/babel">
 
-  const  { useRef }=  React;
+  const  { useState, useRef }=  React;
 
   function App () {
 
     // 创建ref，写法和createRef一样,但是createRef是类组件的写法,这里是函数组件的写法,所以用useRef,而且useRef可以传入参数,createRef不行
     const inputDom = useRef();
+
+    const [value ,setValue] = useState('0');
 
     //通过ref,获取焦点
     function focusInput(e){
@@ -41,12 +43,29 @@
       inputDom.current.select();
     }
 
+    // 通过ref,设置input的值
+    function setInputValue(e){
+      // 生成一个1000以内的随机数
+      const random = Math.floor(Math.random() * 1000);
+      inputDom.current.value = String(random);
+    }
+
+    function getInputValue(e){
+      // 读取input的值是最新的
+      console.log(inputDom.current.value);
+    }
+
 
     return (
             <div>
-              <input ref={inputDom}/>
+              <input ref={inputDom} value={value} onChange={(event)=>{
+                setValue(event.target.value)
+              }
+              }/>
               <button onClick={focusInput}>获取焦点</button>
               <button onClick={selectInput}>全选</button>
+              <button onClick={getInputValue}>读取input的值</button>
+              <button onClick={setInputValue}>设置input的值</button>
             </div>
     )
   }

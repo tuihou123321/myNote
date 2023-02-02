@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>react demo</title>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+  <style>
+    .box{
+      /*width: 60%;*/
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const  { useRef }=  React;
+
+  function App () {
+
+    // 创建ref，写法和createRef一样,但是createRef是类组件的写法,这里是函数组件的写法,所以用useRef,而且useRef可以传入参数,createRef不行
+    const inputDom = useRef();
+
+    //通过ref,获取焦点
+    function getElementHeightAndWidth(e){
+      // 通过ref获取dom元素，读取宽高
+      // console.log(inputDom.current.clientHeight);
+      console.log(inputDom.current.clientWidth);
+    }
+
+    function setElementHeightAndWidth(){
+        // 通过ref获取dom元素，设置宽高
+        inputDom.current.style.width = inputDom.current.clientWidth+100+'px';
+        inputDom.current.style.height =  inputDom.current.clientHeight+100+'px';
+    }
+
+    // 页面布局在改变，但是不会重新渲染
+    console.log('render')
+
+    return (
+            <div>
+              <div className="box" ref={inputDom}>
+                111
+              </div>
+              <button onClick={getElementHeightAndWidth}>获取元素的宽和高</button>
+              <button onClick={setElementHeightAndWidth}>设置元素的宽和高</button>
+            </div>
+    )
+  }
+
+
+  ReactDOM.render(
+          <App />,
+          document.getElementById('app')
+  );
+</script>
+</body>
+</html>
