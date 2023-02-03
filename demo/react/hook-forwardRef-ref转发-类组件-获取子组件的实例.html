@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+      const { useState, useRef } = React;
+
+
+      // 生成一个Child类组件
+      // 使用forwardRef包裹Child类组件，然后在父组件中使用ref，就可以获取到子组件的实例了
+        // forwardRef的第一个参数是props，第二个参数是ref
+        const Child = React.forwardRef((props, ref) => {
+          class Child2 extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {
+                value:1,
+              };
+            }
+            // 获取焦点
+            focus(){
+              console.log(this.inputRef)
+              this.inputRef.focus();
+            }
+
+
+            render() {
+              return (
+                      <div>
+                        <input type="text" ref={ref}/>
+                      </div>
+              )
+            }
+          }
+
+          return Child2;
+        })
+
+
+
+
+      // 生成一个App函数组件，里面包含一个Child类组件，App函数组件中使用了ref，所以Child类组件也可以使用ref
+        function App() {
+            // 设置一个ref，初始值为0； 要读取值，需要使用current属性;
+            // useRef值的变化不会主动渲染页面
+            const ref = useRef();
+
+            // 获取焦点
+            function focusInput(){
+              // ref.current指向Child类组件的实例, 也就是Child类组件的this, 也就是Child类组件的state和props, 也就是Child类组件的方法, 也就是Child类组件的ref
+              console.log(ref.current);
+
+              // 触发子组件的方法
+              ref.current.inputRef.current.focus();
+
+            }
+
+            return (
+            <div>
+                <button onClick={focusInput}>获取焦点</button>
+
+                // 原因Child是类组件，所以ref只能挂载到类组件的实例上
+                <Child ref={ref}/>
+            </div>
+            );
+        }
+
+
+
+
+
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="utf-8" />
+  <title>react demo</title>
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
+
+      const { useState, useMemo } = React;
+
+      function App() {
+        // 判断是不是管理员
+        const [isAdmin, setIsAdmin] = useState(false);
+        const [themeState, setThemeState] = useState(false);
+
+        const columns = useMemo(() => {
+          console.log('相当于计算属性，只有在依赖变化时，才会重新计算');
+          let defaultColums = [
+            {
+              title: "id",
+              dataIndex: "id",
+              key: "id",
+            },
+            {
+              title: "name",
+              dataIndex: "name",
+              key: "name",
+            }
+          ];
+          if (isAdmin){
+            defaultColums.push({
+              title: "操作",
+              dataIndex: "action",
+              key: "action",
+            });
+          }
+
+          return defaultColums;
+
+        }, [isAdmin]);
+
+        console.log("App render");
+
+        const switchAdminState= () => {
+          setIsAdmin(!isAdmin);
+        };
+
+        const switchPageTheme = () => {
+          console.log('切换页面主题');
+          setThemeState(!themeState);
+        };
+
+        return (
+          <div style={{
+            backgroundColor:!themeState ? 'white' : '#fefbe8'
+          }}>
+
+            {JSON.stringify(columns, null, 2)}
+
+            <div>
+              <button onClick={switchAdminState}>
+                管理员状态切换
+              </button>
+
+              <button onClick={switchPageTheme}>切换页面主题</button>
+
+
+            </div>
+
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
