@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+
+      const { useState, useRef } = React;
+
+      // 子组件
+      function Child(props) {
+        const [state, setState] = useState(0);
+
+        const changeState = () => {
+          setState(state + 1);
+        }
+
+        return <div>
+          {state}
+          <button onClick={changeState}>改变state的值</button>
+        </div>;
+      }
+
+      // 父组件
+      function App() {
+        // 设置一个ref，初始值为0； 要读取值，需要使用current属性;
+        // useRef值的变化不会主动渲染页面
+        const ref = useRef(0);
+
+        // 触发子组件的方法
+        function changeChildState() {
+            ref.current.changeState();
+        }
+
+        // 通过ref, 获取child 子组件的属性
+        function getChildState() {
+            console.log(ref.current.state);
+        }
+
+        return (
+          <div>
+            <button onClick={getChildState}>获取子组件的属性</button>
+
+            <button onClick={changeChildState}>触发子组件的方法</button>
+
+            <hr/>
+
+            <Child ref={ref} />
+          </div>
+        );
+      }
+
+
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
