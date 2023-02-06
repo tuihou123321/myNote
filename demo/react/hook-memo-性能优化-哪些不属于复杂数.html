@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script type="text/babel">
+      // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
+
+      const { useState, memo } = React;
+
+      const Child = ({ data })=>{
+        console.log("子组件渲染了",data);
+        return (
+                <div>
+                  子组件
+                </div>
+        );
+      }
+
+      // memo默认只会做浅比较，如果传入的是复杂数据，那么就会出现问题。哪些属于复杂数据呢？
+        // 1.对象
+        // 2.数组
+        // 3.函数
+      const ChildMemo = memo(Child);
+
+      function App() {
+        const [data, setData] = useState(null);
+
+        return (
+          <div>
+            <ChildMemo data={data} />
+
+            <div>
+
+              <button
+                      onClick={() => {
+                        setData(1);
+                      }}
+              >
+                传入简单数据-string, number
+              </button>
+
+              <button
+                      onClick={() => {
+                        setData(false);
+                      }}
+              >
+                传入简单数据-布尔值
+              </button>
+
+              <button
+                      onClick={() => {
+                        setData({
+                          a:1,
+                          b:2
+                        });
+                      }}
+              >
+                传入简单对象数据
+              </button>
+
+
+              <button
+                onClick={() => {
+                  setData([1,2,3]);
+                }}
+              >
+                传入数据
+              </button>
+
+
+            </div>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<App />, document.getElementById("app"));
+    </script>
+  </body>
+</html>

@@ -10,7 +10,7 @@
     <div id="app"></div>
 
     <script type="text/babel">
-      // memo包裹的函数组件，只有在props修改时，才会出发，相当于做了上个浅比较
+
 
       const { useState, useMemo } = React;
 
@@ -58,7 +58,7 @@
 
         return (
           <div style={{
-            backgroundColor:!themeState ? 'white' : '#fefbe8'
+            backgroundColor:themeState ? 'white' : '#fefbe8'
           }}>
 
             {JSON.stringify(columns, null, 2)}
