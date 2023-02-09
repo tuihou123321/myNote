@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="app">
+</div>
+
+
+<script type="text/babel">
+
+    const { useState } = React;
+
+    let { Form, Input, Button, Checkbox, Select }=antd;
+
+    const InputPro =()=>{
+        return  <Input placeholder="请输入" onC/>
+    }
+
+    function App () {
+        const [form]=Form.useForm();
+
+        const [searchParams, setSearchParams] = useState({});
+
+        // 此方法会在表单字段值发生改变时触发，但是无法监听InputPro组件的值变化, 无法监听到层级结构的变化,因为InputPro组件的值变化不会触发onValuesChange
+        const onValuesChange = (changedValues, allValues)=>{
+            console.log(changedValues, allValues);
+        }
+
+        return (
+            <div>
+
+                <Form
+                    onValuesChange={onValuesChange}
+                    initialValues={searchParams}
+                    form={form}
+                >
+
+                    <Form.Item label={'订单id'} name={'orderId'}>
+                        <Input  placeholder="请输入"/>
+                    </Form.Item>
+
+
+                    <Form.Item label={'订单id--添加包裹层'} name={'orderId2'}>
+                        <InputPro onChange={()=>{
+                            setSearchParams({
+                                ...searchParams,
+                                orderId2: '123'
+                            })
+                        }}/>
+                    </Form.Item>
+
+
+                </Form>
+
+            </div>
+        )
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

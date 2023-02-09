@@ -24,47 +24,43 @@
 
 <script type="text/babel">
 
-    const { useState } = React;
+    const { useState, useEffect } = React;
 
     let { Form, Input, Radio, Button, Checkbox, Select, Row, Col } = antd;
 
 
+    function InputPro(props) {
+        return (
+            <div>
+                <Input {...props}/>
+            </div>
+        )
+    }
 
 
-
-    function App () {
-
-
+    function SearchFrom ({ searchParams,onChange, resetForm }) {
         const [form]=Form.useForm();
 
-        function onFinish(e){
-            console.log(e);
-        }
-        const [searchParams, setSearchParams] = useState({});
-
         // 重置表单
-        const resetFormValue =()=>{
-            console.log('重置表单')
+        const resetFormValue =()=> {
+            console.log('重置表单');
+            // 还包裹inputPro的组件，需要手动重置
             form.resetFields();
-        }
-
-        // 当form表单内的字段改变时触发
-        // 可以知道哪个字段改变了，以及改变后的值。可以用来上报埋点
-        const onValuesChange = (changedValues, allValues)=>{
-            console.log(changedValues, allValues);
+            // resetForm();
         }
 
         const quickSearch = ()=> {
             form.setFieldsValue({
-                afterSaleType: '1',
-                orderId: '123456'
+                name1: '11',
+                name2: '12',
+                name3: '13',
             })
         }
 
         const searchConfig = [
             {
-                name: 'afterSaleType',
-                labelName: '供应商退款状态',
+                labelName: '选项1',
+                name: 'name1',
                 component: Select,
                 props: {
                     options: [
@@ -80,14 +76,32 @@
                 num: 6,
             },
             {
-                name: 'orderId',
-                labelName: '订单id',
+                labelName: '选项2',
+                name: 'name2',
                 component: Input,
                 props: {
                     placeholder: '请输入',
                     style: {
                         width: '100%',
                     },
+                },
+                num: 6,
+            },
+            {
+                labelName: '选项3',
+                name: 'name3',
+                component: InputPro,
+                props: {
+                    placeholder: '请输入',
+                    style: {
+                        width: '100%',
+                    },
+                    // value:searchParams.name3,
+                    // onChange: (e)=>{
+                    //     onChange({
+                    //         name3 : e.target.value
+                    //     })
+                    // }
                 },
                 num: 6,
             },
@@ -109,7 +123,7 @@
 
 
                 <Form
-                    onValuesChange={onValuesChange}
+                    onValuesChange={onChange}
                     initialValues={searchParams}
                     form={form}
                 >
@@ -140,6 +154,42 @@
 
             </div>
         )
+    }
+
+
+    function App() {
+
+        const [searchParams, setSearchParams] = useState({
+            name1:'',
+            name2:'',
+            name3:'',
+        });
+
+        useEffect(()=>{
+            // 监听searchParams变化
+            console.log(searchParams, 'xz--searchParams')
+        }, [searchParams])
+
+
+        return <div>
+            <SearchFrom
+                searchParams={searchParams}
+                resetForm={()=>{
+                    setSearchParams({
+                        name1:'',
+                        name2:'',
+                        name3:'',
+                    })
+                }}
+                onChange={(params)=>{
+                    console.log(params, 'xz--params')
+                    setSearchParams({
+                        ...searchParams,
+                        ...params
+                    });
+                }}
+            />
+        </div>
     }
 
 
