@@ -38,7 +38,20 @@
     }
 
 
-    function SearchFrom ({ searchParams,onChange, resetForm }) {
+    function SelectPro(props) {
+        return (
+            <div>
+                <Select {...props}/>
+            </div>
+        )
+    }
+
+
+    function SearchFrom ( {
+        onChange,
+        onReset,
+                              searchParams
+                          } ) {
         const [form]=Form.useForm();
 
         // 重置表单
@@ -46,15 +59,19 @@
             console.log('重置表单');
             // 还包裹inputPro的组件，需要手动重置
             form.resetFields();
-            // resetForm();
+            onReset();
         }
 
         const quickSearch = ()=> {
-            form.setFieldsValue({
+            const oldValues = {
                 name1: '11',
                 name2: '12',
                 name3: '13',
-            })
+                name4: '14',
+            }
+
+            form.setFieldsValue(oldValues);
+            onChange(oldValues);
         }
 
         const searchConfig = [
@@ -68,6 +85,23 @@
                         {label: '2', value: '2'},
                     ],
                     placeholder: '请选择供应商退款状态',
+                    // mode: 'multiple',
+                    style: {
+                        width: '100%',
+                    },
+                },
+                num: 6,
+            },
+            {
+                labelName: '选项1-',
+                name: 'name4',
+                component: SelectPro,
+                props: {
+                    options: [
+                        {label: '1', value: '1'},
+                        {label: '2', value: '2'},
+                    ],
+                    placeholder: '请选择供应商退款状态--',
                     // mode: 'multiple',
                     style: {
                         width: '100%',
@@ -95,23 +129,23 @@
                     placeholder: '请输入',
                     style: {
                         width: '100%',
-                    },
-                    // value:searchParams.name3,
-                    // onChange: (e)=>{
-                    //     onChange({
-                    //         name3 : e.target.value
-                    //     })
-                    // }
+                    }
                 },
                 num: 6,
             },
         ]
-
-
         const layoutParams = {
             span: 6,
             xxl: 4,
         };
+
+        const onValuesChange = (changedValues, allValues)=>{
+            console.log(changedValues, allValues);
+
+            onChange(changedValues);
+        }
+
+
 
 
         return (
@@ -123,8 +157,8 @@
 
 
                 <Form
-                    onValuesChange={onChange}
-                    initialValues={searchParams}
+                    onValuesChange={onValuesChange}
+                    // initialValues={searchParams}  // 注意这里不能把searchParams作为initialValues，因为这样会导致表单的值不会随着searchParams的变化而变化,而且在reset时，会把searchParams的值重置
                     form={form}
                 >
 
@@ -159,34 +193,20 @@
 
     function App() {
 
-        const [searchParams, setSearchParams] = useState({
-            name1:'',
-            name2:'',
-            name3:'',
-        });
+        const [searchParams, setSearchParams] = useState({});
 
-        useEffect(()=>{
-            // 监听searchParams变化
-            console.log(searchParams, 'xz--searchParams')
-        }, [searchParams])
-
+        useEffect(() => {
+            console.log('searchParams', searchParams);
+        }, [searchParams]);
 
         return <div>
             <SearchFrom
                 searchParams={searchParams}
-                resetForm={()=>{
-                    setSearchParams({
-                        name1:'',
-                        name2:'',
-                        name3:'',
-                    })
+                onChange={(query)=> {
+                    setSearchParams(query);
                 }}
-                onChange={(params)=>{
-                    console.log(params, 'xz--params')
-                    setSearchParams({
-                        ...searchParams,
-                        ...params
-                    });
+                onReset={()=> {
+                    setSearchParams({});
                 }}
             />
         </div>
