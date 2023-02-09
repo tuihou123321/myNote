@@ -26,7 +26,10 @@
 
     const { useState } = React;
 
-    let { Form, Input, Radio, Button, Checkbox, Select, Row, Col }=antd;
+    let { Form, Input, Radio, Button, Checkbox, Select, Row, Col } = antd;
+
+
+
 
 
     function App () {
@@ -58,10 +61,42 @@
             })
         }
 
+        const searchConfig = [
+            {
+                name: 'afterSaleType',
+                labelName: '供应商退款状态',
+                component: Select,
+                props: {
+                    options: [
+                        {label: '1', value: '1'},
+                        {label: '2', value: '2'},
+                    ],
+                    placeholder: '请选择供应商退款状态',
+                    // mode: 'multiple',
+                    style: {
+                        width: '100%',
+                    },
+                },
+                num: 6,
+            },
+            {
+                name: '订单id',
+                labelName: 'orderId',
+                component: Input,
+                props: {
+                    placeholder: '请输入',
+                    style: {
+                        width: '100%',
+                    },
+                },
+                num: 6,
+            },
+        ]
 
-        const colLayout = {
+
+        const layoutParams = {
             span: 6,
-            xxl: 4
+            xxl: 4,
         };
 
 
@@ -81,26 +116,19 @@
 
                 <Row gutter={[10, 8]} >
 
-
-                    <Col {...colLayout}>
-                        <Form.Item  name={'afterSaleType'} >
-                            <Select placeholder="请选择" >
-                                <Select.Option value={'1'}>分类1</Select.Option>
-                                <Select.Option value={'2'}>分类2</Select.Option>
-                            </Select>
-                        </Form.Item>
-                    </Col>
-
-
-
-                    <Col {...colLayout}>
-                        <Form.Item  name={'orderId'} >
-                            <Input  placeholder="请输入" />
-                        </Form.Item>
-                    </Col>
+                    {searchConfig.map((item, index) => {
+                        const Component = item.component;
+                        return (
+                            <Col key={index} {...layoutParams} span={item.num}>
+                                <Form.Item name={item.name}>
+                                    <Component {...item.props} />
+                                </Form.Item>
+                            </Col>
+                        );
+                    })}
 
 
-                    <Col {...colLayout}>
+                    <Col {...layoutParams}>
                         <Form.Item>
                             <Button type={'primary'}  htmlType="button" onClick={resetFormValue}>重置</Button>
                         </Form.Item>
