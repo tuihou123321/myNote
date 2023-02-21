@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Mock.js/1.0.1-beta1/mock-min.js" integrity="sha512-C6haFoe26x0I8R2daqjCKMYlOvq++RXhACOBluxWpZdScv5kuIMrQtxAVweoRqWUlvF0bKtCSEI0f561tRQhtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+
+<script>
+  // mockjs 文档 http://mockjs.com/examples.html#Image
+  var data = Mock.mock({
+    // 属性 list 的值是一个数组，其中含有 1 到 20 个元素
+    'list|1-20': [{
+      'id|+1': 1, // id累加模式
+      'rate|0-1.1-4': 1, // rate的值在0-1之间小数，保留4位小数
+      'cnt|0-100000': 1, // cnt的值在1-100之间的number
+      'money|0-100000.1-2': 1, // cnt的值在1-100之间的number, 保留1-2位小数
+      // 'img': '@image("200x100", "#50B347", "#FFF", "png", "Hello")', // 生成一个200x100的图片
+      'isShow|1': true, // isShow的值为true或者false
+      'shopName': '@ctitle(3, 10)', // shopName的值为3-10个随机中文字符
+      'tags|1-3': ['@ctitle(3, 10)'], // tags的值为1-3个随机中文字符
+      "type|1": [  // type的值为1个随机值
+        "AMD",
+        "CMD",
+        "UMD"
+      ],
+      'time': '@datetime("yyyy-MM-dd HH:mm:ss")', // time的值为随机时间
+      'success': true, // success默认设置为true
+    }]
+  })
+  // 输出结果
+
+  console.log(data)
+
+</script>
+
+</body>
+</html>
