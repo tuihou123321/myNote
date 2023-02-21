@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+<script type="text/babel">
+
+    const { useState, useEffect } = React;
+
+  const App =()=> {
+
+      const [searchParams, setSearchParams] = useState({
+          keyword: '',  // 搜索关键字
+          city: ''  // 类别
+      })
+
+        const startSearch =()=>{
+            console.log('开始搜索', searchParams)
+        }
+
+
+        useEffect(() => {
+            // 停止输入1s后触发`
+            // const startChange = _.debounce(startSearch, 1000)
+            startSearch();
+        }, [searchParams])
+
+
+      // 改变搜索关键字 (这里需要做防抖)
+        const changeKeyword = (value) => {
+            setSearchParams({
+                ...searchParams,
+                keyword: value
+            });
+        }
+
+       // 改变搜索城市, 需要在这里添加防抖功能
+      const changeCity = (e) => {
+          setSearchParams({
+              ...searchParams,
+              city: e.target.value
+          });
+      }
+
+      // 使用debounce后changeKeyword接收的参数
+      const changeKeywordDebounce = _.debounce(changeKeyword, 1000);
+
+        const quickSearch = () => {
+            setSearchParams({
+                city:'beijing',
+                keyword:'雷军'
+            })
+        }
+
+
+        return <div>
+            <p>重命快捷查询系统</p>
+             <button onClick={quickSearch}>快捷搜索项</button>
+
+
+
+            <select name="type" value={searchParams.city} onChange={changeCity}>
+                <option value="shanghai">上海</option>
+                <option value="beijing">北京</option>
+            </select>
+        </div>
+  }
+
+
+  const InputPro = ()=>{
+      // 文本实时显示，回调函数防抖
+        const [searchParams, setSearchParams] = useState({
+            keyword: '',  // 搜索关键字
+        })
+      return <>
+          <input type="text" onChange={(e)=>{
+              changeKeywordDebounce(e.target.value);
+          }} value={searchParams.keyword}/>
+          </>
+  }
+
+
+
+  ReactDOM.render(
+      <App />,
+      document.getElementById('app')
+  );
+
+
+</script>
+
+</body>
+</html>
