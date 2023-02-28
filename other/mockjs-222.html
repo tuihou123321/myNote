@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Mock.js/1.0.1-beta1/mock-min.js" integrity="sha512-C6haFoe26x0I8R2daqjCKMYlOvq++RXhACOBluxWpZdScv5kuIMrQtxAVweoRqWUlvF0bKtCSEI0f561tRQhtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+
+<script>
+  const result = Mock.mock({
+          "act": 0,
+          "requestId": '1eabd93754094be3bbedaf08499fb4d5',
+          "code": 0,
+          "msg": null,
+          "total": 20,
+            "success": true,
+        'data|10-20': [{
+              "pay_amount_rank_desc": '@natural(1, 100000)',
+              "shop_name": '@ctitle(3, 10)',
+              "platform_cn": '@ctitle(3, 10)',
+              "pay_amount": '@integer(0, 100000)',
+              "order_cnt": '@integer(0, 100000)',
+              "sale_quantity": '@integer(0, 100000)',
+              "goods_sale_sku_cnt": '@integer(0, 100000)',
+              "goods_shelve_sku_cnt": '@integer(0, 100000)',
+              "pay_per_order": '@float(0, 100, 1, 4)',
+              "delivery_interval_avg": '@float(0, 100, 1, 4)',
+              "refund_rate": null,
+              "uv": '@integer(0, 100000)',
+              "new_uv": '@integer(0, 100000)',
+              "old_uv": '@integer(0, 100000)',
+              "pv": '@integer(0, 100000)',
+              "shop_clt_buyer_cnt": '@integer(0, 100000)',
+              "item_uv": '@integer(0, 100000)',
+              "item_show_pv": '@integer(0, 100000)',
+              "item_pv": '@integer(0, 100000)',
+              "item_click_uv": '@integer(0, 100000)',
+              "item_click_cnt":'@integer(0, 100000)',
+              "item_show_click_pv_rate": '@float(0, 1, 1, 4)',
+              "item_click_pay_pv_rate": '@float(0, 1, 1, 4)',
+              "item_clt_buyer_cnt": '@integer(0, 100000)',
+              "cart_buyer_cnt":'@integer(0, 100000)',
+              "pay_rate": '@float(0, 1, 1, 4)',
+              "pay_pct": '@float(0, 100, 1, 2)',
+              "gpm": "sit in"
+          }]
+      })
+
+  console.log(result)
+
+</script>
+
+</body>
+</html>

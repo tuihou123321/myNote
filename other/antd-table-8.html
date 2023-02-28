@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react demo</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react/17.0.1/umd/react.development.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/react-dom/17.0.1/umd/react-dom.development.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/antd/4.12.3/antd.css" rel="stylesheet">
+</head>
+<body>
+
+<div id="app">
+
+</div>
+
+
+<script type="text/babel">
+
+  const { Table } = antd;
+
+  const TitlePro =()=>{
+      return (
+          <div>
+             这是一个标题
+          </div>
+      )
+  }
+
+
+  const columns = [
+    {
+      title: <TitlePro/>,
+      dataIndex: 'name',
+        width:'300px'  //支持number ,string两种格式
+    },
+    {
+      title: 'Age',
+      dataIndex: 'age',
+        // width:'200px'  // 最后一个没写width，会按剩余的宽度展开
+    }
+  ];
+
+
+  const data = [
+    {
+      key: '1',
+      name: 'John Brown',
+      age: 32
+    },
+    {
+      key: '2',
+      name: 'Jim Green',
+      age: 42
+    }
+  ];
+
+
+
+   const App=()=>{
+       return (
+           <Table
+               columns={columns}
+               dataSource={data}
+               pagination={false}
+           />
+       )
+   }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>
