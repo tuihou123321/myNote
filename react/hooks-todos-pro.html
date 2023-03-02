@@ -1,0 +1,99 @@
+<!DOCTYPE html><html>
+<head>
+    <meta charset="utf-8" />
+    <title>react demo</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+</head>
+<body>
+
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+
+    function useTodoState(initialValue){
+        const [todos,setTodos]=React.useState(initialValue);
+        return {
+            todos,
+            //增加item
+            addTodo: todoText =>{
+                setTodos([...todos,todoText]);
+            },
+            //删除item
+            deleteTodo:(index)=>{
+                todos.splice(index,1);
+                //setTodos(todos);  //这种写法不生效，why?
+                setTodos([...todos]);
+            },
+        }
+    }
+
+
+    function useInputState(initialValue){
+        const [value, setValue]=React.useState(initialValue);
+        return {
+            value,
+            reset: () =>{
+                setValue('');
+            },
+            onChange: event =>{
+                console.log(event.target.value,1111);
+                setValue(event.target.value)
+            }
+        }
+    }
+
+
+    function TodoFrom({ saveTodo }){
+
+        const {value, reset, onChange}=useInputState('');
+
+        return <form action="react" onSubmit={(event)=>{
+            event.preventDefault();
+            saveTodo(value);
+            reset('')
+        }}>
+            <input type="text" onChange={onChange}  placeholder='添加后，按回车'  value={value}/>
+        </form>
+    }
+
+    function TodoList({ todos,deleteTodo }){
+        return <ul>
+            {
+                todos.map((item,index)=>{
+                    return  <li key={index} style={{marginBottom:'5px'}}>  {item}  <button onClick={()=>{deleteTodo(index)}}>删除</button> </li>
+                })
+            }
+        </ul>
+    }
+
+
+
+    //useState方法要写在function 里面
+    function App(){
+
+        const { todos, addTodo, deleteTodo }=useTodoState(['a','b']);
+
+        return <div>
+            <h3>列表标题</h3>
+            <TodoList {...{todos, deleteTodo}}/>
+            <TodoFrom saveTodo={(value)=>{
+                const trimmedText = value.trim();
+                if(trimmedText.length>0){
+                    addTodo(value);
+                }
+            }}/>
+        </div>
+    }
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+</script>
+
+
+</body>
