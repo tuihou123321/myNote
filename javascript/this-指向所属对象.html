@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    window.name = 'window';
+    const obj = {
+        name: 'xiaoming',
+        sayName: function () {
+            // 此时的this无法判断指向哪里，只有当运行时才知道。可能指向obj，也可能指向window.主要看调用方式，如果是obj.sayName()，则指向obj，如果是sayName()，则指向window
+            // 但是，如果使用了箭头函数，则this指向window
+            //
+            console.log(this.name);
+        },
+        sayName2: ()=> {
+            // 默认情况下，this指向window
+            console.log(this.name);
+        }
+    }
+
+    // obj.sayName(); // xiaoming,
+    // obj.sayName2(); // window,
+
+
+    const sayName = obj.sayName;
+    // 此时调用sayName函数，this指向window
+
+    // // 解决方法1：使用call或者apply
+    sayName.call(obj); // xiaoming
+
+    sayName.apply(obj); // xiaoming
+
+    // // 解决方法2：使用bind,bind返回一个新的函数，新函数的this指向bind的第一个参数
+    const sayName2 = sayName.bind(obj);
+    sayName2(); // xiaoming
+
+    const sayName3 = sayName.bind({
+        name:'xiaohong'
+    });
+    sayName3(); // xiaohong
+</script>
+</body>
+</html>

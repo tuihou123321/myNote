@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var name='global';
+    const obj = {
+        name: 'xiaoming',
+        sayName: function () {
+            // 此时的this无法判断指向哪里，只有当运行时才知道。可能指向obj，也可能指向window.主要看调用方式，如果是obj.sayName()，则指向obj，如果是sayName()，则指向window
+            // 但是，如果使用了箭头函数，则this指向window
+            //
+            console.log(this.name);
+        },
+        sayName2: ()=> {
+            console.log(this.name);
+        }
+    }
+
+    obj.sayName(); // xiaoming,
+    obj.sayName2(); // global，箭头函数的this指向window，而不是obj。箭头函数的this指向是在定义时确定的，而不是在运行时确定的。
+    // 箭头函数与普通函数的区别：
+    // 1.箭头函数没有this，箭头函数的this指向是在定义时确定的，而不是在运行时确定的。
+    // 2.箭头函数没有arguments，箭头函数的arguments是在定义时确定的，而不是在运行时确定的。
+    // 3.箭头函数没有prototype，箭头函数没有prototype属性，因此不能作为构造函数，不能使用new命令，也就是说，不可以使用new命令，否则会抛出一个错误。
+    // 4.箭头函数不能用作Generator函数，因为箭头函数不能使用yield命令，所以箭头函数不能用作Generator函数。
+    // 5.箭头函数不能用作构造函数，因为箭头函数不能使用new命令，所以箭头函数不能用作构造函数。
+    // 6.箭头函数不能使用call()、apply()、bind()这些方法去改变this的指向。
+    // 7.箭头函数没有自己的this，它的this是继承外层代码块的this
+
+
+
+
+
+</script>
+</body>
+</html>

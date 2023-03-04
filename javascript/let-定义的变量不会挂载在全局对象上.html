@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+
+    var value=11; // 在全局环境中，使用var定义的变量会挂载在全局对象上，可以在任何地方使用
+    let value2=22; // 在浏览器中，window.value2会输出undefined,因为let定义的变量不会挂载在全局对象上，只能在当前作用域中使用
+
+    window.value=111; // 修改window对象的value属性，会影响到全局变量value的值
+    window.value2=222;
+
+    console.log(value); // 111
+    console.log(value2); // 22
+
+</script>
+
+</body>
+</html>

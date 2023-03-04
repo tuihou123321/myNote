@@ -1,2 +1,7 @@
-console.log(a);  // a显示为undefined，但是不会报错。因为变量提升
-var a = 1;
+// var中存在变量提升
+console.log(a); // undefined
+var a=1;
+
+// let中不存在变量提升
+console.log(b); // 引用错误：初始化之前不能使用
+let b=1;

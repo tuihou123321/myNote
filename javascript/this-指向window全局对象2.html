@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 定义全局变量
+   var value = 1; // value是全局变量，定义在window上，window.value=1
+   const value2 = 1; // value是全局变量，定义在window上，window.value=1
+   let value3 = 1; // value是全局变量，定义在window上，window.value=1
+   const obj ={
+       value:2,
+   }
+    // console.log(window.value); // undefined, 因为window上没有value属性
+   // 定义一个函数,获取this的值
+   const method = function(){
+       // console.log(this);
+       // console.log(this===window); // true
+       console.log(this.value); // 1, this指向window,window.value=1
+       console.log(this.value2); // undefined, this指向window,window.value2=undefined
+       console.log(this.value3);// undefined, this指向window,window.value3=undefined
+   }
+
+   method(); // 1, this指向window
+
+
+
+
+
+
+</script>
+</body>
+</html>
