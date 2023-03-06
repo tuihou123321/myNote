@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<button onclick="getData()">请求数据</button>
+
+<script>
+    // function axiosAsync(){
+    //      return new Promise((resolve,reject)=>{
+    //         axios.get('https://testapi.ydl.com/api/test-category/all',{
+    //             params:{},
+    //             timeout:2000
+    //         }).then(res=>{
+    //             console.log(res)
+    //             const { data } = res;
+    //             resolve(data);
+    //         }).catch(err=>{
+    //             reject(err);
+    //         })
+    //     })
+    // }
+    //
+    // axiosAsync().then(res=>{
+    //   console.log(res,'result');
+    // });
+
+
+
+
+    // fetch, axios默认是异步的，所以需要用promise封装一下。
+    // fetch和promise的关系：fetch返回的是一个promise对象，所以可以直接.then()。
+
+
+
+    function fetchAsync() {
+        // 注意：Promise是一个构造函数，需要使用new关键字来创建一个Promise对象。
+        return new Promise(function(resolve, reject){
+            fetch('https://testapi.ydl.com/api/test-category/all',{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                timeout:10, // 测试使用2s要超时
+                mode:'cors',
+                cache:'default'
+            }).then(res=>{
+                return res.json();
+            }).then(res=>{
+                resolve(res);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
+
+    }
+
+    function getData(){
+        fetchAsync().then(res=>{
+            // 接口404也会走到这里，原因是：fetch不会报错，只会返回一个状态码，所以需要自己判断状态码。status 404
+            console.log(res,'result');
+        }).catch(err=>{
+            // 什么情况下，会走到这里？
+            // 1. 网络错误, 报错: Failed to fetch
+            // 2. 服务器错误:报错: 404
+            // 3. 超时
+            console.log(err,'error');
+        });
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

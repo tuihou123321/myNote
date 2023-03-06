@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+
+<script>
+    function axiosAsync(){
+        return new Promise((resolve,reject)=>{
+            axios.get('http://yapi.jushuitan.com/api/project/list?group_id=66&page=1&limit=10',{
+                params:{},
+                timeout:2000
+            }).then(res=>{
+                const {data}=res;
+                resolve(data);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
+    }
+
+
+    async function getCategoryData(){
+        try {
+            const result=await axiosAsync()
+            console.log(result,1);
+        }catch (e) {
+            // alert(e);
+            // Error: Network Error, 网络错误（接口会报跨域）
+            console.log(e);
+        }
+    }
+
+
+    getCategoryData()
+
+    // axiosAsync().then(res=>{
+    //   console.log(res,44);
+    // });
+
+</script>
+
+
+</body>
+</html>

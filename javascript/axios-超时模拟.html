@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.js"></script>
+</head>
+<body>
+
+<button onclick="handleClick()">获取接口</button>
+
+<script>
+    /*
+    * chrome中模拟接口超时的方法：chrome控制台中找到 setting > Throttling > Add custom profile > latency中填写 接口超时时间 5000ms
+    * */
+
+
+    // 向接口https://testapi.ydl.com/api/test-category/all，发送fetch get请求，并模拟接口超时
+    function getData() {
+        return new Promise(function(resolve, reject){
+            axios('https://testapi.ydl.com/api/test-category/all',{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                mode:'cors',
+                cache:'default',
+                timeout:1000 // axios超时1s报错,目前兼容性比fetch好很多。
+            }).then(res=>{
+                return res.data;
+            }).then(res=>{
+                resolve(res);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
+    }
+
+    function handleClick() {
+        getData().then(res=>{
+            console.log(res,'result');
+        }).catch(err=>{
+            // 超时报错：Error: timeout of 1000ms exceeded
+            console.log(err,'error');
+        })
+    }
+</script>
+</body>
+</html>

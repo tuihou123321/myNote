@@ -9,32 +9,23 @@
 </head>
 <body>
 <script>
-    console.log(fun)   //fun is not defined
-
-    console.log(person)  //不执行
+    console.log(fun)   //fun未定义
+    console.log(person,'person')  // 由于上面报错，所以这行代码不会执行
 </script>
 
 <script>
-    console.log(person)  //undefind
-
-    console.log(fun)  //function
+    console.log(person)  // undefined，var存在变量提升，所以会报undefind;
+    console.log(fun)  //function,同上
 
     var person = "Eric";
 
-    console.log(person)    //Eric
-
     function fun() {
-        console.log(person)
+        console.log(person); // undefined,var存在变量提升，覆盖了外部的person，所以会报undefind;
         var person = "Tom";
-        console.log(person)
+        console.log(person); // Tom
     }
-
-    fun()  //undefind,Tom
-
-    console.log(person)  //Eric
-
+    fun();
 </script>
-
 
 
 </body>

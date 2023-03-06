@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button onclick="handleClick()">获取接口</button>
+
+<script>
+    // 向接口https://testapi.ydl.com/api/test-category/all，发送fetch get请求，并模拟接口超时
+    function getData() {
+        return new Promise(function(resolve, reject){
+            fetch('https://testapi.ydl.com/api/test-category/all',{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                mode:'cors',
+                cache:'default',
+                timeout:1000 // 超时1s报错,注意：timeout属性非官方属性，目前chrome,safari,firefox都不支持
+            }).then(res=>{
+                return res.json();
+            }).then(res=>{
+                resolve(res);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
+    }
+
+    function handleClick() {
+        getData().then(res=>{
+            console.log(res,'result');
+        }).catch(err=>{
+            console.log(err,'error');
+        })
+    }
+</script>
+</body>
+</html>
