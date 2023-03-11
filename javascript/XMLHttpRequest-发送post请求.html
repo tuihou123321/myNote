@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 通过XMLHttpRequest构造函数，创建一个xhr的实例对象
+  const xhr = new XMLHttpRequest();
+
+  // 监听请求的状态变化，和服务器的响应
+  xhr.onreadystatechange = function() {
+    // 一个http请求，会执行四次onreadystatechange
+    // xhr.readyState的值：0代表未初始化，1代表正在加载，2代表加载完成，3代表正在交互，4代表完成
+    console.log('readyState',xhr.readyState);
+    // xhr.status的值：200代表成功，404代表失败, 403代表禁止访问, 500代表服务器错误, 503代表服务器不可用, 504代表网关超时....
+      // xhr.status的值为400的时候，xhr.responseText的值为: {"code":400,"msg":"Bad Request"}，代表请求错误。一般是请求参数错误
+      // xhr.status 415的时候，xhr.responseText的值为: {"code":415,"msg":"Unsupported Media Type"}，代表不支持的媒体类型.一般是没有设置content-type
+    console.log('status',xhr.status);
+    // responseText是服务器返回的文本, 在readyState为4的时候才有值(测试下来发现为3的时候也有值)
+     console.log('responseText',xhr.responseText)
+
+    console.log(xhr);
+  };
+
+  // 设置POST请求的URL和参数
+  xhr.open("POST", "https://testapi.ydl.com/api/data/bigdata/maidian/writeMaiDianData", true);
+
+  // content-type设置为application/json，这样服务器才能接收到json格式的参数,,如果不设置，服务器接收到的参数是空的.
+  // charset=UTF-8，这样服务器才能接收到中文参数（如果没有设置content-type. xhr.status会返回415的报错）
+  xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+  const paramsObj = {"appVersion":"","manufacturer":"iPhone","model":"iPhone6_6S_7_8","os":"iOS","osVersion":"13.23","wifi":0,"screenHeight":667,"screenWidth":375,"url":"https://m.ydl.com/","server":"","ip":"","time":1678502519478,"partId":"main_page","api":"","sign1":"","sign2":"","sign3":"","sign4":"","sign5":"","position":"main_page_visit","appId":"ydl-wap-ios","uid":"591292f8-61e4-4204-b8ef-d31d78ce0772"}
+
+
+  // 发送请求,post请求的参数要放在send方法的参数里面，需要转成json字符串
+  xhr.send(JSON.stringify(paramsObj));
+</script>
+</body>
+</html>

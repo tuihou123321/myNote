@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+    // store.js
+    class Store {
+        constructor() {
+            if (typeof Store.instance === 'object') {
+                return Store.instance;
+            }
+
+            // 这里定义了一些状态和行为
+            this.count = 0;
+            this.increment = () => {
+                this.count++;
+            };
+
+            // 保存单例实例
+            Store.instance = this;
+
+            // 返回实例
+            return this;
+        }
+    }
+
+    // // 在组件中使用
+    // import React from 'react';
+    // import Store from './store';
+
+    const store = new Store();
+
+    function App() {
+        return (
+            <div>
+                <p>Count: {store.count}</p>
+                <button onClick={store.increment}>Increment</button>
+            </div>
+        );
+    }
+
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('app')
+    );
+
+
+</script>
+</body>
+</html>

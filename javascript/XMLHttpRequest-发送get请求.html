@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 创建一个XMLHTTPRequest对象
+    const xhr = new XMLHttpRequest();
+
+    // 监听响应状态改变事件，除了onreadystatechange，还有onload、onerror、ontimeout等事件.
+    // 详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest
+    xhr.onreadystatechange = function() {
+        // 4表示响应已经完成，200表示响应成功
+        // 详见：https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/readyState
+
+        // readyState的值：
+        // 0: 请求未初始化
+        // 1: 服务器连接已建立
+        // 2: 请求已接收
+        // 3: 请求处理中
+        // 4: 请求已完成，且响应已就绪
+
+        // status的值：
+        // 200: "OK"
+        // 403: "Forbidden"
+        // 404: "Not Found"
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+        }
+    };
+
+    // 设置请求方法和URL, 最后一个参数表示是否异步，true表示异步，false表示同步
+    xhr.open('GET', 'https://testapi.ydl.com/api/test-category/all', true);
+
+    // 发送请求
+    xhr.send();
+
+</script>
+
+</body>
+</html>

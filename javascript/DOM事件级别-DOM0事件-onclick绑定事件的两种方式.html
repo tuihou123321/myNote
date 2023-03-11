@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        button{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <p>下面的三种表现形式</p>
+    <button onclick="clickButton()">button1</button>
+    <button onclick="console.log('button2')">button2</button>
+    <button id="btn">button3</button>
+</div>
+<script>
+function clickButton(){
+    console.log('button1');
+}
+
+var btn = document.getElementById("btn");
+btn.onclick = function(){
+    console.log('button3');
+}
+
+/*
+* button1 ,执行函数名
+* button2, 执行函数体
+* button3,通过js获取dom元素，再将函数赋值给对应的事件属性
+* */
+
+</script>
+
+</body>
+</html>

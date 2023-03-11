@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // 通过XMLHttpRequest构造函数，创建一个xhr的实例对象
+  const xhr = new XMLHttpRequest();
+
+  // 监听请求的状态变化，和服务器的响应
+  xhr.onreadystatechange = function() {
+    // 一个http请求，会执行四次onreadystatechange
+    // xhr.readyState的值：0代表未初始化，1代表正在加载，2代表加载完成，3代表正在交互，4代表完成
+    console.log('readyState',xhr.readyState);
+    // xhr.status的值：200代表成功，404代表失败, 403代表禁止访问, 500代表服务器错误, 503代表服务器不可用, 504代表网关超时....
+    console.log('status',xhr.status);
+    // responseText是服务器返回的文本, 在readyState为4的时候才有值(测试下来发现为3的时候也有值)
+     console.log('responseText',xhr.responseText)
+
+    console.log(xhr);
+  };
+
+  // 设置请求的方法和URL，true表示异步请求
+  xhr.open('GET', 'https://testapi.ydl.com/api/test-category/all1', true);
+  // xhr.open('GET', 'https://testapi.ydl.com/api/test-category/all', true);
+
+  // 发送请求
+  xhr.send();
+</script>
+</body>
+</html>

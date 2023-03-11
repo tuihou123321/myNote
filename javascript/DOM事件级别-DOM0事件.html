@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        button{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <button onclick="clickButton()" id="btn1">button</button>
+
+    <button onclick="console.log(111)">button2</button>
+</div>
+<script>
+
+/*
+* DOM0事件的几种方式
+* 1.直接在标签上添加事件
+* 2.通过js代码添加事件，但是只能添加一个事件，后面的会覆盖前面的，所以一般不用，除非是动态添加的标签，或者是需要添加多个事件的时候，可以用这种方式
+* */
+
+//1.直接在标签上添加事件
+function clickButton(){
+    console.log('事件A1');
+}
+
+// 2.通过js代码添加事件，但是只能添加一个事件，后面的会覆盖前面的，所以一般不用，除非是动态添加的标签，或者是需要添加多个事件的时候，可以用这种方式
+var btn1 = document.getElementById('btn1');
+btn1.onclick = function(){
+    console.log('事件A2');
+}
+
+/*
+* 页面中的button同时绑定了两个DOM0事件，当点击button的时候，会依次执行这两个事件
+* */
+
+
+</script>
+
+</body>
+</html>

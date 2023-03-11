@@ -10,27 +10,28 @@
 </head>
 <body>
 
-<button onclick="getData()">请求数据</button>
+<button onclick="getData()">请求数据-使用fetch</button>
+<button onclick="axiosAsync()">请求数据-使用axios</button>
 
 <script>
-    // function axiosAsync(){
-    //      return new Promise((resolve,reject)=>{
-    //         axios.get('https://testapi.ydl.com/api/test-category/all',{
-    //             params:{},
-    //             timeout:2000
-    //         }).then(res=>{
-    //             console.log(res)
-    //             const { data } = res;
-    //             resolve(data);
-    //         }).catch(err=>{
-    //             reject(err);
-    //         })
-    //     })
-    // }
-    //
-    // axiosAsync().then(res=>{
-    //   console.log(res,'result');
-    // });
+    function axiosAsync(){
+         return new Promise((resolve,reject)=>{
+            axios.get('https://testapi.ydl.com/api/test-category/all',{
+                params:{},
+                timeout:2000
+            }).then(res=>{
+                console.log(res)
+                const { data } = res;
+                resolve(data);
+            }).catch(err=>{
+                reject(err);
+            })
+        })
+    }
+
+    axiosAsync().then(res=>{
+      console.log(res,'result');
+    });
 
 
 
