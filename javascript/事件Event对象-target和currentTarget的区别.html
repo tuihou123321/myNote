@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+  <table>
+      <tr>
+          <td>1</td>
+      </tr>
+  </table>
+
+
+
+<script>
+    var table = document.getElementsByTagName("table")[0];
+    table.onclick = function (e) {
+        console.log('table元素', e.target.nodeName, e.currentTarget.nodeName);
+    }
+
+    var tr = document.getElementsByTagName("tr")[0];
+    tr.onclick = function (e) {
+        console.log('tr元素', e.target.nodeName, e.currentTarget.nodeName);
+    }
+    var td= document.getElementsByTagName("td")[0];
+    td.onclick = function (e) {
+        console.log('td元素', e.target.nodeName, e.currentTarget.nodeName);
+    }
+
+    /*
+    * 上面的执行结果为：td,tr,table
+    * td元素,TD,TD
+    * tr元素,TD,TR
+    * table元素,TD,TABLE
+    * */
+
+    /*
+    * 上面的执行结果为：td,tr,table
+    * e.target 和 e.currentTarget的区别：
+    * e.target：它的值是不会变的。
+    * e.currentTarget：它的值会动态变化。在事件冒泡的过程中，它的值会随着事件的传播而改变，而e.target的值则不会改变。
+    * */
+
+</script>
+
+</body>
+</html>

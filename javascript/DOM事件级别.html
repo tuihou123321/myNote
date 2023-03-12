@@ -3,46 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-    <style>
-        button{
-            margin: 30px;
-        }
-    </style>
 </head>
 <body>
 
-<div>
-    <button onclick="clickButton()" id="btn1">button</button>
-    <button id="btn2">button2</button>
-</div>
-
+<button onclick="clickButton()" id="btn">button</button>
 
 <script>
 
-
-
 function clickButton(){
-    console.log('事件A1');
+    console.log('事件1');
 }
 
 //一个对象可绑定多个监听事件,执行顺序按绑定顺序执行
-let btn1=document.getElementById('btn1');
-btn1.addEventListener('click',function (){
-    console.log('事件A2');
+const btn=document.getElementById('btn');
+btn.onclick=function (){
+    console.log('事件2');
+}
+
+
+btn.addEventListener('click',function (){
+    console.log('事件3');
 })
 
-btn1.addEventListener('click',function (){
-    console.log('事件A3');
+btn.addEventListener('click',function (){
+    console.log('事件4');
 })
-
-
-let btn2=document.getElementById('btn2');
-btn2.addEventListener('click',function (){
-    console.log('事件B2');
-})
-
-
 
 </script>
 

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    // null出现的场景
+
+    // 1. js在获取DOM元素时，如果没有获取到，返回的是null
+    console.log(document.getElementById('box2'));
+
+    // 2. 定义一个变量，不赋值，返回的是null。
+    let a = null;  // 接口返回的数据，如果没有数据，返回的是null
+
+    // 3.使用正则表达式，如果没有匹配到，返回的是null
+    // console.log(/a/.test('b')); // 这种写法会返回boolean值
+    console.log('test'.match(/a/)); // 返回null
+</script>
+</body>
+</html>

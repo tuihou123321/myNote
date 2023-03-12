@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/" id="btn">点击不要跳转</a>
+
+<script>
+    document.getElementById('btn').addEventListener('click', function (event) {
+        // 阻止默认行为
+        event.preventDefault();
+    });
+</script>
+
+</body>
+</html>

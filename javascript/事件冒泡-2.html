@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="father" onclick="clickFather(event)">
+    父级
+    <button>我是子元素</button>
+</div>
+
+
+<script>
+
+function clickFather(event){
+    // 不管是点击父级不是子元素，都会触发这个方法。
+    // 原理是：点击子元素，会先触发子元素的点击事件，然后再触发父级的点击事件。
+    // 这是因为：子元素的点击事件触发后，会冒泡到父级，然后父级的点击事件也会触发。
+    console.log(event.target.nodeName);
+    console.log('点击父元素');
+}
+
+</script>
+
+</body>
+</html>
